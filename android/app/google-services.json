@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "828697811486",
+    "project_id": "sajhabackup",
+    "storage_bucket": "sajhabackup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828697811486:android:7107fce536e8bd22e6ac0f",
+        "android_client_info": {
+          "package_name": "com.example.sajhabackup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTFbNlGd0RDpWKc6og_uRv0K9IEi-nX0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
