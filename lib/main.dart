@@ -8,6 +8,7 @@ import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
 import 'package:sajhabackup/pages/login.dart';
+import 'package:sajhabackup/voice.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -56,6 +57,9 @@ class _homepageState extends State<homepage> {
         title: Text('Sajha Bookstore'),
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Colors.white,)),
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>voice()));
+          }, icon: Icon(Icons.mic,color: Colors.white,)),
            IconButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>cart()));
            }, icon: Icon(Icons.shopping_cart,color: Colors.white,))
@@ -110,6 +114,15 @@ class _homepageState extends State<homepage> {
               child: ListTile(
                 title: Text('Account'),
                 leading: Icon(Icons.supervised_user_circle,color: Colors.deepPurple),
+              ),
+            ),
+             InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>loginscreen()));
+              },
+              child: ListTile(
+                title: Text('Log Out'),
+                leading: Icon(Icons.logout,color: Colors.deepPurple),
               ),
             ),
             

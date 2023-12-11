@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/main.dart';
 import 'package:sajhabackup/pages/register.dart';
-//import 'package:loginapp/screens/homescreen.dart';
+
+
 TextStyle mystyle=TextStyle(fontSize: 25);
 
 class loginscreen extends StatefulWidget {
@@ -94,7 +95,12 @@ class _loginscreenState extends State<loginscreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children:[ Text('Forgot Password?',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12,color: Colors.grey),),]
+                    children:[
+                       TextButton(
+                        onPressed: (){},
+                         child: Text('Forgot Password?',
+                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12,color: Colors.grey),),
+                       ),]
                   ),
                 ),
                 SizedBox(height: 40),

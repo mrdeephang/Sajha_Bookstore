@@ -38,6 +38,9 @@ dependencies:
   lecle_flutter_carousel_pro: ^0.0.3
   image_picker: ^1.0.4
   path_provider: ^2.1.1
+  avatar_glow: ^2.0.2
+  speech_to_text: ^6.5.0
+  
 
 dev_dependencies:
   flutter_test:

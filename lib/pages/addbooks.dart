@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sajhabackup/pages/adddetails.dart';
 
 class addbooks extends StatefulWidget {
   
@@ -20,11 +21,13 @@ class _HomeScreenState extends State<addbooks> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.deepPurple,
         leading:BackButton(),
         actions: [
            
-            IconButton(icon: Icon(Icons.forward),onPressed: (){}),
+            IconButton(icon: Icon(Icons.forward),onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>adddetails()));
+            }),
         ],
       ),
       body: Center(
