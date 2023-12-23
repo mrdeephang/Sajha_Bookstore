@@ -82,10 +82,10 @@ class _loginscreenState extends State<loginscreen> {
                       Container(
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: 250,
+                          height: 200,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      SizedBox(height: 1),
                       Container(
                         child: const Text(
                           'Sell, Buy & Rent Books',
@@ -114,7 +114,7 @@ class _loginscreenState extends State<loginscreen> {
                               ),
                             ]),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 5),
                       myloginbutton,
                       SizedBox(height: 10),
                       Divider(
