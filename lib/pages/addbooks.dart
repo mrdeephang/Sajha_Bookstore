@@ -1,14 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sajhabackup/pages/adddetails.dart';
 
 class addbooks extends StatefulWidget {
-  
-
   @override
   State<addbooks> createState() => _HomeScreenState();
 }
@@ -22,12 +18,14 @@ class _HomeScreenState extends State<addbooks> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        leading:BackButton(),
+        leading: BackButton(),
         actions: [
-           
-            IconButton(icon: Icon(Icons.forward),onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>adddetails()));
-            }),
+          IconButton(
+              icon: Icon(Icons.forward),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => adddetails()));
+              }),
         ],
       ),
       body: Center(
@@ -35,8 +33,18 @@ class _HomeScreenState extends State<addbooks> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             selectedImagePath == ''
-                ? Image.asset('assets/images/image_placeholder.png', height: 200, width: 200, fit: BoxFit.fill,)
-                : Image.file(File(selectedImagePath), height: 200, width: 200, fit: BoxFit.fill,),
+                ? Image.asset(
+                    'assets/images/image_placeholder.png',
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  )
+                : Image.file(
+                    File(selectedImagePath),
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  ),
             Text(
               'Select Image',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
@@ -46,7 +54,8 @@ class _HomeScreenState extends State<addbooks> {
             ),
             ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.deepPurple),
                     padding:
                         MaterialStateProperty.all(const EdgeInsets.all(20)),
                     textStyle: MaterialStateProperty.all(
@@ -93,7 +102,8 @@ class _HomeScreenState extends State<addbooks> {
                               Navigator.pop(context);
                               setState(() {});
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
                                 content: Text("No Image Selected !"),
                               ));
                             }
@@ -124,7 +134,8 @@ class _HomeScreenState extends State<addbooks> {
                               Navigator.pop(context);
                               setState(() {});
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
                                 content: Text("No Image Captured !"),
                               ));
                             }
