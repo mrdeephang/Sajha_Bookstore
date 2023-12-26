@@ -54,7 +54,7 @@ class _loginscreenState extends State<loginscreen> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
         onPressed: () {
-          if (user == "esparsh" && pass == "Password123") {
+          if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => homepage()));
           } else {
