@@ -124,7 +124,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Chat'),
-                leading: Icon(Icons.chat_bubble, color: Colors.deepPurple),
+                leading: Icon(Icons.chat_bubble, color: Color(0xFF9526BC)),
               ),
             ),
             InkWell(
@@ -134,7 +134,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Add'),
-                leading: Icon(Icons.add, color: Colors.deepPurple),
+                leading: Icon(Icons.add, color: Color(0xFF9526BC)),
               ),
             ),
             InkWell(
