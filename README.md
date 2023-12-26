@@ -1,6 +1,6 @@
 # SajhaBookstore
 
-A new Flutter project.
+KEC Minor Project
 
 ## Getting Started
 
