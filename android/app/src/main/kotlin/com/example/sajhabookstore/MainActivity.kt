@@ -1,4 +1,4 @@
-package com.example.sajhabackup
+package com.example.sajhabookstore
 
 import io.flutter.embedding.android.FlutterActivity
 
