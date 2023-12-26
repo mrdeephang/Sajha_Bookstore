@@ -17,7 +17,7 @@ class _HomeScreenState extends State<addbooks> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xFF9526BC),
         leading: BackButton(),
         actions: [
           IconButton(
@@ -55,16 +55,19 @@ class _HomeScreenState extends State<addbooks> {
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.deepPurple),
+                        MaterialStateProperty.all(Color(0xFF9526BC)),
                     padding:
-                        MaterialStateProperty.all(const EdgeInsets.all(20)),
+                        MaterialStateProperty.all(const EdgeInsets.all(25)),
                     textStyle: MaterialStateProperty.all(
                         const TextStyle(fontSize: 14, color: Colors.white))),
                 onPressed: () async {
                   selectImage();
                   setState(() {});
                 },
-                child: const Text('Select')),
+                child: const Text(
+                  'Select',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                )),
             const SizedBox(height: 10),
           ],
         ),
@@ -80,9 +83,9 @@ class _HomeScreenState extends State<addbooks> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: Container(
-              height: 150,
+              height: 200,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     Text(

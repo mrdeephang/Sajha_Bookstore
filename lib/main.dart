@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 //import 'package:sajhabackup/home.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
-import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/bachelors.dart';
 import 'package:sajhabackup/extra.dart';
 import 'package:sajhabackup/masters.dart';
 import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
-import 'package:sajhabackup/pages/login.dart';
+import 'package:sajhabackup/pages/onboardingscreen.dart';
 import 'package:sajhabackup/voice.dart';
 
 void main() {
@@ -16,7 +15,7 @@ void main() {
     debugShowCheckedModeBanner: false,
 
     routes: {
-      '/': (context) => loginscreen(),
+      '/': (context) => onboardingscreen(),
     },
     //home:homepage(),
   ));
@@ -30,7 +29,6 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -112,7 +110,7 @@ class _homepageState extends State<homepage> {
                     MaterialPageRoute(builder: (context) => homepage()));
               },
               child: ListTile(
-                title: Text('Home page'),
+                title: Text('Home'),
                 leading: Icon(
                   Icons.home,
                   color: Color(0xFF9526BC),
@@ -148,9 +146,7 @@ class _homepageState extends State<homepage> {
               ),
             ),
             InkWell(
-              onTap: () {
-                
-              },
+              onTap: () {},
               child: ListTile(
                 title: Text('Log Out'),
                 leading: Icon(Icons.logout, color: Color(0xFF9526BC)),
