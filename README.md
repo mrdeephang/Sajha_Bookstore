@@ -2,8 +2,8 @@
 
 # KEC Minor Project
 # Team Member:
-David
-Deephang
-Dipesh
-Esparsh 
-Pankaj
+# David
+# Deephang
+# Dipesh
+# Esparsh 
+# Pankaj
