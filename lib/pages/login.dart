@@ -49,7 +49,7 @@ class _loginscreenState extends State<loginscreen> {
     final myloginbutton = Material(
       elevation: 3,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.deepPurple,
+      color: Color(0xFF9526BC),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
@@ -89,7 +89,11 @@ class _loginscreenState extends State<loginscreen> {
                       Container(
                         child: const Text(
                           'Sell, Buy & Rent Books',
-                          style: TextStyle(color: Colors.black, fontSize: 19),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            //fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -155,7 +159,7 @@ class _loginscreenState extends State<loginscreen> {
                               child: Text(
                                 'Register Now',
                                 style: TextStyle(
-                                    color: Colors.blue,
+                                    color: Color(0xFF9526BC),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14),
                               ))
