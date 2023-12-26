@@ -1,7 +1,7 @@
 # SajhaBookstore
 
-KEC Minor Project
-Team Member:
+# KEC Minor Project
+# Team Member:
 David
 Deephang
 Dipesh
