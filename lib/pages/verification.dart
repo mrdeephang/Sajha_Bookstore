@@ -1,33 +1,28 @@
+import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';
 
+class verification extends StatelessWidget {
+  
 
-
-
-class verification extends StatefulWidget {
-  @override
-  State<verification> createState() => _verificationState();
-}
-
-class _verificationState extends State<verification> {
   @override
    final myloginbutton = Material(
       elevation: 3,
       borderRadius: BorderRadius.circular(30),
       color: Color(0xFF9526BC),
       child: MaterialButton(
-        
         minWidth:20, 
         padding: EdgeInsets.all(12),
         onPressed: () {
-        
+         
         },
-        child: Text('Verify',style: TextStyle(fontWeight: FontWeight.bold),),
+        child: Text(
+          'Verify',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
       ),
     );
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,11 +30,11 @@ class _verificationState extends State<verification> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: ((context) => loginscreen())));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => loginscreen())));
             },
             icon: const Icon(Icons.arrow_back_ios_new),
             color: Colors.black),
-        
       ),
       body: Column(
         children: [
