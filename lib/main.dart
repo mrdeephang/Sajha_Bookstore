@@ -54,7 +54,7 @@ class _homepageState extends State<homepage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Sajha Bookstore'style: TextStyle(color: Colors.white)),
+        title: Text('Sajha Bookstore',style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Colors.white,)),
           IconButton(onPressed: (){
