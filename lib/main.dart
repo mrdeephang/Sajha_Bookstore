@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:sajhabackup/home.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/bachelors.dart';
 import 'package:sajhabackup/extra.dart';
 import 'package:sajhabackup/masters.dart';
@@ -29,6 +30,7 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -147,8 +149,7 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => loginscreen()));
+                
               },
               child: ListTile(
                 title: Text('Log Out'),

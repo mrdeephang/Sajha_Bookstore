@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/main.dart';
+import 'package:sajhabackup/pages/verification.dart';
 
 class register extends StatefulWidget {
   const register({super.key});
@@ -59,7 +60,7 @@ class _registerState extends State<register> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(onPressed: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>homepage()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>verification()));
                   }, 
                   child: Text('Next >',style: TextStyle(fontSize:15,fontWeight: FontWeight.bold,color: Colors.deepPurple),))
                 ],
