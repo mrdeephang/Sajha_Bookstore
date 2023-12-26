@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/main.dart';
+import 'package:sajhabackup/pages/forgotpassword.dart';
 import 'package:sajhabackup/pages/register.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
@@ -108,12 +109,14 @@ class _loginscreenState extends State<loginscreen> {
                             children: [
                               TextButton(
                                 onPressed: () {},
-                                child: Text(
-                                  'Forgot Password?',
+                                child: TextButton(
+                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>forgetpassword()));},
+                                  child: Text('Forgot Password?',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
-                                      color: Colors.black),
+                                      color: Colors.black)),
+                                      
                                 ),
                               ),
                             ]),
