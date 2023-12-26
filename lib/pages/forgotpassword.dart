@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/main.dart';
 import 'package:sajhabackup/pages/verification.dart';
 
 class forgetpassword extends StatelessWidget {
@@ -9,13 +8,14 @@ class forgetpassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-     appBar: AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: BackButton(color: Colors.black,),
-     ),
-     
-body: SingleChildScrollView(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black,
+        ),
+      ),
+      body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
           height: MediaQuery.of(context).size.height,
@@ -25,48 +25,57 @@ body: SingleChildScrollView(
             children: [
               Column(
                 children: [
-                  Image.asset(
-                          'assets/images/logo.png',
-                          height: 200),
-                          SizedBox(height: 7),
-                  Text('Reset Password',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.deepPurple),),
-             
-               ],
+                  Image.asset('assets/images/logo.png', height: 200),
+                  SizedBox(height: 7),
+                  Text(
+                    'Reset Password',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Color(0xFF9526BC)),
+                  ),
+                ],
               ),
               Column(
                 children: [
-                  inputFile(label: "New Password",obscureText: true),
-                  inputFile(label: "Confirm Password",obscureText: true),
+                  inputFile(label: "New Password", obscureText: true),
+                  inputFile(label: "Confirm Password", obscureText: true),
                 ],
               ),
               Container(
-                padding: EdgeInsets.only(top: 3,left: 3),
+                padding: EdgeInsets.only(top: 3, left: 3),
                 decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(50), 
-                    
-                  
+                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(onPressed: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>verification()));
-                  }, 
-                  child: Text('Next >',style: TextStyle(fontSize:15,fontWeight: FontWeight.bold,color: Colors.deepPurple),))
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => verification()));
+                      },
+                      child: Text(
+                        'Next >',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF9526BC)),
+                      ))
                 ],
               )
-              
             ],
           ),
-          
         ),
       ),
     );
   }
 }
-Widget inputFile({label,obscureText=false})
-{
+
+Widget inputFile({label, obscureText = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -75,28 +84,23 @@ Widget inputFile({label,obscureText=false})
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.bold,
-
         ),
       ),
       SizedBox(height: 5),
       TextField(
         obscureText: obscureText,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
               color: Colors.grey,
-            )
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
+            )),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
               color: Colors.grey,
-            )
-          )
-        ),
+            ))),
       ),
       SizedBox(height: 15)
     ],
   );
 }
-    
