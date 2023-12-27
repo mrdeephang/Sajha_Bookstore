@@ -1,6 +1,7 @@
 //import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quickalert/quickalert.dart';
 //import 'package:sajhabackup/main.dart';
 //import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';

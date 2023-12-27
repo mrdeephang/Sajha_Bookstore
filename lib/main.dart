@@ -7,9 +7,11 @@ import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/bachelors.dart';
 import 'package:sajhabackup/extra.dart';
 import 'package:sajhabackup/masters.dart';
+import 'package:sajhabackup/pages/accountdetails.dart';
 import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
+import 'package:sajhabackup/pages/login.dart';
 //import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/onboardingscreen.dart';
 import 'package:sajhabackup/notification.dart';
@@ -147,7 +149,9 @@ class _homepageState extends State<homepage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>accountdetails()));
+              },
               child: ListTile(
                 title: Text('Account'),
                 leading: Icon(Icons.supervised_user_circle,
@@ -159,7 +163,8 @@ class _homepageState extends State<homepage> {
                 QuickAlert.show(context: context, 
                 type: QuickAlertType.confirm,
                 title: "LogOut",
-                text: "Are you sure you want to logout?"
+                text: "Are you sure you want to logout?",
+                onConfirmBtnTap: ()=>loginscreen()
                 );
                
               },
