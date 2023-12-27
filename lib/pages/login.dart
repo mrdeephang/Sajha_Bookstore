@@ -27,8 +27,8 @@ class _loginscreenState extends State<loginscreen> {
       style: mystyle,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
-        hintText: "Email, Phone or Username",
-        hintStyle: TextStyle(fontSize: 20),
+        hintText: "Email or Phone ",
+        hintStyle: TextStyle(fontSize: 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
@@ -43,7 +43,7 @@ class _loginscreenState extends State<loginscreen> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         hintText: "Password",
-        hintStyle: TextStyle(fontSize: 20),
+        hintStyle: TextStyle(fontSize: 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
@@ -55,8 +55,10 @@ class _loginscreenState extends State<loginscreen> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
         onPressed: () {
+          
           if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
+              
                 context, MaterialPageRoute(builder: (context) => homepage()));
           } else {
             print("Falied");

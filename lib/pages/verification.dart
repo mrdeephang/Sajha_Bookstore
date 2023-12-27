@@ -1,6 +1,7 @@
-import 'dart:js';
+//import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sajhabackup/main.dart';
 //import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';
 
@@ -16,7 +17,7 @@ class verification extends StatelessWidget {
         minWidth:20, 
         padding: EdgeInsets.all(12),
         onPressed: () {
-         
+                  
         },
         child: Text(
           'Verify',

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 //import 'package:sajhabackup/home.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/bachelors.dart';
 import 'package:sajhabackup/extra.dart';
 import 'package:sajhabackup/masters.dart';
 import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
+//import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/onboardingscreen.dart';
 import 'package:sajhabackup/voice.dart';
 
@@ -72,12 +74,13 @@ class _homepageState extends State<homepage> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => voice()));
+                    context, MaterialPageRoute(builder: (context) => notification()));
               },
               icon: Icon(
-                Icons.mic,
+                Icons.notifications,
                 color: Colors.white,
               )),
+
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -151,7 +154,12 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                
+                QuickAlert.show(context: context, 
+                type: QuickAlertType.confirm,
+                title: "LogOut",
+                text: "Are you sure you want to logout?"
+                );
+               
               },
               child: ListTile(
                 title: Text('Log Out'),

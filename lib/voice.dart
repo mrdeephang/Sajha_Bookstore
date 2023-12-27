@@ -2,14 +2,14 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class voice extends StatefulWidget {
-  const voice({super.key});
+class notification extends StatefulWidget {
+  const notification({super.key});
 
   @override
-  State<voice> createState() => _voiceState();
+  State<notification> createState() => _notificationState();
 }
 
-class _voiceState extends State<voice> {
+class _notificationState extends State<notification> {
   SpeechToText speechToText=SpeechToText();
   var text="Hold the Button";
   var isListening=false;

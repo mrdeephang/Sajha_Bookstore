@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/main.dart';
+//import 'package:sajhabackup/main.dart';
 import 'package:sajhabackup/pages/verification.dart';
 
 class register extends StatefulWidget {
