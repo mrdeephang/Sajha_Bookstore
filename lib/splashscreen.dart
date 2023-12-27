@@ -24,7 +24,7 @@ class _splashscreenState extends State<splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Color(0xFF9526BC),
         body: Stack(
           children: [
             Container(
@@ -34,6 +34,31 @@ class _splashscreenState extends State<splashscreen> {
                 height: 350,
               ),
             ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+                padding: EdgeInsets.only(left: 75, top: 475),
+                child: Text(
+                  'Buy, Sell & Rent Books',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      wordSpacing: 2,
+                      letterSpacing: 2),
+                )),
+            Container(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  '"तपाईको Online Bookstore"',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      wordSpacing: 1,
+                      letterSpacing: 1),
+                ))
           ],
         ));
   }

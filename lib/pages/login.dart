@@ -55,14 +55,13 @@ class _loginscreenState extends State<loginscreen> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
         onPressed: () {
-          
           if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => homepage()));
-                showDialog(context: context, builder: (context){
+            showDialog(
+                context: context,
+                builder: (context) {
                   return Center(child: (CircularProgressIndicator()));
-                  
-                  
                 });
           } else {
             print("Falied");
@@ -89,18 +88,20 @@ class _loginscreenState extends State<loginscreen> {
                       Container(
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: 200,
+                          height: 250,
                         ),
                       ),
-                      SizedBox(height: 1),
                       Container(
                         child: const Text(
-                          'Sell, Buy & Rent Books',
+                          'Welcome',
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            //fontWeight: FontWeight.bold
-                          ),
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              letterSpacing: 2,
+                              wordSpacing: 2
+                              //fontWeight: FontWeight.bold
+                              ),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -116,13 +117,18 @@ class _loginscreenState extends State<loginscreen> {
                               TextButton(
                                 onPressed: () {},
                                 child: TextButton(
-                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>forgetpassword()));},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                forgetpassword()));
+                                  },
                                   child: Text('Forgot Password?',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black)),
-                                      
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.black)),
                                 ),
                               ),
                             ]),
