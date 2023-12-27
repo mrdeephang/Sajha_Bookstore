@@ -12,31 +12,24 @@ import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
 import 'package:sajhabackup/pages/login.dart';
-//import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/pages/onboardingscreen.dart';
 import 'package:sajhabackup/notification.dart';
+import 'package:sajhabackup/splashscreen.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-
-    routes: {
-      '/': (context) => onboardingscreen(),
-    },
-    //home:homepage(),
+    home: splashscreen(),
   ));
 }
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
- 
 
   @override
   State<homepage> createState() => _homepageState();
 }
 
 class _homepageState extends State<homepage> {
-  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -69,7 +62,10 @@ class _homepageState extends State<homepage> {
         actions: [
           IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: CustomSearchDelegate(),);
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(),
+                );
               },
               icon: Icon(
                 Icons.search,
@@ -77,14 +73,13 @@ class _homepageState extends State<homepage> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => notification()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => notification()));
               },
               icon: Icon(
                 Icons.notifications,
                 color: Colors.white,
               )),
-
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -150,7 +145,8 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>accountdetails()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => accountdetails()));
               },
               child: ListTile(
                 title: Text('Account'),
@@ -160,13 +156,12 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                QuickAlert.show(context: context, 
-                type: QuickAlertType.confirm,
-                title: "LogOut",
-                text: "Are you sure you want to logout?",
-                onConfirmBtnTap: ()=>loginscreen()
-                );
-               
+                QuickAlert.show(
+                    context: context,
+                    type: QuickAlertType.confirm,
+                    title: "LogOut",
+                    text: "Are you sure you want to logout?",
+                    onConfirmBtnTap: () => loginscreen());
               },
               child: ListTile(
                 title: Text('Log Out'),
@@ -241,64 +236,65 @@ class _homepageState extends State<homepage> {
     );
   }
 }
-class CustomSearchDelegate extends SearchDelegate{
-   List <String> searchItems=['Physics','Matrix','Batman V Superman'];
+
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchItems = ['Physics', 'Matrix', 'Batman V Superman'];
   @override
   List<Widget>? buildActions(BuildContext context) {
-      return [
-        IconButton(
-          icon:Icon(Icons.clear),
-          onPressed: (){
-            query='';
-          },
-        )
-        ];
-   
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-     return IconButton(
-      onPressed: (){
-        close(context,null);
-      }, 
-     icon: Icon(Icons.arrow_back));
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: Icon(Icons.arrow_back));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    List <String> matchQuery=[];
-    for(var books in searchItems){
-      if(books.toLowerCase().contains(query.toLowerCase())){
+    List<String> matchQuery = [];
+    for (var books in searchItems) {
+      if (books.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(books);
       }
     }
-    return ListView.builder(itemCount: matchQuery.length,
-    itemBuilder: (context,index){
-      var result=matchQuery[index];
-      return ListTile(
-        title: Text(result),
-      );
-    },
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List <String> matchQuery=[];
-    for(var books in searchItems){
-      if(books.toLowerCase().contains(query.toLowerCase())){
+    List<String> matchQuery = [];
+    for (var books in searchItems) {
+      if (books.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(books);
       }
     }
-    return ListView.builder(itemCount: matchQuery.length,
-    itemBuilder: (context,index){
-      var result=matchQuery[index];
-      return ListTile(
-        title: Text(result),
-      );
-    },
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
     );
-   
   }
 }

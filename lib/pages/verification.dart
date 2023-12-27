@@ -1,31 +1,26 @@
 //import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 //import 'package:sajhabackup/main.dart';
 //import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';
 
 class verification extends StatelessWidget {
-  
-
-  @override
-   final myloginbutton = Material(
-      elevation: 3,
-      borderRadius: BorderRadius.circular(30),
-      color: Color(0xFF9526BC),
-      child: MaterialButton(
-        minWidth:20, 
-        padding: EdgeInsets.all(12),
-        onPressed: () {
-                  
-        },
-        child: Text(
-          'Verify',
-          style: TextStyle(color: Colors.white, fontSize: 24),
-        ),
+  final myloginbutton = Material(
+    elevation: 3,
+    borderRadius: BorderRadius.circular(30),
+    color: Color(0xFF9526BC),
+    child: MaterialButton(
+      minWidth: 20,
+      padding: EdgeInsets.all(12),
+      onPressed: () {},
+      child: Text(
+        'Verify',
+        style: TextStyle(color: Colors.white, fontSize: 24),
       ),
-    );
+    ),
+  );
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
