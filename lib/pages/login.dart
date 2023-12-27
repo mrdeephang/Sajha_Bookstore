@@ -27,7 +27,7 @@ class _loginscreenState extends State<loginscreen> {
       style: mystyle,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
-        hintText: "Email or Phone ",
+        hintText: "Email,Phone or Username ",
         hintStyle: TextStyle(fontSize: 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
@@ -95,7 +95,7 @@ class _loginscreenState extends State<loginscreen> {
                         child: const Text(
                           'Welcome',
                           style: TextStyle(
-                              color: Colors.blue,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
                               letterSpacing: 2,
