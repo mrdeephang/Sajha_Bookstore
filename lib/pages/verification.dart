@@ -1,15 +1,10 @@
-//import 'dart:js';
+import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';
 
-class verification extends StatefulWidget {
-  @override
-  State<verification> createState() => _verificationState();
-}
-
-class _verificationState extends State<verification> {
+class verification extends StatelessWidget {
   
 
   @override
@@ -21,7 +16,7 @@ class _verificationState extends State<verification> {
         minWidth:20, 
         padding: EdgeInsets.all(12),
         onPressed: () {
-             
+         
         },
         child: Text(
           'Verify',
@@ -29,7 +24,6 @@ class _verificationState extends State<verification> {
         ),
       ),
     );
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -110,8 +104,7 @@ class Otp extends StatelessWidget {
         decoration: const InputDecoration(
           hintText: ('0'),
         ),
-        onSaved: (value) {
-        },
+        onSaved: (value) {},
       ),
     );
   }
