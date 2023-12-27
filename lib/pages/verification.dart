@@ -1,9 +1,15 @@
-import 'dart:js';
+//import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+//import 'package:quickalert/quickalert.dart';
 import 'package:sajhabackup/pages/login.dart';
 
-class verification extends StatelessWidget {
+class verification extends StatefulWidget {
+  @override
+  State<verification> createState() => _verificationState();
+}
+
+class _verificationState extends State<verification> {
   
 
   @override
@@ -15,7 +21,7 @@ class verification extends StatelessWidget {
         minWidth:20, 
         padding: EdgeInsets.all(12),
         onPressed: () {
-         
+             
         },
         child: Text(
           'Verify',
@@ -23,6 +29,7 @@ class verification extends StatelessWidget {
         ),
       ),
     );
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
