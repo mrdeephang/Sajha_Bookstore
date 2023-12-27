@@ -12,7 +12,7 @@ import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
 //import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/onboardingscreen.dart';
-import 'package:sajhabackup/voice.dart';
+import 'package:sajhabackup/notification.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -66,7 +66,9 @@ class _homepageState extends State<homepage> {
         title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showSearch(context: context, delegate: CustomSearchDelegate(),);
+              },
               icon: Icon(
                 Icons.search,
                 color: Colors.white,
@@ -232,5 +234,66 @@ class _homepageState extends State<homepage> {
         ],
       ),
     );
+  }
+}
+class CustomSearchDelegate extends SearchDelegate{
+   List <String> searchItems=['Physics','Matrix','Batman V Superman'];
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+      return [
+        IconButton(
+          icon:Icon(Icons.clear),
+          onPressed: (){
+            query='';
+          },
+        )
+        ];
+   
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+     return IconButton(
+      onPressed: (){
+        close(context,null);
+      }, 
+     icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List <String> matchQuery=[];
+    for(var books in searchItems){
+      if(books.toLowerCase().contains(query.toLowerCase())){
+        matchQuery.add(books);
+      }
+    }
+    return ListView.builder(itemCount: matchQuery.length,
+    itemBuilder: (context,index){
+      var result=matchQuery[index];
+      return ListTile(
+        title: Text(result),
+      );
+    },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List <String> matchQuery=[];
+    for(var books in searchItems){
+      if(books.toLowerCase().contains(query.toLowerCase())){
+        matchQuery.add(books);
+      }
+    }
+    return ListView.builder(itemCount: matchQuery.length,
+    itemBuilder: (context,index){
+      var result=matchQuery[index];
+      return ListTile(
+        title: Text(result),
+      );
+    },
+    );
+   
   }
 }

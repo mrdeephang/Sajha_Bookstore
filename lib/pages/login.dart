@@ -58,8 +58,12 @@ class _loginscreenState extends State<loginscreen> {
           
           if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
-              
                 context, MaterialPageRoute(builder: (context) => homepage()));
+                showDialog(context: context, builder: (context){
+                  return Center(child: (CircularProgressIndicator()));
+                  
+                  
+                });
           } else {
             print("Falied");
           }
