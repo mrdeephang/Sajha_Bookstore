@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sajhabackup/main.dart';
 import 'package:sajhabackup/pages/forgotpassword.dart';
 import 'package:sajhabackup/pages/register.dart';
+import 'package:sajhabackup/splashs/splashpage.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
 
@@ -57,12 +58,8 @@ class _loginscreenState extends State<loginscreen> {
         onPressed: () {
           if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => homepage()));
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return Center(child: (CircularProgressIndicator()));
-                });
+                context, MaterialPageRoute(builder: (context) => SplashPage()));
+          
           } else {
             print("Falied");
           }
@@ -189,3 +186,4 @@ class _loginscreenState extends State<loginscreen> {
     );
   }
 }
+

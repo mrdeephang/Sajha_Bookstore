@@ -16,7 +16,7 @@ class accountdetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
@@ -31,6 +31,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: BackButton(color: Colors.white),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(

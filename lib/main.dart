@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/quickalert.dart';
 //import 'package:quickalert/quickalert.dart';
-import 'package:sajhabackup/bachelors.dart';
-import 'package:sajhabackup/extra.dart';
-import 'package:sajhabackup/masters.dart';
+import 'package:sajhabackup/homepagedeco/bachelors.dart';
+import 'package:sajhabackup/homepagedeco/extra.dart';
+import 'package:sajhabackup/homepagedeco/masters.dart';
 import 'package:sajhabackup/pages/accountdetails.dart';
 import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
 import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/notification.dart';
-import 'package:sajhabackup/splashscreen.dart';
+import 'package:sajhabackup/pages/notification.dart';
+import 'package:sajhabackup/splashs/splashscreen.dart';
 
 void main() {
   runApp(MaterialApp(
