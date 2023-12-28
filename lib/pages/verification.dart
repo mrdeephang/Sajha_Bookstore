@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/homepage.dart';
 import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/splashs/splashpage.dart';
 
-
 class verification extends StatelessWidget {
- 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -55,27 +52,30 @@ class verification extends StatelessWidget {
           ),
           SizedBox(height: 40),
           Material(
-    elevation: 3,
-    borderRadius: BorderRadius.circular(30),
-    color: Color(0xFF9526BC),
-    child: MaterialButton(
-      minWidth: 20,
-      padding: EdgeInsets.all(12),
-      onPressed: () {
-        QuickAlert.show(
-          confirmBtnColor: Color(0xFF9526BC),
-          context: context, type: QuickAlertType.success,
-          onConfirmBtnTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
-          }
-          );
-      },
-      child: Text(
-        'Verify',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
-    ),
-  ),
+            elevation: 3,
+            borderRadius: BorderRadius.circular(30),
+            color: Color(0xFF9526BC),
+            child: MaterialButton(
+              minWidth: 20,
+              padding: EdgeInsets.all(12),
+              onPressed: () {
+                QuickAlert.show(
+                    confirmBtnColor: Color(0xFF9526BC),
+                    context: context,
+                    type: QuickAlertType.success,
+                    onConfirmBtnTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SplashPage()));
+                    });
+              },
+              child: Text(
+                'Verify',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -116,4 +116,3 @@ class Otp extends StatelessWidget {
     );
   }
 }
-
