@@ -67,6 +67,7 @@ class _registerState extends State<register> {
                 children: [
                   TextButton(
                       onPressed: () {
+                      
                         Navigator.push(
                             context,
                             MaterialPageRoute(

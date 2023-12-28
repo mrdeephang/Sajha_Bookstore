@@ -13,6 +13,7 @@ class loginscreen extends StatefulWidget {
 }
 
 class _loginscreenState extends State<loginscreen> {
+  bool _issecuredpassword=true;
   String user = '';
   String pass = '';
 
@@ -32,21 +33,7 @@ class _loginscreenState extends State<loginscreen> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
-    final password = TextField(
-      onChanged: (val) {
-        setState(() {
-          pass = val;
-        });
-      },
-      obscureText: true,
-      style: mystyle,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(10),
-        hintText: "Password",
-        hintStyle: TextStyle(fontSize: 18),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-      ),
-    );
+
     final myloginbutton = Material(
       elevation: 3,
       borderRadius: BorderRadius.circular(30),
@@ -102,7 +89,23 @@ class _loginscreenState extends State<loginscreen> {
                       SizedBox(height: 20),
                       userfield,
                       SizedBox(height: 10),
-                      password,
+                      TextField(
+                          onChanged: (val) {
+                                setState(() {
+                                pass = val;
+                                 });
+                                     },
+                                obscureText: _issecuredpassword,
+                                style: mystyle,
+                               decoration: InputDecoration(
+                                suffixIcon: togglePassword(),
+                             contentPadding: EdgeInsets.all(10),
+                                hintText: "Password",
+                               hintStyle: TextStyle(fontSize: 18),
+                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+                                      ),  
+                                   
+                                  ),
                       SizedBox(height: 1),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -181,6 +184,15 @@ class _loginscreenState extends State<loginscreen> {
               )),
         ),
       ),
+    );
+  }
+  Widget togglePassword(){
+    return IconButton(onPressed: (){
+      setState(() {
+        _issecuredpassword=! _issecuredpassword;
+      });
+    }, 
+    icon:  _issecuredpassword ? Icon(Icons.visibility): Icon(Icons.visibility_off),color: Colors.grey,
     );
   }
 }
