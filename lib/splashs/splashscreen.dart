@@ -38,7 +38,8 @@ class _splashscreenState extends State<splashscreen> {
               height: 5,
             ),
             Container(
-                padding: EdgeInsets.only(left: 75, top: 475),
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(left: 10, top: 200),
                 child: Text(
                   'Buy, Sell & Rent Books',
                   style: TextStyle(
