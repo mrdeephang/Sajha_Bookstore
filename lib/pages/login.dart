@@ -28,7 +28,7 @@ class _loginscreenState extends State<loginscreen> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         hintText: "Email, Phone or Username ",
-        hintStyle: TextStyle(fontSize: 15),
+        hintStyle: TextStyle(fontSize: 18),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
@@ -43,7 +43,7 @@ class _loginscreenState extends State<loginscreen> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         hintText: "Password",
-        hintStyle: TextStyle(fontSize: 15),
+        hintStyle: TextStyle(fontSize: 18),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
