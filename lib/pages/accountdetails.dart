@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sajhabackup/main.dart';
+import 'package:sajhabackup/pages/editprofile.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -33,7 +35,12 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: BackButton(color: Colors.white),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>homepage()));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -41,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             CircleAvatar(
-              radius: 70,
+              radius: 80,
               backgroundImage: AssetImage('assets/images/profile.jpg'),
             ),
             const SizedBox(height: 20),
@@ -56,7 +63,9 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>editprofile()));
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(15),
                   ),
@@ -87,7 +96,6 @@ class ProfileScreen extends StatelessWidget {
         title: Text(title),
         subtitle: Text(subtitle),
         leading: Icon(iconData),
-        trailing: Icon(Icons.arrow_forward, color: Color.fromARGB(255, 137, 8, 165)),
         tileColor: Colors.white,
       ),
     );

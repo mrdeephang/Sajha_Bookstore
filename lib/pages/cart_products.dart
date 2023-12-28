@@ -63,13 +63,20 @@ class singlecartproduct extends StatelessWidget {
                   padding: const EdgeInsets.all(4.0),
                   child: Text("-"),
                 ),
-                Padding(padding: EdgeInsets.fromLTRB(20, 8, 8, 8),
+                Padding(padding: EdgeInsets.fromLTRB(20, 8, 6, 8),
                 child: Text('Condition:'),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text("Used")),
-                
+                  Padding(padding: EdgeInsets.fromLTRB(20, 8, 10, 8),
+                child: IconButton(
+                  icon: Icon(Icons.select_all_rounded),
+                  onPressed: (){
+                    
+                  },
+                ),
+                ),
                
               ],
             ),

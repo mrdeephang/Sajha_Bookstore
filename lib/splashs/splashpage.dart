@@ -35,10 +35,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/images/random.jpg",
-              width: 48,
-            ),
+            
             Container(
               margin: const EdgeInsets.only(top: 10),
               child: Row(

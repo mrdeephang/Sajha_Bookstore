@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/main.dart';
 import 'package:sajhabackup/pages/forgotpassword.dart';
 import 'package:sajhabackup/pages/register.dart';
 import 'package:sajhabackup/splashs/splashpage.dart';
