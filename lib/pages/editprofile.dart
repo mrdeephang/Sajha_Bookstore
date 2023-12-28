@@ -62,7 +62,7 @@ class _editprofileState extends State<editprofile> {
                           color: Theme.of(context).scaffoldBackgroundColor,
                         )
                       ),
-                      child: Icon(Icons.edit,color: Colors.deepPurple,),
+                      child: Icon(Icons.edit,color: Colors.white,),
                     ))
                   ],
                 ),
