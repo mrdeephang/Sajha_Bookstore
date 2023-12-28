@@ -88,13 +88,13 @@ class _loginscreenState extends State<loginscreen> {
                       ),
                       Container(
                         child: const Text(
-                          'Welcome',
+                          'Buy, Sell & Rent Books',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xFF9526BC),
                               fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              letterSpacing: 2,
-                              wordSpacing: 2
+                              fontSize: 24,
+                              letterSpacing: 1,
+                              wordSpacing: 1
                               //fontWeight: FontWeight.bold
                               ),
                         ),
