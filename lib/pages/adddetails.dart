@@ -14,7 +14,7 @@ class _adddetailsState extends State<adddetails> {
     return Scaffold(
       backgroundColor: Colors.grey[250],
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xFF9526BC),
         leading: BackButton(),
         actions: [
           TextButton(
@@ -44,7 +44,7 @@ class _adddetailsState extends State<adddetails> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Colors.deepPurple),
+                        color: Color(0xFF9526BC)),
                   ),
                   SizedBox(height: 20),
                 ],

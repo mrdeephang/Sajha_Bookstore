@@ -47,7 +47,7 @@ class _homepageState extends State<homepage> {
     );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xFF9526BC),
         title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
@@ -147,11 +147,18 @@ class _homepageState extends State<homepage> {
             InkWell(
               onTap: () {
                 QuickAlert.show(
-                    context: context,
-                    type: QuickAlertType.confirm,
-                    title: "LogOut",
-                    text: "Are you sure you want to logout?",
-                    onConfirmBtnTap: () => loginscreen());
+                  textColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  confirmBtnColor: Color(0xFF9526BC),
+                  context: context,
+                  type: QuickAlertType.confirm,
+                  title: "LogOut",
+                  text: "Are you sure you want to logout?",
+                  onConfirmBtnTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => loginscreen()));
+                  },
+                );
               },
               child: ListTile(
                 title: Text('Log Out'),

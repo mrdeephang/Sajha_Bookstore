@@ -19,8 +19,8 @@ class accountdetails extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
+          //primarySwatch: Colors.deepPurple,
+          ),
       home: const ProfileScreen(),
     );
   }
