@@ -27,7 +27,7 @@ class _loginscreenState extends State<loginscreen> {
       style: mystyle,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
-        hintText: "Email,Phone or Username ",
+        hintText: "Email, Phone or Username ",
         hintStyle: TextStyle(fontSize: 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
@@ -58,7 +58,6 @@ class _loginscreenState extends State<loginscreen> {
           if (user == "sajha" && pass == "bookstore123") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => SplashPage()));
-          
           } else {
             print("Falied");
           }
@@ -89,13 +88,13 @@ class _loginscreenState extends State<loginscreen> {
                       ),
                       Container(
                         child: const Text(
-                          'Welcome',
+                          'Buy, Sell & Rent Books',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xFF9526BC),
                               fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              letterSpacing: 2,
-                              wordSpacing: 2
+                              fontSize: 24,
+                              letterSpacing: 1,
+                              wordSpacing: 1
                               //fontWeight: FontWeight.bold
                               ),
                         ),
@@ -185,4 +184,3 @@ class _loginscreenState extends State<loginscreen> {
     );
   }
 }
-

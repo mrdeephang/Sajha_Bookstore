@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:sajhabackup/pages/login.dart';
 
 class splashscreen extends StatefulWidget {
@@ -34,11 +34,9 @@ class _splashscreenState extends State<splashscreen> {
                 height: 350,
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
             Container(
-                padding: EdgeInsets.only(left: 75, top: 475),
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(left: 10, top: 200),
                 child: Text(
                   'Buy, Sell & Rent Books',
                   style: TextStyle(
@@ -61,5 +59,81 @@ class _splashscreenState extends State<splashscreen> {
                 ))
           ],
         ));
+  }
+}
+*/
+import 'package:flutter/material.dart';
+import 'package:sajhabackup/pages/login.dart';
+
+class splashscreen extends StatefulWidget {
+  const splashscreen({Key? key}) : super(key: key);
+
+  @override
+  State<splashscreen> createState() => _splashscreenState();
+}
+
+class _splashscreenState extends State<splashscreen> {
+  @override
+  void initState() {
+    super.initState();
+    goToHome();
+  }
+
+  void goToHome() async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const loginscreen()),
+        (Route<dynamic> route) => false,
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        color: const Color(0xFF9526BC),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/logo.png",
+              width: 250,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    child: CircularProgressIndicator(
+                      color: Colors.green,
+                      backgroundColor: Colors.amberAccent,
+                      strokeWidth: 2.0,
+                    ),
+                    width: 24,
+                    height: 24,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: const Text(
+                      'Welcome',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

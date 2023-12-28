@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/main.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -30,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        color: const Color(0xFF765EFC),
+        color: const Color(0xFF9526BC),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

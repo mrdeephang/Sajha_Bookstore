@@ -14,6 +14,7 @@ import 'package:sajhabackup/pages/chat.dart';
 import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/notification.dart';
 import 'package:sajhabackup/splashs/splashscreen.dart';
+//import 'package:sajhabackup/splashs/splashscreen.dart';
 
 void main() {
   runApp(MaterialApp(
