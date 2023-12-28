@@ -1,26 +1,15 @@
 //import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:quickalert/quickalert.dart';
-//import 'package:sajhabackup/main.dart';
-//import 'package:quickalert/quickalert.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/homepage.dart';
 import 'package:sajhabackup/pages/login.dart';
+import 'package:sajhabackup/splashs/splashpage.dart';
+
 
 class verification extends StatelessWidget {
-  final myloginbutton = Material(
-    elevation: 3,
-    borderRadius: BorderRadius.circular(30),
-    color: Color(0xFF9526BC),
-    child: MaterialButton(
-      minWidth: 20,
-      padding: EdgeInsets.all(12),
-      onPressed: () {},
-      child: Text(
-        'Verify',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
-    ),
-  );
+ 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +54,28 @@ class verification extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 40),
-          myloginbutton
+          Material(
+    elevation: 3,
+    borderRadius: BorderRadius.circular(30),
+    color: Color(0xFF9526BC),
+    child: MaterialButton(
+      minWidth: 20,
+      padding: EdgeInsets.all(12),
+      onPressed: () {
+        QuickAlert.show(
+          confirmBtnColor: Color(0xFF9526BC),
+          context: context, type: QuickAlertType.success,
+          onConfirmBtnTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
+          }
+          );
+      },
+      child: Text(
+        'Verify',
+        style: TextStyle(color: Colors.white, fontSize: 24),
+      ),
+    ),
+  ),
         ],
       ),
     );
@@ -106,3 +116,4 @@ class Otp extends StatelessWidget {
     );
   }
 }
+
