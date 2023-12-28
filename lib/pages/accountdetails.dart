@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sajhabackup/main.dart';
+import 'package:sajhabackup/homepage.dart';
 import 'package:sajhabackup/pages/editprofile.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Color.fromARGB(0, 167, 118, 118),
-    statusBarIconBrightness: Brightness.dark
-  ));
+      statusBarColor: Color.fromARGB(0, 167, 118, 118),
+      statusBarIconBrightness: Brightness.dark));
   runApp(const accountdetails());
 }
 
@@ -37,8 +36,9 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>homepage()));
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => homepage()));
           },
         ),
       ),
@@ -58,19 +58,22 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 10),
             itemProfile('Address', 'sanepa', CupertinoIcons.location),
             const SizedBox(height: 10),
-            itemProfile('Email', 'atamrakarrockers69@gmail.com', CupertinoIcons.mail),
-            const SizedBox(height: 20,),
+            itemProfile(
+                'Email', 'atamrakarrockers69@gmail.com', CupertinoIcons.mail),
+            const SizedBox(
+              height: 20,
+            ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>editprofile()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => editprofile()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(15),
                   ),
-                  child: const Text('Edit Profile')
-              ),
+                  child: const Text('Edit Profile')),
             )
           ],
         ),
@@ -88,10 +91,8 @@ class ProfileScreen extends StatelessWidget {
                 offset: Offset(0, 5),
                 color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
                 spreadRadius: 2,
-                blurRadius: 10
-            )
-          ]
-      ),
+                blurRadius: 10)
+          ]),
       child: ListTile(
         title: Text(title),
         subtitle: Text(subtitle),
