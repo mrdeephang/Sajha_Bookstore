@@ -67,13 +67,15 @@ class _adddetailsState extends State<adddetails> {
                 ),
               ),
               SizedBox(height: 15),
-              Container(
-                color: Colors.grey[250],
-                height: 150,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Additional Information",
+              SingleChildScrollView(
+                child: Container(
+                  color: Colors.grey[250],
+                  height: 100,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Additional Information",
+                    ),
                   ),
                 ),
               )
