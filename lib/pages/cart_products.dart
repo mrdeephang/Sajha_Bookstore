@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class cartproducts extends StatefulWidget {
 
@@ -34,60 +35,68 @@ class _cartproductsState extends State<cartproducts> {
       } );
   }
 }
-class singlecartproduct extends StatelessWidget {
+class singlecartproduct extends StatefulWidget {
    final cart_prod_name;
   final cart_prod_picture;
   final cart_prod_price;
 
   singlecartproduct({this.cart_prod_name,this.cart_prod_price,this.cart_prod_picture});
 
-  
+  @override
+  State<singlecartproduct> createState() => _singlecartproductState();
+}
 
+class _singlecartproductState extends State<singlecartproduct> {
   @override
   Widget build(BuildContext context) {
     return  Card(
-      child: ListTile(
-
-        leading: Image.asset(cart_prod_picture,width: 80,height: 80,),
-        title: Text(cart_prod_name),
-        subtitle: Column(
-          children: [
-            Row(
-              children: [
+      child: Slidable(
+        key: Key('${widget.cart_prod_name}'),
+        endActionPane: ActionPane(motion:ScrollMotion() ,children: [
+          SlidableAction(onPressed: (context){
+            setState(() {
+              
+            });
+          },
+          backgroundColor: Colors.red,
+          icon: Icons.delete,
+          )
+        ],),
+        child: ListTile(
+          leading: Image.asset(widget.cart_prod_picture,width: 80,height: 80,),
+          title: Text(widget.cart_prod_name),
+          subtitle: Column(
+            children: [
+              Row(
+                children: [
+                   
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Author:'),
+                  ),
+                   Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text("-"),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(20, 8, 6, 8),
+                  child: Text('Condition:'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text("Used")),
+                   
                  
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Author:'),
-                ),
-                 Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text("-"),
-                ),
-                Padding(padding: EdgeInsets.fromLTRB(20, 8, 6, 8),
-                child: Text('Condition:'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text("Used")),
-                  Padding(padding: EdgeInsets.fromLTRB(20, 8, 10, 8),
-                child: IconButton(
-                  icon: Icon(Icons.select_all_rounded),
-                  onPressed: (){
-                    
-                  },
-                ),
-                ),
-               
-              ],
-            ),
-           Container(
-            alignment: Alignment.topLeft,
-            child: Text("\Rs.${cart_prod_price}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-           ),
-
-          ],
+                ],
+              ),
+             Container(
+              alignment: Alignment.topLeft,
+              child: Text("\Rs.${widget.cart_prod_price}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+             ),
+      
+            ],
+          ),
+         
         ),
-       
       ),
     );
   }

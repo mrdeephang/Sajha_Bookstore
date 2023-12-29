@@ -18,13 +18,13 @@ class _notificationState extends State<notification> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
-        endRadius:75,
+       // endRadius:75,
         animate: isListening,
         duration: Duration(milliseconds:2000 ),
         glowColor: Colors.deepPurple,
         repeat: true,
-        repeatPauseDuration: Duration(milliseconds: 100),
-        showTwoGlows: true,
+       // repeatPauseDuration: Duration(milliseconds: 100),
+        //showTwoGlows: true,
         child: GestureDetector(
           onTapDown: (details) async {
            if(!isListening){

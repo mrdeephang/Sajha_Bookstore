@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sajhabackup/pages/verification.dart';
 
 class forgetpassword extends StatelessWidget {
-  const forgetpassword({super.key});
-
+ 
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +76,7 @@ class forgetpassword extends StatelessWidget {
 }
 
 Widget inputFile({label, obscureText = false}) {
+  bool showPassword=false;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -88,8 +89,18 @@ Widget inputFile({label, obscureText = false}) {
       ),
       SizedBox(height: 5),
       TextField(
-        obscureText: obscureText,
+        obscureText: obscureText ? showPassword : false,
         decoration: InputDecoration(
+          suffixIcon: obscureText? IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                     
+                    },
+                  )
+                : null,
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
