@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/homepage.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

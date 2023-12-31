@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sajhabackup/homepage.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
 import 'package:sajhabackup/pages/editprofile.dart';
 
 void main() {
