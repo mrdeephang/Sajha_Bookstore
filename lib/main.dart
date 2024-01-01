@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/style.dart';
-import 'package:sajhabackup/splashs/splashscreen.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
+//import 'package:sajhabackup/splashs/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
+        //  scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF9526BC)),
         fontFamily: regular,
       ),
-      home: splashscreen(),
+      home: homepage(),
     );
   }
 }

@@ -21,6 +21,7 @@ class accountdetails extends StatelessWidget {
       theme: ThemeData(
           //primarySwatch: Colors.deepPurple,
           ),
+      title: 'Account',
       home: const ProfileScreen(),
     );
   }
