@@ -15,6 +15,7 @@ class _editprofileState extends State<editprofile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
         elevation: 0,
         backgroundColor: Color(0xFF9526BC),
         leading: BackButton(),
@@ -27,13 +28,6 @@ class _editprofileState extends State<editprofile> {
           },
           child: ListView(
             children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              SizedBox(
-                height: 15,
-              ),
               Center(
                 child: Stack(
                   children: [
@@ -56,20 +50,23 @@ class _editprofileState extends State<editprofile> {
                           )),
                     ),
                     Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          width: 4,
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                        )
-                      ),
-                      child: Icon(Icons.edit,color: Colors.deepPurple,),
-                    ))
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 4,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                              )),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.deepPurple,
+                          ),
+                        ))
                   ],
                 ),
               ),

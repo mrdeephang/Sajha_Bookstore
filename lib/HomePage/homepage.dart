@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/homepagedeco/bachelors.dart';
-import 'package:sajhabackup/homepagedeco/extra.dart';
-import 'package:sajhabackup/homepagedeco/masters.dart';
-import 'package:sajhabackup/pages/accountdetails.dart';
+import 'package:sajhabackup/HomePage/bachelors.dart';
+import 'package:sajhabackup/HomePage/extra.dart';
+import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/pages/addbooks.dart';
 import 'package:sajhabackup/pages/cart.dart';
 import 'package:sajhabackup/pages/chat.dart';
 import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/notification.dart';
+import 'package:sajhabackup/pages/settings.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -137,12 +137,11 @@ class _homepageState extends State<homepage> {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => accountdetails()));
+                    MaterialPageRoute(builder: (context) => SettingsScreen()));
               },
               child: ListTile(
-                title: Text('Account'),
-                leading: Icon(Icons.supervised_user_circle,
-                    color: Color(0xFF9526BC)),
+                title: Text('Settings'),
+                leading: Icon(Icons.settings, color: Color(0xFF9526BC)),
               ),
             ),
             InkWell(
