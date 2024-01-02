@@ -1,9 +1,38 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/pages/forgotpassword.dart';
 import 'package:sajhabackup/pages/register.dart';
 import 'package:sajhabackup/splashs/splashpage.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  Future<FirebaseApp> _initializeFirebase() async{
+    FirebaseApp firebaseApp=await Firebase.initializeApp();
+    return firebaseApp;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context,snapshot){
+          if(snapshot.connectionState==ConnectionState.done){
+            return loginscreen();
+          }
+          return const Center(child: CircularProgressIndicator(),);
+        },
+      ),
+    );
+  }
+}
 
 class loginscreen extends StatefulWidget {
   const loginscreen({super.key});
@@ -13,22 +42,34 @@ class loginscreen extends StatefulWidget {
 }
 
 class _loginscreenState extends State<loginscreen> {
+  static Future<User?> loginUsingEmailPassword({required String email,required String password, required BuildContext context})async{
+    FirebaseAuth auth=FirebaseAuth.instance;
+    User? user;
+    try{
+      UserCredential userCredential=await auth.signInWithEmailAndPassword(email: email, password: password);
+      user=userCredential.user;
+    }on FirebaseAuthException catch(e){
+      if(e.code=="user-not-found"){
+        print("no user found");
+      }
+    }
+    return user;
+  }
   bool _issecuredpassword=true;
   String user = '';
   String pass = '';
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _emailController=TextEditingController();
+    TextEditingController _passwordController=TextEditingController();
     final userfield = TextField(
-      onChanged: (val) {
-        setState(() {
-          user = val;
-        });
-      },
+
+      controller: _emailController,
       style: mystyle,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
-        hintText: "Email, Phone or Username ",
+        hintText: "Email or Phone",
         hintStyle: TextStyle(fontSize: 18),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
@@ -41,15 +82,14 @@ class _loginscreenState extends State<loginscreen> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
-        onPressed: () {
-          if (user == "sajha" && pass == "bookstore123") {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SplashPage()));
-          } else {
-            print("Falied");
-          }
+        onPressed: () async{
+         User? user= await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+         print(user);
+         if(user!=null){
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>SplashPage()));
+         }
         },
-        child: Text(
+        child: const Text(
           'Login',
           style: TextStyle(color: Colors.white, fontSize: 24),
         ),
@@ -90,11 +130,8 @@ class _loginscreenState extends State<loginscreen> {
                       userfield,
                       SizedBox(height: 10),
                       TextField(
-                          onChanged: (val) {
-                                setState(() {
-                                pass = val;
-                                 });
-                                     },
+                          
+                                     controller: _passwordController,
                                 obscureText: _issecuredpassword,
                                 style: mystyle,
                                decoration: InputDecoration(

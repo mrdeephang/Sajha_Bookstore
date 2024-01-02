@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/pages/login.dart';
 
+
 class splashscreen extends StatefulWidget {
   const splashscreen({Key? key}) : super(key: key);
 
@@ -19,7 +20,7 @@ class _splashscreenState extends State<splashscreen> {
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const loginscreen()),
+        MaterialPageRoute(builder: (context) => const MainPage()),
         (Route<dynamic> route) => false,
       );
     });

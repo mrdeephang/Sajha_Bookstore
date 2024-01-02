@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -154,10 +155,9 @@ class _homepageState extends State<homepage> {
                   type: QuickAlertType.confirm,
                   title: "LogOut",
                   text: "Are you sure you want to logout?",
-                  onConfirmBtnTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => loginscreen()));
-                  },
+                  onConfirmBtnTap: () =>
+                    FirebaseAuth.instance.signOut(),
+                  
                 );
               },
               child: ListTile(

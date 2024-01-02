@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:sajhabackup/main.dart';
-import 'package:sajhabackup/pages/verification.dart';
+import 'package:sajhabackup/pages/login.dart';
+import 'package:sajhabackup/splashs/splashpage.dart';
+import 'package:sajhabackup/utils/formcontainer.dart';
+import 'package:sajhabackup/utils/firebase.dart';
+import 'package:sajhabackup/utils/toast.dart';
 
 class register extends StatefulWidget {
   const register({super.key});
@@ -10,112 +14,168 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
+  
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+ TextEditingController _confirmpasswordController = TextEditingController();
+  bool isSigningUp = false;
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmpasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: BackButton(
-          color: Colors.black,
-        ),
+        automaticallyImplyLeading: false,
+        leading: BackButton(),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Sign Up',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.deepPurple),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Create an Account',
-                    style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  inputFile(label: "First Name"),
-                  inputFile(label: "Last Name"),
-                  inputFile(label: "UserName"),
-                  inputFile(label: "Email"),
-                  inputFile(label: "Phone Number"),
-                  inputFile(label: "Password", obscureText: true),
-                  inputFile(label: "Confirm Password", obscureText: true),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 3, left: 3),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Sign Up",
+                  style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                      
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => verification()));
-                      },
-                      child: Text(
-                        'Next >',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple),
-                      ))
-                ],
-              )
-            ],
+                SizedBox(
+                  height: 30,
+                ),
+                 FormContainerWidget(
+                  
+                  hintText: "Full Name",
+                  isPasswordField: false,
+                ),
+                SizedBox(height: 10),
+                FormContainerWidget(
+                  controller: _usernameController,
+                  hintText: "Username",
+                  isPasswordField: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                                FormContainerWidget(
+                  
+                  hintText: "Phone Number",
+                  isPasswordField: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                FormContainerWidget(
+                  controller: _emailController,
+                  hintText: "Email",
+                  isPasswordField: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                FormContainerWidget(
+                  controller: _passwordController,
+                  hintText: "Password",
+                  isPasswordField: true,
+                ),
+                 SizedBox(
+                  height: 10,
+                ),
+                FormContainerWidget(
+                  controller: _confirmpasswordController,
+                  hintText: " Confirm Password",
+                  isPasswordField: true,
+                ),
+                 SizedBox(
+                  height: 10,
+                ),
+              
+                SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap:  (){
+                    _signUp();
+        
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF9526BC),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                        child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Already have an account?"),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => loginscreen()),
+                              (route) => false);
+                        },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              color: Color(0xFF9526BC), fontWeight: FontWeight.bold),
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-}
 
-Widget inputFile({label, obscureText = false}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        label,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      SizedBox(height: 5),
-      TextField(
-        obscureText: obscureText,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.grey,
-            )),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.grey,
-            ))),
-      ),
-      SizedBox(height: 10)
-    ],
-  );
+  void _signUp() async {
+
+setState(() {
+  isSigningUp = true;
+});
+
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+setState(() {
+  isSigningUp = false;
+});
+    if (user != null) {
+      showToast(message: "User is successfully created");
+      Navigator.push(context,MaterialPageRoute(builder: (context)=>SplashPage()));
+    } else {
+      showToast(message: "Some error happend");
+    }
+  }
 }
