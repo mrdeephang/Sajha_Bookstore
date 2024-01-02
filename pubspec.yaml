@@ -44,7 +44,13 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   flutter_slidable: ^3.0.1
   cloud_firestore: ^4.13.6
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.5.6
+  fluttertoast: ^8.2.4
+  ionicons: ^0.1.2
   
+
   
   
 

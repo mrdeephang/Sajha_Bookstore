@@ -1,117 +1,83 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/pages/verification.dart';
+//import 'package:sajhabackup/pages/verification.dart';
 
-class forgetpassword extends StatelessWidget {
- 
-   
+class forgetpassword extends StatefulWidget {
   @override
+  State<forgetpassword> createState() => _forgetpasswordState();
+}
+
+class _forgetpasswordState extends State<forgetpassword> {
+ final _emailController=TextEditingController();
+
+  @override
+  
+  void dispose(){
+    _emailController.dispose();
+    super.dispose();
+  }
+Future passwrodReset()async{
+  try{
+  await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+  showDialog(context: context, builder: (context){
+    return AlertDialog(
+      content: Text('Password Reset link sent!!Check Your Email'),
+    );
+  });
+  }on FirebaseAuthException catch(e){
+    print(e);
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        content: Text(e.message.toString()),
+      );
+    });
+  }
+}
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(
-          color: Colors.black,
-        ),
+        leading: BackButton(),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Image.asset('assets/images/logo.png', height: 200),
-                  SizedBox(height: 7),
-                  Text(
-                    'Reset Password',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Color(0xFF9526BC)),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  inputFile(label: "New Password", obscureText: true),
-                  inputFile(label: "Confirm Password", obscureText: true),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 3, left: 3),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => verification()));
-                      },
-                      child: Text(
-                        'Next >',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF9526BC)),
-                      ))
-                ],
-              )
-            ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal:25),
+            child: Text('Enter your email and we will send you a link',textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20),
+            ),
           ),
-        ),
+        SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: TextField(
+              controller:_emailController ,
+              decoration: InputDecoration(
+                enabledBorder:OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12)
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepPurple),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: '...',
+                fillColor: Colors.grey[200],
+                filled: true,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          MaterialButton(
+            onPressed: passwrodReset,
+            child: Text('Reset Password'),
+            color: Colors.deepPurple[200],
+            )
+        ],
       ),
     );
   }
 }
 
-Widget inputFile({label, obscureText = false}) {
-  bool showPassword=false;
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        label,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      SizedBox(height: 5),
-      TextField(
-        obscureText: obscureText ? showPassword : false,
-        decoration: InputDecoration(
-          suffixIcon: obscureText? IconButton(
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                     
-                    },
-                  )
-                : null,
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.grey,
-            )),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.grey,
-            ))),
-      ),
-      SizedBox(height: 15)
-    ],
-  );
-}
