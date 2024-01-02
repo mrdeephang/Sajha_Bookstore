@@ -4,29 +4,6 @@ import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/pages/editprofile.dart';
 import 'package:sajhabackup/pages/settings.dart';
 
-/*void main() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color.fromARGB(0, 167, 118, 118),
-      statusBarIconBrightness: Brightness.dark));
-  runApp(const accountdetails());
-}
-
-class accountdetails extends StatelessWidget {
-  const accountdetails({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          //primarySwatch: Colors.deepPurple,
-          ),
-      title: 'Account',
-      home: const ProfileScreen(),
-    );
-  }
-}
-*/
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
