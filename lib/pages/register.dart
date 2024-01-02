@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/splashs/splashpage.dart';
+import 'package:sajhabackup/Pages/login.dart';
+import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/utils/formcontainer.dart';
 import 'package:sajhabackup/utils/firebase.dart';
 import 'package:sajhabackup/utils/toast.dart';
@@ -14,13 +14,12 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
-  
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
- TextEditingController _confirmpasswordController = TextEditingController();
+  TextEditingController _confirmpasswordController = TextEditingController();
   bool isSigningUp = false;
 
   @override
@@ -53,8 +52,7 @@ class _registerState extends State<register> {
                 SizedBox(
                   height: 30,
                 ),
-                 FormContainerWidget(
-                  
+                FormContainerWidget(
                   hintText: "Full Name",
                   isPasswordField: false,
                 ),
@@ -67,8 +65,7 @@ class _registerState extends State<register> {
                 SizedBox(
                   height: 10,
                 ),
-                                FormContainerWidget(
-                  
+                FormContainerWidget(
                   hintText: "Phone Number",
                   isPasswordField: false,
                 ),
@@ -88,7 +85,7 @@ class _registerState extends State<register> {
                   hintText: "Password",
                   isPasswordField: true,
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 FormContainerWidget(
@@ -96,17 +93,15 @@ class _registerState extends State<register> {
                   hintText: " Confirm Password",
                   isPasswordField: true,
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10,
                 ),
-              
                 SizedBox(
                   height: 30,
                 ),
                 GestureDetector(
-                  onTap:  (){
+                  onTap: () {
                     _signUp();
-        
                   },
                   child: Container(
                     width: double.infinity,
@@ -116,11 +111,16 @@ class _registerState extends State<register> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                        child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    )),
+                        child: isSigningUp
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
                   ),
                 ),
                 SizedBox(
@@ -144,7 +144,8 @@ class _registerState extends State<register> {
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              color: Color(0xFF9526BC), fontWeight: FontWeight.bold),
+                              color: Color(0xFF9526BC),
+                              fontWeight: FontWeight.bold),
                         ))
                   ],
                 )
@@ -157,10 +158,9 @@ class _registerState extends State<register> {
   }
 
   void _signUp() async {
-
-setState(() {
-  isSigningUp = true;
-});
+    setState(() {
+      isSigningUp = true;
+    });
 
     String username = _usernameController.text;
     String email = _emailController.text;
@@ -168,12 +168,13 @@ setState(() {
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-setState(() {
-  isSigningUp = false;
-});
+    setState(() {
+      isSigningUp = false;
+    });
     if (user != null) {
       showToast(message: "User is successfully created");
-      Navigator.push(context,MaterialPageRoute(builder: (context)=>SplashPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SplashPage()));
     } else {
       showToast(message: "Some error happend");
     }

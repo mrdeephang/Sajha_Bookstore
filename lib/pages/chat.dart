@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/HomePage/homepage.dart';
-import 'package:sajhabackup/pages/chatpage.dart';
-import 'package:sajhabackup/pages/recentchat.dart';
+import 'package:sajhabackup/Pages/chatpage.dart';
+import 'package:sajhabackup/Pages/recentchat.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,

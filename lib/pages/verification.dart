@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/splashs/splashpage.dart';
+import 'package:sajhabackup/Pages/login.dart';
+import 'package:sajhabackup/splashes/splashpage.dart';
 
 class verification extends StatelessWidget {
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
-import 'package:sajhabackup/pages/accountdetails.dart';
+import 'package:sajhabackup/Pages/accountdetails.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/style.dart';
-import 'package:sajhabackup/pages/editprofile.dart';
-import 'package:sajhabackup/pages/settings.dart';
+import 'package:sajhabackup/Pages/editprofile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

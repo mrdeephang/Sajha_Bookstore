@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/pages/forgotpassword.dart';
-import 'package:sajhabackup/pages/register.dart';
-import 'package:sajhabackup/splashs/splashpage.dart';
+import 'package:sajhabackup/Pages/forgotpassword.dart';
+import 'package:sajhabackup/Pages/register.dart';
+import 'package:sajhabackup/Splashes/splashpage.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -14,20 +15,23 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  Future<FirebaseApp> _initializeFirebase() async{
-    FirebaseApp firebaseApp=await Firebase.initializeApp();
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
         future: _initializeFirebase(),
-        builder: (context,snapshot){
-          if(snapshot.connectionState==ConnectionState.done){
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
             return loginscreen();
           }
-          return const Center(child: CircularProgressIndicator(),);
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
@@ -42,29 +46,33 @@ class loginscreen extends StatefulWidget {
 }
 
 class _loginscreenState extends State<loginscreen> {
-  static Future<User?> loginUsingEmailPassword({required String email,required String password, required BuildContext context})async{
-    FirebaseAuth auth=FirebaseAuth.instance;
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
-    try{
-      UserCredential userCredential=await auth.signInWithEmailAndPassword(email: email, password: password);
-      user=userCredential.user;
-    }on FirebaseAuthException catch(e){
-      if(e.code=="user-not-found"){
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
         print("no user found");
       }
     }
     return user;
   }
-  bool _issecuredpassword=true;
+
+  bool _issecuredpassword = true;
   String user = '';
   String pass = '';
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController=TextEditingController();
-    TextEditingController _passwordController=TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
     final userfield = TextField(
-
       controller: _emailController,
       style: mystyle,
       decoration: InputDecoration(
@@ -82,12 +90,16 @@ class _loginscreenState extends State<loginscreen> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
-        onPressed: () async{
-         User? user= await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
-         print(user);
-         if(user!=null){
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>SplashPage()));
-         }
+        onPressed: () async {
+          User? user = await loginUsingEmailPassword(
+              email: _emailController.text,
+              password: _passwordController.text,
+              context: context);
+          print(user);
+          if (user != null) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => SplashPage()));
+          }
         },
         child: const Text(
           'Login',
@@ -130,19 +142,18 @@ class _loginscreenState extends State<loginscreen> {
                       userfield,
                       SizedBox(height: 10),
                       TextField(
-                          
-                                     controller: _passwordController,
-                                obscureText: _issecuredpassword,
-                                style: mystyle,
-                               decoration: InputDecoration(
-                                suffixIcon: togglePassword(),
-                             contentPadding: EdgeInsets.all(10),
-                                hintText: "Password",
-                               hintStyle: TextStyle(fontSize: 18),
-                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-                                      ),  
-                                   
-                                  ),
+                        controller: _passwordController,
+                        obscureText: _issecuredpassword,
+                        style: mystyle,
+                        decoration: InputDecoration(
+                          suffixIcon: togglePassword(),
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: "Password",
+                          hintStyle: TextStyle(fontSize: 18),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(32)),
+                        ),
+                      ),
                       SizedBox(height: 1),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -223,13 +234,18 @@ class _loginscreenState extends State<loginscreen> {
       ),
     );
   }
-  Widget togglePassword(){
-    return IconButton(onPressed: (){
-      setState(() {
-        _issecuredpassword=! _issecuredpassword;
-      });
-    }, 
-    icon:  _issecuredpassword ? Icon(Icons.visibility): Icon(Icons.visibility_off),color: Colors.grey,
+
+  Widget togglePassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _issecuredpassword = !_issecuredpassword;
+        });
+      },
+      icon: _issecuredpassword
+          ? Icon(Icons.visibility)
+          : Icon(Icons.visibility_off),
+      color: Colors.grey,
     );
   }
 }
