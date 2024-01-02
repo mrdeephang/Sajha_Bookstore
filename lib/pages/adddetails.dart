@@ -14,8 +14,14 @@ class _adddetailsState extends State<adddetails> {
     return Scaffold(
       backgroundColor: Colors.grey[250],
       appBar: AppBar(
+        title: Text(
+          'Add Details',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Color(0xFF9526BC),
-        leading: BackButton(),
+        leading: BackButton(
+          color: Colors.white,
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -24,7 +30,8 @@ class _adddetailsState extends State<adddetails> {
             },
             child: Text(
               "Finish",
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
           )
         ],
@@ -37,18 +44,6 @@ class _adddetailsState extends State<adddetails> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                children: [
-                  Text(
-                    'Add Details',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Color(0xFF9526BC)),
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
               Column(
                 children: [
                   inputFile(label: "Book's Name"),

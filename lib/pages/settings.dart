@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
 import 'package:sajhabackup/pages/accountdetails.dart';
 
@@ -16,11 +17,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text(
-          'Settings',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text('Settings',
+            style: TextStyle(color: Colors.white, fontFamily: regular)),
         backgroundColor: Color(0xFF9526BC),
+        leading: BackButton(
+          color: Colors.white,
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -33,10 +35,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Ionicons.person_circle_outline,
                 title: "Account",
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => accountdetails()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfileScreen()));
                 },
               ),
               const SizedBox(

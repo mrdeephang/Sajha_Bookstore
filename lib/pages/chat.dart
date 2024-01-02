@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/style.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
 import 'package:sajhabackup/pages/chatpage.dart';
 import 'package:sajhabackup/pages/recentchat.dart';
 
@@ -20,8 +22,17 @@ class chat extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Chats', style: TextStyle(color: Colors.white)),
+        title: Text('Chats',
+            style: TextStyle(color: Colors.white, fontFamily: regular)),
+        elevation: 0,
         backgroundColor: Color(0xFF9526BC),
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => homepage()));
+          },
+        ),
       ),
       body: ListView(
         children: [
@@ -47,7 +58,8 @@ class chat extends StatelessWidget {
                   Container(
                     width: 300,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                       child: TextFormField(
                           decoration: InputDecoration(
                         hintText: "Search",

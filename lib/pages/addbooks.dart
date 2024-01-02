@@ -17,15 +17,25 @@ class _HomeScreenState extends State<addbooks> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text(
+          'Add',
+          style: TextStyle(color: Colors.white, fontSize: 22),
+        ),
         backgroundColor: Color(0xFF9526BC),
-        leading: BackButton(),
+        leading: BackButton(
+          color: Colors.white,
+        ),
         actions: [
-          IconButton(
-              icon: Icon(Icons.forward),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => adddetails()));
-              }),
+          TextButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => adddetails()));
+            },
+            child: Text(
+              "Next",
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+          )
         ],
       ),
       body: Center(

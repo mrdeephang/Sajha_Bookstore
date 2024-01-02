@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:sajhabackup/HomePage/homepage.dart';
+import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/pages/editprofile.dart';
+import 'package:sajhabackup/pages/settings.dart';
 
-void main() {
+/*void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromARGB(0, 167, 118, 118),
       statusBarIconBrightness: Brightness.dark));
@@ -26,7 +26,7 @@ class accountdetails extends StatelessWidget {
     );
   }
 }
-
+*/
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -34,13 +34,12 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Account',
+            style: TextStyle(color: Colors.white, fontFamily: regular)),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => homepage()));
-          },
+        backgroundColor: Color(0xFF9526BC),
+        leading: BackButton(
+          color: Colors.white,
         ),
       ),
       body: Padding(
@@ -53,11 +52,11 @@ class ProfileScreen extends StatelessWidget {
               backgroundImage: AssetImage('assets/images/profile.jpg'),
             ),
             const SizedBox(height: 20),
-            itemProfile('Name', 'esparsh tamrakar', CupertinoIcons.person),
+            itemProfile('Name', 'Esparsh tamrakar', CupertinoIcons.person),
             const SizedBox(height: 10),
             itemProfile('Phone', '9809454069', CupertinoIcons.phone),
             const SizedBox(height: 10),
-            itemProfile('Address', 'sanepa', CupertinoIcons.location),
+            itemProfile('Address', 'Sanepa', CupertinoIcons.location),
             const SizedBox(height: 10),
             itemProfile(
                 'Email', 'atamrakarrockers69@gmail.com', CupertinoIcons.mail),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/style.dart';
 import 'package:sajhabackup/pages/accountdetails.dart';
-//import 'package:sajhabackup/pages/accountdetails.dart';
 
 class editprofile extends StatefulWidget {
   const editprofile({super.key});
@@ -15,10 +15,12 @@ class _editprofileState extends State<editprofile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
-        elevation: 0,
+        title: Text('Edit Profile',
+            style: TextStyle(color: Colors.white, fontFamily: regular)),
         backgroundColor: Color(0xFF9526BC),
-        leading: BackButton(),
+        leading: BackButton(
+          color: Colors.white,
+        ),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -76,7 +78,7 @@ class _editprofileState extends State<editprofile> {
               buildTextField("Address", "Sanepa", false),
               buildTextField("Email", "atamrakarrocker69@gmail.com", false),
               buildTextField("Password", "************", true),
-              SizedBox(height: 35),
+              SizedBox(height: 10),
               SingleChildScrollView(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +90,7 @@ class _editprofileState extends State<editprofile> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => accountdetails()));
+                                    builder: (context) => ProfileScreen()));
                           },
                           child: Text(
                             'Cancel',
@@ -102,7 +104,7 @@ class _editprofileState extends State<editprofile> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => accountdetails()));
+                                    builder: (context) => ProfileScreen()));
                           },
                           child: Text(
                             'Save',
