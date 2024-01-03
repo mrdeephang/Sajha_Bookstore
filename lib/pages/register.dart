@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Pages/login.dart';
@@ -16,16 +17,20 @@ class register extends StatefulWidget {
 class _registerState extends State<register> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
+  TextEditingController _fullnameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmpasswordController = TextEditingController();
   bool isSigningUp = false;
 
   @override
   void dispose() {
+    _fullnameController.dispose();
     _usernameController.dispose();
     _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
     _confirmpasswordController.dispose();
     super.dispose();
@@ -53,6 +58,7 @@ class _registerState extends State<register> {
                   height: 30,
                 ),
                 FormContainerWidget(
+                  controller: _fullnameController,
                   hintText: "Full Name",
                   isPasswordField: false,
                 ),
@@ -66,6 +72,7 @@ class _registerState extends State<register> {
                   height: 10,
                 ),
                 FormContainerWidget(
+                  controller: _phoneController,
                   hintText: "Phone Number",
                   isPasswordField: false,
                 ),
@@ -101,7 +108,7 @@ class _registerState extends State<register> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    _signUp();
+                   _signUp();
                   },
                   child: Container(
                     width: double.infinity,
@@ -161,13 +168,20 @@ class _registerState extends State<register> {
     setState(() {
       isSigningUp = true;
     });
-
+    String fullname=_fullnameController.text;
     String username = _usernameController.text;
     String email = _emailController.text;
+    String phone=_phoneController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
-
+    addUser(
+      _fullnameController.text.trim(),
+       _usernameController.text.trim(),
+       int.parse( _phoneController.text.trim()), 
+        _emailController.text.trim(),
+         _passwordController.text.trim(),
+      );
     setState(() {
       isSigningUp = false;
     });
@@ -178,5 +192,14 @@ class _registerState extends State<register> {
     } else {
       showToast(message: "Some error happend");
     }
+  }
+  Future addUser(String fullname,String userName,int phone,String email,String pass)async{
+    await FirebaseFirestore.instance.collection('users').add({
+      'Full Name':fullname,
+      'Username':userName,
+      'Phone':phone,
+      'Email':email,
+      'Password':pass,
+    });
   }
 }
