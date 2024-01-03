@@ -16,7 +16,7 @@ class _helpcenterState extends State<helpcenter> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Settings',
+        title: Text('Help Center',
             style: TextStyle(color: Colors.white, fontFamily: regular)),
         backgroundColor: Color(0xFF9526BC),
         leading: BackButton(
