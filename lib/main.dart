@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Splashes/splashscreen.dart';
+import 'package:sajhabackup/Pages/bookdetails.dart';
+//import 'package:sajhabackup/Splashes/splashscreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,6 @@ Future<void> main() async {
       : await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: splashscreen(),
+    home: booksdetails(),
   ));
 }

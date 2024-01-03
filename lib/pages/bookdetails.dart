@@ -26,7 +26,13 @@ class _bookdetailsState extends State<booksdetails> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xFF9526BC),
-        title: Text('Sajha Bookstore'),
+        title: Text(
+          'Sajha Bookstore',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: BackButton(
+          color: Colors.white,
+        ),
         actions: [
           IconButton(
               onPressed: () {},

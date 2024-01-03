@@ -108,7 +108,7 @@ class _registerState extends State<register> {
                 ),
                 GestureDetector(
                   onTap: () {
-                   _signUp();
+                    _signUp();
                   },
                   child: Container(
                     width: double.infinity,
@@ -168,38 +168,40 @@ class _registerState extends State<register> {
     setState(() {
       isSigningUp = true;
     });
-    String fullname=_fullnameController.text;
+    String fullname = _fullnameController.text;
     String username = _usernameController.text;
     String email = _emailController.text;
-    String phone=_phoneController.text;
+    String phone = _phoneController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
     addUser(
       _fullnameController.text.trim(),
-       _usernameController.text.trim(),
-       int.parse( _phoneController.text.trim()), 
-        _emailController.text.trim(),
-         _passwordController.text.trim(),
-      );
+      _usernameController.text.trim(),
+      int.parse(_phoneController.text.trim()),
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
+    );
     setState(() {
       isSigningUp = false;
     });
     if (user != null) {
-      showToast(message: "User is successfully created");
+      showToast(message: "Registered Successfully");
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SplashPage()));
     } else {
       showToast(message: "Some error happend");
     }
   }
-  Future addUser(String fullname,String userName,int phone,String email,String pass)async{
+
+  Future addUser(String fullname, String userName, int phone, String email,
+      String pass) async {
     await FirebaseFirestore.instance.collection('users').add({
-      'Full Name':fullname,
-      'Username':userName,
-      'Phone':phone,
-      'Email':email,
-      'Password':pass,
+      'Full Name': fullname,
+      'Username': userName,
+      'Phone': phone,
+      'Email': email,
+      'Password': pass,
     });
   }
 }
