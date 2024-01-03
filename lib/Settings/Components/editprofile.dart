@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/style.dart';
-import 'package:sajhabackup/Pages/accountdetails.dart';
+import 'package:sajhabackup/Settings/Components/accountdetails.dart';
 
 class editprofile extends StatefulWidget {
   const editprofile({super.key});

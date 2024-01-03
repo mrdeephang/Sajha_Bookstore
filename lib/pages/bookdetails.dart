@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/Chat/chat.dart';
+import 'package:sajhabackup/Pages/cart.dart';
 
 class booksdetails extends StatefulWidget {
   final book_name;
@@ -65,7 +67,9 @@ class _bookdetailsState extends State<booksdetails> {
                         child: Text(
                           "\Rs.${widget.book_price}",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 219, 38, 25)),
                         ),
                       ),
                     ],
@@ -77,76 +81,136 @@ class _bookdetailsState extends State<booksdetails> {
           Row(
             children: [
               Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Color(0xFF9526BC),
-                  textColor: Colors.black,
-                  elevation: 0.2,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Buy Now",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                child: Container(
+                  height: 40,
+                  width: 20,
+                  child: FloatingActionButton(
+                    backgroundColor: Color(0xFF9526BC),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => cart()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Buy",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: Container(
+                  height: 40,
+                  width: 20,
+                  child: FloatingActionButton(
+                    backgroundColor: Color(0xFF9526BC),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => cart()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Rent",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.deepPurple,
-                  textColor: Colors.black,
-                  elevation: 0.2,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Rent",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.deepPurple,
-                  textColor: Colors.black,
-                  elevation: 0.2,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Add To Cart",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                child: Container(
+                  height: 40,
+                  width: 20,
+                  child: FloatingActionButton(
+                    backgroundColor: Color(0xFF9526BC),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => cart()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Add to Cart",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          Divider(),
+          SizedBox(height: 5),
+          Expanded(
+            child: Container(
+              height: 40,
+              width: 20,
+              child: FloatingActionButton(
+                backgroundColor: Color(0xFF9526BC),
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => chat()));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Chat with Seller",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            height: 2,
+          ),
           ListTile(
-            title: Text('Book Details:'),
+            title: Text(
+              'Book Details:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             //subtitle: Text(''),
           ),
-          Divider(),
+          Divider(
+            height: 2,
+          ),
           Row(
             children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
                 child: Text(
                   'Author:',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.blue),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: Text(widget.book_author),
+                child: Text('Ram Hari Mishra'),
               )
             ],
           ),
@@ -156,7 +220,7 @@ class _bookdetailsState extends State<booksdetails> {
                 padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
                 child: Text(
                   'Condition:',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.blue),
                 ),
               ),
               Padding(
@@ -171,12 +235,12 @@ class _bookdetailsState extends State<booksdetails> {
                 padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
                 child: Text(
                   'Edition:',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.blue),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: Text(widget.book_edition),
+                child: Text('1st'),
               )
             ],
           ),
@@ -186,7 +250,7 @@ class _bookdetailsState extends State<booksdetails> {
                 padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
                 child: Text(
                   'Publisher:',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.blue),
                 ),
               ),
               Padding(
@@ -195,11 +259,26 @@ class _bookdetailsState extends State<booksdetails> {
               )
             ],
           ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
+                child: Text(
+                  'Address:',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: Text("Budanilkantha"),
+              )
+            ],
+          ),
           Divider(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'More Books',
+              'Explore  More',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),

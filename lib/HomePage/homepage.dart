@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/Notification/notification.dart';
 import 'package:sajhabackup/Pages/addbooks.dart';
 import 'package:sajhabackup/Pages/cart.dart';
-import 'package:sajhabackup/Pages/chat.dart';
 import 'package:sajhabackup/Pages/login.dart';
-import 'package:sajhabackup/Pages/settings.dart';
+import 'package:sajhabackup/Settings/settings.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
