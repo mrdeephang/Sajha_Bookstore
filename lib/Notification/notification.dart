@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/style.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class notification extends StatefulWidget {
   const notification({super.key});

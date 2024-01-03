@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/style.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajhabackup/EasyConst/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class helpcenter extends StatefulWidget {
@@ -17,13 +18,13 @@ class _helpcenterState extends State<helpcenter> {
         appBar: AppBar(
           title: Text('Help Center',
               style: TextStyle(color: Colors.white, fontFamily: regular)),
-          backgroundColor: Color(0xFF9526BC),
+          backgroundColor: color,
           leading: BackButton(
             color: Colors.white,
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -43,7 +44,7 @@ class _helpcenterState extends State<helpcenter> {
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Colors.blue,
+                        color: color,
                       ),
                       child: Icon(
                         Icons.call,
@@ -53,7 +54,7 @@ class _helpcenterState extends State<helpcenter> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 5,
                   ),
                   ElevatedButton(
                       onPressed: () {},
@@ -89,7 +90,7 @@ class _helpcenterState extends State<helpcenter> {
                       final email = Uri(
                         scheme: 'mailto',
                         path: 'sajhabookstore@gmail.com',
-                        query: 'subject=Hello&body=Test',
+                        query: 'subject=Hello&body=How to use this app?',
                       );
                       if (await canLaunchUrl(email)) {
                         launchUrl(email);
@@ -102,7 +103,7 @@ class _helpcenterState extends State<helpcenter> {
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Colors.blue,
+                        color: color,
                       ),
                       child: Icon(
                         Icons.mail_lock_sharp,
@@ -112,7 +113,7 @@ class _helpcenterState extends State<helpcenter> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 5,
                   ),
                   ElevatedButton(
                       onPressed: () {},
@@ -154,7 +155,7 @@ class _helpcenterState extends State<helpcenter> {
                       fontFamily: regular,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue),
+                      color: color),
                 ),
               ),
               SizedBox(
@@ -170,7 +171,7 @@ class _helpcenterState extends State<helpcenter> {
               ),
               Image.asset(
                 'assets/images/read.png',
-                height: 315,
+                height: 300,
               )
             ],
           ),

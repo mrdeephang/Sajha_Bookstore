@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
 
 Future<void> main() async {

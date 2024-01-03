@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:sajhabackup/EasyConst/style.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
 import 'package:sajhabackup/Settings/Components/accountdetails.dart';
