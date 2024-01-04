@@ -30,8 +30,8 @@ class _helpcenterState extends State<helpcenter> {
             children: [
               Row(
                 children: [
-                  ElevatedButton(
-                    onPressed: () async {
+                  GestureDetector(
+                    onTap: () async {
                       final call = Uri.parse('tel:+977 9847600569');
                       if (await canLaunchUrl(call)) {
                         launchUrl(call);
@@ -56,8 +56,8 @@ class _helpcenterState extends State<helpcenter> {
                   SizedBox(
                     width: 5,
                   ),
-                  ElevatedButton(
-                      onPressed: () {},
+                  GestureDetector(
+                      onTap: () {},
                       child: Column(
                         children: [
                           Text(
@@ -85,8 +85,8 @@ class _helpcenterState extends State<helpcenter> {
               ),
               Row(
                 children: [
-                  ElevatedButton(
-                    onPressed: () async {
+                  GestureDetector(
+                    onTap: () async {
                       final email = Uri(
                         scheme: 'mailto',
                         path: 'sajhabookstore@gmail.com',
@@ -115,8 +115,8 @@ class _helpcenterState extends State<helpcenter> {
                   SizedBox(
                     width: 5,
                   ),
-                  ElevatedButton(
-                      onPressed: () {},
+                  GestureDetector(
+                      onTap: () {},
                       child: Column(
                         children: [
                           Text(
@@ -128,7 +128,7 @@ class _helpcenterState extends State<helpcenter> {
                                 fontFamily: regular),
                           ),
                           Text(
-                            'Within 48 Hours',
+                            '    Within 48 Hours',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,

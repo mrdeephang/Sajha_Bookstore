@@ -50,6 +50,7 @@ dependencies:
   fluttertoast: ^8.2.4
   ionicons: ^0.1.2
   url_launcher: ^6.2.2
+  google_sign_in: ^6.2.1
   
 
   
