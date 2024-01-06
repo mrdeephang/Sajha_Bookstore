@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
@@ -20,7 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text('Settings',
             style: TextStyle(color: Colors.white, fontFamily: regular)),
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         leading: BackButton(
           color: Colors.white,
         ),
@@ -32,7 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SettingsTile(
-                color: Color(0xFF9526BC),
+                color: color,
                 icon: Ionicons.person_circle_outline,
                 title: "Account",
                 onTap: () {
@@ -44,7 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 10,
               ),
               SettingsTile(
-                color: Color(0xFF9526BC),
+                color: color,
                 icon: Ionicons.help,
                 title: "Help Center",
                 onTap: () {
@@ -56,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 10,
               ),
               SettingsTile(
-                color: Color(0xFF9526BC),
+                color: color,
                 icon: Ionicons.moon_outline,
                 title: "Theme",
                 onTap: () {},
@@ -65,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 10,
               ),
               SettingsTile(
-                color: Color(0xFF9526BC),
+                color: color,
                 icon: Ionicons.language,
                 title: "Language",
                 onTap: () {},

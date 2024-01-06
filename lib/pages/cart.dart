@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/cart_products.dart';
 
 class cart extends StatefulWidget {
@@ -13,7 +14,7 @@ class _cartState extends State<cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: color,
         title: Text('Cart'),
         actions: [
           IconButton(
@@ -43,7 +44,7 @@ class _cartState extends State<cart> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),
-                color: Colors.deepPurple,
+                color: color,
               ),
             )
           ],

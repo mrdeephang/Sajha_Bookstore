@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/editprofile.dart';
 
@@ -13,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
         title: Text('Account',
             style: TextStyle(color: Colors.white, fontFamily: regular)),
         elevation: 0,
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         leading: BackButton(
           color: Colors.white,
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/login.dart';
 
 class splashscreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _splashscreenState extends State<splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF9526BC),
+      backgroundColor: color,
       body: Stack(
         children: [
           Container(

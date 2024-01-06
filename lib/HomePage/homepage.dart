@@ -4,6 +4,7 @@ import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:sajhabackup/Chat/chat.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
@@ -48,7 +49,7 @@ class _homepageState extends State<homepage> {
     );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
@@ -98,7 +99,7 @@ class _homepageState extends State<homepage> {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Color(0xFF9526BC),
+                color: color,
               ),
             ),
             InkWell(
@@ -110,7 +111,7 @@ class _homepageState extends State<homepage> {
                 title: Text('Home'),
                 leading: Icon(
                   Icons.home,
-                  color: Color(0xFF9526BC),
+                  color: color,
                 ),
               ),
             ),
@@ -121,7 +122,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Chat'),
-                leading: Icon(Icons.chat_bubble, color: Color(0xFF9526BC)),
+                leading: Icon(Icons.chat_bubble, color: color),
               ),
             ),
             InkWell(
@@ -131,7 +132,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Add'),
-                leading: Icon(Icons.add, color: Color(0xFF9526BC)),
+                leading: Icon(Icons.add, color: color),
               ),
             ),
             InkWell(
@@ -141,7 +142,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Settings'),
-                leading: Icon(Icons.settings, color: Color(0xFF9526BC)),
+                leading: Icon(Icons.settings, color: color),
               ),
             ),
             InkWell(
@@ -149,7 +150,7 @@ class _homepageState extends State<homepage> {
                 QuickAlert.show(
                     textColor: Colors.black,
                     backgroundColor: Colors.white,
-                    confirmBtnColor: Color(0xFF9526BC),
+                    confirmBtnColor: color,
                     context: context,
                     type: QuickAlertType.confirm,
                     title: "LogOut",
@@ -161,7 +162,7 @@ class _homepageState extends State<homepage> {
               },
               child: ListTile(
                 title: Text('Log Out'),
-                leading: Icon(Icons.logout, color: Color(0xFF9526BC)),
+                leading: Icon(Icons.logout, color: color),
               ),
             ),
           ],
@@ -185,9 +186,7 @@ class _homepageState extends State<homepage> {
             child: Text(
               "Master's Level",
               style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF9526BC)),
+                  fontSize: 20, fontWeight: FontWeight.bold, color: color),
             ),
           ),
           Container(
@@ -201,9 +200,7 @@ class _homepageState extends State<homepage> {
             padding: EdgeInsets.all(30),
             child: Text("Bachelor's Level",
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF9526BC))),
+                    fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           ),
           Container(
             height: 300,
@@ -217,9 +214,7 @@ class _homepageState extends State<homepage> {
             padding: EdgeInsets.all(30),
             child: Text("Extra",
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF9526BC))),
+                    fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           ),
           Container(
             height: 300,

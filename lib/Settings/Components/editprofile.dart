@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/accountdetails.dart';
 
@@ -17,7 +18,7 @@ class _editprofileState extends State<editprofile> {
       appBar: AppBar(
         title: Text('Edit Profile',
             style: TextStyle(color: Colors.white, fontFamily: regular)),
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         leading: BackButton(
           color: Colors.white,
         ),
@@ -66,7 +67,7 @@ class _editprofileState extends State<editprofile> {
                               )),
                           child: Icon(
                             Icons.edit,
-                            color: Colors.deepPurple,
+                            color: color,
                           ),
                         ))
                   ],

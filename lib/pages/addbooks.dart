@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/adddetails.dart';
 
 class addbooks extends StatefulWidget {
@@ -64,8 +64,7 @@ class _HomeScreenState extends State<addbooks> {
             ),
             ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF9526BC)),
+                    backgroundColor: MaterialStateProperty.all(color),
                     padding:
                         MaterialStateProperty.all(const EdgeInsets.all(25)),
                     textStyle: MaterialStateProperty.all(

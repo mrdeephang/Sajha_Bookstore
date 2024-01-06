@@ -88,7 +88,7 @@ class _loginscreenState extends State<loginscreen> {
     final myloginbutton = Material(
       elevation: 3,
       borderRadius: BorderRadius.circular(30),
-      color: Color(0xFF9526BC),
+      color: color,
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(12),
@@ -131,7 +131,7 @@ class _loginscreenState extends State<loginscreen> {
                         child: const Text(
                           'Buy, Sell & Rent Books',
                           style: TextStyle(
-                              color: Color(0xFF9526BC),
+                              color: color,
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                               letterSpacing: 1,

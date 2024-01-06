@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/homepage.dart';
 
 class adddetails extends StatefulWidget {
@@ -18,7 +19,7 @@ class _adddetailsState extends State<adddetails> {
           'Add Details',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         leading: BackButton(
           color: Colors.white,
         ),

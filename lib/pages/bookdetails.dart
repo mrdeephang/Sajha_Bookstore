@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chat.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/cart.dart';
 
 class booksdetails extends StatefulWidget {
@@ -27,7 +28,7 @@ class _bookdetailsState extends State<booksdetails> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         title: Text(
           'Sajha Bookstore',
           style: TextStyle(color: Colors.white),
@@ -85,7 +86,7 @@ class _bookdetailsState extends State<booksdetails> {
                   height: 40,
                   width: 20,
                   child: FloatingActionButton(
-                    backgroundColor: Color(0xFF9526BC),
+                    backgroundColor: color,
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => cart()));
@@ -113,7 +114,7 @@ class _bookdetailsState extends State<booksdetails> {
                   height: 40,
                   width: 20,
                   child: FloatingActionButton(
-                    backgroundColor: Color(0xFF9526BC),
+                    backgroundColor: color,
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => cart()));
@@ -138,7 +139,7 @@ class _bookdetailsState extends State<booksdetails> {
                   height: 40,
                   width: 20,
                   child: FloatingActionButton(
-                    backgroundColor: Color(0xFF9526BC),
+                    backgroundColor: color,
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => cart()));
@@ -166,7 +167,7 @@ class _bookdetailsState extends State<booksdetails> {
               height: 40,
               width: 20,
               child: FloatingActionButton(
-                backgroundColor: Color(0xFF9526BC),
+                backgroundColor: color,
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => chat()));
