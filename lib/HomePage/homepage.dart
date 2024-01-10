@@ -1,4 +1,6 @@
 //import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -14,6 +16,7 @@ import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
 import 'package:sajhabackup/pages/adddetails.dart';
 import 'package:sajhabackup/pages/recentlyadded.dart';
+import 'package:sajhabackup/pages/search.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -23,6 +26,7 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -55,10 +59,7 @@ class _homepageState extends State<homepage> {
         actions: [
           IconButton(
               onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>search()));
               },
               icon: Icon(
                 Icons.search,
@@ -239,64 +240,4 @@ class _homepageState extends State<homepage> {
   }
 }
 
-class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchItems = ['Physics', 'Matrix', 'Batman V Superman'];
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      )
-    ];
-  }
 
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          close(context, null);
-        },
-        icon: Icon(Icons.arrow_back));
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var books in searchItems) {
-      if (books.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(books);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var books in searchItems) {
-      if (books.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(books);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-}
