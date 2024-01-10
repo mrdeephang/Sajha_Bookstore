@@ -13,6 +13,7 @@ import 'package:sajhabackup/Pages/cart.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
 import 'package:sajhabackup/pages/adddetails.dart';
+import 'package:sajhabackup/pages/recentlyadded.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -123,6 +124,16 @@ class _homepageState extends State<homepage> {
               child: ListTile(
                 title: Text('Chat'),
                 leading: Icon(Icons.chat_bubble, color: color),
+              ),
+            ),
+              InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => BookListPage()));
+              },
+              child: ListTile(
+                title: Text('Recently Added'),
+                leading: Icon(Icons.add_alert_outlined, color: color),
               ),
             ),
             InkWell(
