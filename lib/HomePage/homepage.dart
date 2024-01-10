@@ -9,10 +9,10 @@ import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/Notification/notification.dart';
-import 'package:sajhabackup/Pages/addbooks.dart';
 import 'package:sajhabackup/Pages/cart.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
+import 'package:sajhabackup/pages/adddetails.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -128,7 +128,7 @@ class _homepageState extends State<homepage> {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => addbooks()));
+                    MaterialPageRoute(builder: (context) => BookAddPage()));
               },
               child: ListTile(
                 title: Text('Add'),
