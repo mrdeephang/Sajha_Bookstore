@@ -1,5 +1,7 @@
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
@@ -26,6 +28,39 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  User? _user;
+  String _userName = '';
+  String _userEmail = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+  }
+
+  Future<void> _getUser() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        _user = user;
+      });
+
+      // Fetch user details from Firestore 'users' collection
+      DocumentSnapshot userSnapshot =
+          await _firestore.collection('users').doc(user.uid).get();
+
+      if (userSnapshot.exists) {
+        setState(() {
+          _userName = userSnapshot['Full Name'];
+          _userEmail = userSnapshot['Email'];
+        });
+      }
+    }
+  }
+
   
   @override
   Widget build(BuildContext context) {
@@ -89,8 +124,8 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Esparsh Tamrakar'),
-              accountEmail: Text('esparsh.tamrakar@gmail.com'),
+              accountName: Text(_userName),
+              accountEmail: Text(_userEmail),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
