@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/pages/bookdetails2.dart';
 
 class BookListPage extends StatefulWidget {
@@ -12,9 +14,16 @@ class _BookListPageState extends State<BookListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: color,
+        centerTitle: true,
         elevation: 0,
-        leading: BackButton(),
-        title: Text('Recently Added'),
+        leading: BackButton(
+          color: color1,
+        ),
+        title: Text(
+          'Recently Added',
+          style: TextStyle(color: color1, fontFamily: regular),
+        ),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('books').snapshots(),
@@ -34,7 +43,8 @@ class _BookListPageState extends State<BookListPage> {
 
               return ListTile(
                 title: Text(book['name']),
-                subtitle: Text('Author: ${book['author']}\nPrice: \Rs${book['price']}'),
+                subtitle: Text(
+                    'Author: ${book['author']}\nPrice: \Rs${book['price']}'),
                 leading: Image.network(
                   book['image_url'],
                   height: 50,
@@ -42,9 +52,12 @@ class _BookListPageState extends State<BookListPage> {
                   fit: BoxFit.cover,
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>booksdetails2(
-                  book: book,
-                  )));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => booksdetails2(
+                                book: book,
+                              )));
                 },
               );
             },

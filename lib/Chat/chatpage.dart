@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chat_bubble.dart';
 import 'package:sajhabackup/Chat/chat_service.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 
 class chatpage extends StatefulWidget {
   final String receiveruserEmail;
@@ -32,7 +33,16 @@ class _chatpageState extends State<chatpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiveruserEmail),
+        centerTitle: true,
+        backgroundColor: color,
+        title: Text(
+          widget.receiveruserEmail,
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: color1),
+        ),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: Column(
         children: [

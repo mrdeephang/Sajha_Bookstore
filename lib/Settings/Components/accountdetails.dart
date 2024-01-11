@@ -11,8 +11,11 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account',
-            style: TextStyle(color: Colors.white, fontFamily: regular)),
+        centerTitle: true,
+        title: Text(
+          'Account',
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+        ),
         elevation: 0,
         backgroundColor: color,
         leading: BackButton(

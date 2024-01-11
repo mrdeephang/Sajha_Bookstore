@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/splashes/splashpage.dart';
 
@@ -17,7 +18,7 @@ class verification extends StatelessWidget {
                   MaterialPageRoute(builder: ((context) => loginscreen())));
             },
             icon: const Icon(Icons.arrow_back_ios_new),
-            color: Colors.black),
+            color: color1),
       ),
       body: Column(
         children: [

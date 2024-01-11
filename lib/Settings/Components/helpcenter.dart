@@ -14,11 +14,14 @@ class _helpcenterState extends State<helpcenter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[200],
         appBar: AppBar(
-          title: Text('Help Center',
-              style: TextStyle(color: Colors.white, fontFamily: regular)),
+          centerTitle: true,
           backgroundColor: color,
+          title: Text(
+            'Help Center',
+            style: TextStyle(
+                color: Colors.white, fontFamily: regular, fontSize: 20),
+          ),
           leading: BackButton(
             color: Colors.white,
           ),
