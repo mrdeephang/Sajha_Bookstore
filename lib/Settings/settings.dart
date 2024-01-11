@@ -19,8 +19,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Settings',
-            style: TextStyle(color: Colors.white, fontFamily: regular)),
+        centerTitle: true,
+        title: Text(
+          'Settings',
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+        ),
         backgroundColor: color,
         leading: BackButton(
           color: Colors.white,

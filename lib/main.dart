@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
 
 
-
 Future<void> main() async {
  
   WidgetsFlutterBinding.ensureInitialized();

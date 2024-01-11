@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/cart.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
 
@@ -30,11 +31,12 @@ class _bookdetailsState extends State<booksdetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: color,
         title: Text(
           'Sajha Bookstore',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
         ),
         leading: BackButton(
           color: Colors.white,

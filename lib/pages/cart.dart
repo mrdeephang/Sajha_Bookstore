@@ -15,8 +15,13 @@ class _cartState extends State<cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: color,
-        title: Text('Cart'),
+        title: Text(
+          'Cart',
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: color1),
+        ),
         actions: [
           IconButton(
               onPressed: () {

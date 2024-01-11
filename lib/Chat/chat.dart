@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chatpage.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class chat extends StatefulWidget {
   const chat({super.key});
@@ -18,13 +20,16 @@ class _chatState extends State<chat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        backgroundColor: color,
         elevation: 0,
         title: Text(
           'CHAT',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
         ),
-        leading: BackButton(),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: _buildUserList(),
     );
