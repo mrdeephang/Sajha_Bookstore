@@ -1,7 +1,11 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
+import 'package:sajhabackup/pages/bookdetails2.dart';
+import 'package:sajhabackup/pages/cartmodel.dart';
+import 'package:sajhabackup/pages/recentlyadded.dart';
 
 
 Future<void> main() async {
@@ -17,10 +21,22 @@ Future<void> main() async {
               storageBucket: 'gs://sajhabookstore.appspot.com'))
       : await Firebase.initializeApp();
        runApp(
+        ChangeNotifierProvider(
+          create: (context)=>CartModel(),
+          child: MyApp(),
+        )
         
-  MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: splashscreen(),
-  ));
+ );
  
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: splashscreen(),
+    );
+  }
 }

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:provider/provider.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/pages/cartmodel.dart';
+//import 'package:sajhabackup/pages/CartPage.dart';
 
 class booksdetails2 extends StatelessWidget {
   final Map<String,dynamic> book;
 
   booksdetails2({required this.book});
-  List<Book> cartItems=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,7 +152,17 @@ class booksdetails2 extends StatelessWidget {
                    //padding: EdgeInsets.only(right: 10),
                   color: color,
                   width: MediaQuery.of(context).size.width*0.4,
-                  child: TextButton(onPressed: (){}, child: Text('AddToCart',style: TextStyle(color: Colors.black)))),
+                  child: TextButton(onPressed: (){
+                     Provider.of<CartModel>(context, listen: false).addToCart(
+            Book(
+              name: book['name'],
+              author: book['author'],
+              imageUrl: book['image_url'],
+              price: book['price'],
+              
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
+                  }, child: Text('AddToCart',style: TextStyle(color: Colors.black)))),
               ],
             ),
             SizedBox(height: 10),

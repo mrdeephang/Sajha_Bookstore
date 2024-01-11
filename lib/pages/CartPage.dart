@@ -1,97 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sajhabackup/pages/cartmodel.dart';
 
-class Book {
-  final String name;
-  final String author;
-  final String imageUrl;
-  final double price;
-
-  Book({
-    required this.name,
-    required this.author,
-    required this.imageUrl,
-    required this.price,
-  });
-}
-
-class CartPage extends StatefulWidget {
-  final List<Book> cartItems;
-
-  CartPage({required this.cartItems});
-
-  @override
-  _CartPageState createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
- 
+class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double total = 0;
+    var cartModel = Provider.of<CartModel>(context);
 
-    for (var book in widget.cartItems) {
-     
-      total += 10.0;
-    }
+    // Calculate total price
+    double totalPrice = cartModel.cartItems.fold(
+        0, (previousValue, book) => previousValue + book.price);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Shopping Cart'),
       ),
-      body: widget.cartItems.isEmpty
-          ? Center(
-              child: Text('Your cart is empty.'),
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: widget.cartItems.length,
-                    itemBuilder: (context, index) {
-                      var book = widget.cartItems[index];
-                      return _buildCartItem(book);
-                    },
-                  ),
-                ),
-                _buildTotalAndCheckoutButtons(total),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: cartModel.cartItems.isEmpty
+                    ? Text('Your cart is empty.')
+                    : ListView.builder(
+                        itemCount: cartModel.cartItems.length,
+                        itemBuilder: (context, index) {
+                          var book = cartModel.cartItems[index];
+                          return Card(
+                            margin: EdgeInsets.all(8.0),
+                            child: ListTile(
+                             // leading: Image.asset(book.imageUrl,width: 40,height: 40,),
+                              title: Text(book.name),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.network(
+                                    book.imageUrl,
+                                    height: 100,
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Text('Author: ${book.author}'),
+                                  
+                                  Text('Price: \Rs${book.price.toStringAsFixed(2)}'),
+                                ],
+                              ),
+        
+                              trailing: IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () {
+                                  // Remove the book from the cart
+                                  cartModel.removeFromCart(book);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
             ),
-    );
-  }
-
-  Widget _buildCartItem(Book book) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      child: ListTile(
-        leading: Image.network(
-          book.imageUrl,
-          width: 50,
-          height: 50,
-          fit: BoxFit.cover,
+            Container(
+              padding: EdgeInsets.all(16.0),
+              color: Colors.grey.shade200,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Total Price: \Rs.${totalPrice.toStringAsFixed(2)}'),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add your checkout logic here
+                      // For example, you can navigate to a checkout page
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutPage()));
+                    },
+                    child: Text('Checkout'),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        title: Text(book.name),
-        subtitle: Text('Author: ${book.author}'),
-        trailing: Text('\Rs.${book.price}'),
-      ),
-    );
-  }
-
-  Widget _buildTotalAndCheckoutButtons(double total) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      color: Colors.blueGrey[100],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Total: \Rs${total.toStringAsFixed(2)}'),
-          ElevatedButton(
-            onPressed: () {
-             
-              print('Checkout pressed');
-            },
-            child: Text('Checkout'),
-          ),
-        ],
       ),
     );
   }

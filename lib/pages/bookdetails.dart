@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/cart.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/pages/cartmodel.dart';
 
 class booksdetails extends StatefulWidget {
   
@@ -26,7 +28,6 @@ class booksdetails extends StatefulWidget {
 }
 
 class _bookdetailsState extends State<booksdetails> {
-  List<Book> cartItems=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,8 +94,14 @@ class _bookdetailsState extends State<booksdetails> {
                   child: FloatingActionButton(
                     backgroundColor: color,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => cart()));
+                      Provider.of<CartModel>(context, listen: false).addToCart(
+            Book(
+              name: widget.book_name,
+              author:widget.book_author,
+              imageUrl: widget.book_pic,
+              price: widget.book_price,
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -145,13 +152,14 @@ class _bookdetailsState extends State<booksdetails> {
                   child: FloatingActionButton(
                     backgroundColor: color,
                     onPressed: () {
-                    cartItems.add(Book(
-                        name: widget.book_name, 
-                        author: widget.book_author, 
-                        imageUrl: widget.book_pic, 
-                        price: widget.book_price));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CartPage(cartItems: cartItems)));
+                   Provider.of<CartModel>(context, listen: false).addToCart(
+            Book(
+              name: widget.book_name,
+              author:widget.book_author,
+              imageUrl: widget.book_pic,
+              price: widget.book_price,
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

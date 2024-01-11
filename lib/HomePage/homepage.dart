@@ -26,7 +26,7 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  List <Book>cartItems=[];
+  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -77,7 +77,7 @@ class _homepageState extends State<homepage> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => CartPage(cartItems: cartItems,)));
+                    context, MaterialPageRoute(builder: (context) => CartPage()));
               },
               icon: Icon(
                 Icons.shopping_cart,
