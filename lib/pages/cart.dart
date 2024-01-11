@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Pages/cart_products.dart';
+import 'package:sajhabackup/pages/search.dart';
 
 class cart extends StatefulWidget {
   const cart({super.key});
@@ -18,7 +19,9 @@ class _cartState extends State<cart> {
         title: Text('Cart'),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                search;
+              },
               icon: Icon(
                 Icons.search,
                 color: Colors.white,

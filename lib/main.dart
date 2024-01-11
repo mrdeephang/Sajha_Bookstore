@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
 
 
+
 Future<void> main() async {
+ 
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
       ? await Firebase.initializeApp(
@@ -15,8 +17,11 @@ Future<void> main() async {
               projectId: 'sajhabookstore',
               storageBucket: 'gs://sajhabookstore.appspot.com'))
       : await Firebase.initializeApp();
-  runApp(MaterialApp(
+       runApp(
+        
+  MaterialApp(
     debugShowCheckedModeBanner: false,
     home: splashscreen(),
   ));
+ 
 }

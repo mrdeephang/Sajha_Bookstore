@@ -11,9 +11,9 @@ import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/Notification/notification.dart';
-import 'package:sajhabackup/Pages/cart.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
+import 'package:sajhabackup/pages/CartPage.dart';
 import 'package:sajhabackup/pages/adddetails.dart';
 import 'package:sajhabackup/pages/recentlyadded.dart';
 import 'package:sajhabackup/pages/search.dart';
@@ -26,7 +26,7 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-
+  List <Book>cartItems=[];
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -77,7 +77,7 @@ class _homepageState extends State<homepage> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => cart()));
+                    context, MaterialPageRoute(builder: (context) => CartPage(cartItems: cartItems,)));
               },
               icon: Icon(
                 Icons.shopping_cart,
@@ -195,10 +195,19 @@ class _homepageState extends State<homepage> {
           ),
           Padding(
             padding: EdgeInsets.all(30),
-            child: Text(
-              "Master's Level",
-              style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: color),
+            child: Row(
+              children: [
+                Text(
+                  "Master's Level",
+                  style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold, color: color),
+                ),
+                SizedBox(width: 20),
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
+                }, child: Text('See More',style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+              ],
             ),
           ),
           Container(
@@ -210,9 +219,18 @@ class _homepageState extends State<homepage> {
           ),
           Padding(
             padding: EdgeInsets.all(30),
-            child: Text("Bachelor's Level",
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+            child: Row(
+              children: [
+                Text("Bachelor's Level",
+                    style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+                         SizedBox(width: 20),
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
+                }, child: Text('See More',style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+              ],
+            ),
           ),
           Container(
             height: 300,
@@ -224,9 +242,18 @@ class _homepageState extends State<homepage> {
           ),
           Padding(
             padding: EdgeInsets.all(30),
-            child: Text("Extra",
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+            child: Row(
+              children: [
+                Text("Extra",
+                    style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+                         SizedBox(width: 20),
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
+                }, child: Text('See More',style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+              ],
+            ),
           ),
           Container(
             height: 300,
