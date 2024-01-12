@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:provider/provider.dart';
+import 'package:sajhabackup/Cart/CartPage.dart';
+import 'package:sajhabackup/Cart/cartmodel.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/pages/CartPage.dart';
-import 'package:sajhabackup/pages/cartmodel.dart';
-//import 'package:sajhabackup/pages/CartPage.dart';
 
 class booksdetails2 extends StatelessWidget {
-  final Map<String,dynamic> book;
+  final Map<String, dynamic> book;
 
   booksdetails2({required this.book});
   @override
@@ -125,51 +124,64 @@ class booksdetails2 extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-               Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                  child: Text(
-                    'Additional Info:',
-                    style: TextStyle(color: Colors.blue),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                    child: Text(
+                      'Additional Info:',
+                      style: TextStyle(color: Colors.blue),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Text(book['additional_info']),
-                )
-              ],
-            ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Container(
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(book['additional_info']),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Container(
+                      color: color,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Buy',
+                            style: TextStyle(color: Colors.black),
+                          ))),
+                  SizedBox(width: 2),
+                  Container(
+                      //padding: EdgeInsets.only(right: 10),
+                      color: color,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: TextButton(
+                          onPressed: () {
+                            Provider.of<CartModel>(context, listen: false)
+                                .addToCart(Book(
+                              name: book['name'],
+                              author: book['author'],
+                              imageUrl: book['image_url'],
+                              price: book['price'],
+                            ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CartPage()));
+                          },
+                          child: Text('AddToCart',
+                              style: TextStyle(color: Colors.black)))),
+                ],
+              ),
+              SizedBox(height: 10),
+              Container(
                   color: color,
-                   width: MediaQuery.of(context).size.width*0.4,  
-                  child: TextButton(onPressed: (){}, child: Text('Buy',style: TextStyle(color: Colors.black),))),
-                SizedBox(width: 2),
-                Container(
-                   //padding: EdgeInsets.only(right: 10),
-                  color: color,
-                  width: MediaQuery.of(context).size.width*0.4,
-                  child: TextButton(onPressed: (){
-                     Provider.of<CartModel>(context, listen: false).addToCart(
-            Book(
-              name: book['name'],
-              author: book['author'],
-              imageUrl: book['image_url'],
-              price: book['price'],
-              
-            ));
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
-                  }, child: Text('AddToCart',style: TextStyle(color: Colors.black)))),
-              ],
-            ),
-            SizedBox(height: 10),
-            Container(
-              color: color,
-              width: MediaQuery.of(context).size.width,
-              child: TextButton(onPressed: (){}, child: Text('Chat With Seller',style: TextStyle(color: Colors.black)))),
+                  width: MediaQuery.of(context).size.width,
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text('Chat With Seller',
+                          style: TextStyle(color: Colors.black)))),
             ],
           ),
         ),

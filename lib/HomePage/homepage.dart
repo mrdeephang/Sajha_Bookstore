@@ -1,22 +1,20 @@
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
+import 'package:sajhabackup/MyBooksStatus/mybookstatus.dart';
 import 'package:sajhabackup/Notification/notification.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
-import 'package:sajhabackup/pages/CartPage.dart';
-import 'package:sajhabackup/pages/adddetails.dart';
+import 'package:sajhabackup/AddBooks/adddetails.dart';
 import 'package:sajhabackup/pages/recentlyadded.dart';
 import 'package:sajhabackup/pages/search.dart';
 
@@ -61,7 +59,6 @@ class _homepageState extends State<homepage> {
     }
   }
 
-  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -94,7 +91,8 @@ class _homepageState extends State<homepage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>search()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => search()));
               },
               icon: Icon(
                 Icons.search,
@@ -111,8 +109,8 @@ class _homepageState extends State<homepage> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => CartPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CartPage()));
               },
               icon: Icon(
                 Icons.shopping_cart,
@@ -162,10 +160,10 @@ class _homepageState extends State<homepage> {
                 leading: Icon(Icons.chat_bubble, color: color),
               ),
             ),
-              InkWell(
+            InkWell(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => BookListPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BookListPage()));
               },
               child: ListTile(
                 title: Text('Recently Added'),
@@ -180,6 +178,16 @@ class _homepageState extends State<homepage> {
               child: ListTile(
                 title: Text('Add'),
                 leading: Icon(Icons.add, color: color),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => mybookstatus()));
+              },
+              child: ListTile(
+                title: Text('My Books Status'),
+                leading: Icon(Icons.star_outline_sharp, color: color),
               ),
             ),
             InkWell(
@@ -238,10 +246,20 @@ class _homepageState extends State<homepage> {
                       fontSize: 20, fontWeight: FontWeight.bold, color: color),
                 ),
                 SizedBox(width: 20),
-                TextButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
-                }, child: Text('See More',style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookListPage()));
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: color),
+                    ))
               ],
             ),
           ),
@@ -258,12 +276,24 @@ class _homepageState extends State<homepage> {
               children: [
                 Text("Bachelor's Level",
                     style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-                         SizedBox(width: 20),
-                TextButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
-                }, child: Text('See More',style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color)),
+                SizedBox(width: 20),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookListPage()));
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: color),
+                    ))
               ],
             ),
           ),
@@ -281,12 +311,24 @@ class _homepageState extends State<homepage> {
               children: [
                 Text("Extra",
                     style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-                         SizedBox(width: 20),
-                TextButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookListPage()));
-                }, child: Text('See More',style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold, color: color),))
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color)),
+                SizedBox(width: 20),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookListPage()));
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: color),
+                    ))
               ],
             ),
           ),
@@ -301,5 +343,3 @@ class _homepageState extends State<homepage> {
     );
   }
 }
-
-

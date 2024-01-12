@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Pages/bookdetails.dart';
+import 'package:sajhabackup/AddBooks/bookdetails.dart';
 
 class extra extends StatefulWidget {
   const extra({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Pages/bookdetails.dart';
+import 'package:sajhabackup/AddBooks/bookdetails.dart';
 
 class bach extends StatefulWidget {
   const bach({super.key});
