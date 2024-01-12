@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:provider/provider.dart';
+import 'package:sajhabackup/Chat/chatpage.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
@@ -45,7 +46,7 @@ class booksdetails2 extends StatelessWidget {
                 "Book Details",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 18),
               Row(
                 children: [
                   Padding(
@@ -61,7 +62,7 @@ class booksdetails2 extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
               Row(
                 children: [
                   Padding(
@@ -77,7 +78,7 @@ class booksdetails2 extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
               Row(
                 children: [
                   Padding(
@@ -93,7 +94,7 @@ class booksdetails2 extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
               Row(
                 children: [
                   Padding(
@@ -109,7 +110,7 @@ class booksdetails2 extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
               Row(
                 children: [
                   Padding(
@@ -125,11 +126,11 @@ class booksdetails2 extends StatelessWidget {
                       onPressed:()=> Navigator.push(context, MaterialPageRoute(builder: (
                        (context)=> MapOpenPage(destinationAddress: book['address'],)
                       ))),
-                    child: Text(book['address'])),
+                    child: Text(book['address'],style: TextStyle(color: Colors.red),)),
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
                Row(
               children: [
                 Padding(
@@ -145,7 +146,23 @@ class booksdetails2 extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 7),
+             Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                    child: Text(
+                      'Added By:',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(book['added by']),
+                  )
+                ],
+              ),
+            SizedBox(height: 25),
             Row(
               children: [
                 Container(
@@ -174,7 +191,9 @@ class booksdetails2 extends StatelessWidget {
             Container(
               color: color,
               width: MediaQuery.of(context).size.width,
-              child: TextButton(onPressed: (){}, child: Text('Chat With Seller',style: TextStyle(color: Colors.black)))),
+              child: TextButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: book['added by'], receiverId: "")));
+              }, child: Text('Chat With Seller',style: TextStyle(color: Colors.black)))),
             ],
           ),
         ),
