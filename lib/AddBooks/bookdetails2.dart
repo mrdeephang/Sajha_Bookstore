@@ -5,6 +5,7 @@ import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
 import 'package:sajhabackup/pages/cartmodel.dart';
+import 'package:sajhabackup/utils/maps.dart';
 //import 'package:sajhabackup/pages/CartPage.dart';
 
 class booksdetails2 extends StatelessWidget {
@@ -120,7 +121,11 @@ class booksdetails2 extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text(book['address']),
+                    child: TextButton(
+                      onPressed:()=> Navigator.push(context, MaterialPageRoute(builder: (
+                       (context)=> MapOpenPage(destinationAddress: book['address'],)
+                      ))),
+                    child: Text(book['address'])),
                   )
                 ],
               ),
@@ -137,22 +142,6 @@ class booksdetails2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(5),
                   child: Text(book['additional_info']),
-                )
-              ],
-            ),
-            SizedBox(height: 10),
-               Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                  child: Text(
-                    'Added By:',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: TextButton(onPressed:(){},child: Text(book['added by'])),
                 )
               ],
             ),

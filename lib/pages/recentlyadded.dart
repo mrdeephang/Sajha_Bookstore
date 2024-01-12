@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/pages/bookdetails2.dart';
+import 'package:sajhabackup/AddBooks/bookdetails2.dart';
 
 class BookListPage extends StatefulWidget {
   @override

@@ -3,15 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sajhabackup/HomePage/homepage.dart';
-import 'package:sajhabackup/Settings/Components/accountdetails.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
-import 'package:sajhabackup/pages/bookdetails2.dart';
 import 'package:sajhabackup/pages/cartmodel.dart';
-import 'package:sajhabackup/pages/recentlyadded.dart';
-
 
 Future<void> main() async {
- 
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
       ? await Firebase.initializeApp(
@@ -22,15 +17,12 @@ Future<void> main() async {
               projectId: 'sajhabookstore',
               storageBucket: 'gs://sajhabookstore.appspot.com'))
       : await Firebase.initializeApp();
-       runApp(
-        ChangeNotifierProvider(
-          create: (context)=>CartModel(),
-          child: MyApp(),
-        )
-        
- );
- 
+  runApp(ChangeNotifierProvider(
+    create: (context) => CartModel(),
+    child: MyApp(),
+  ));
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

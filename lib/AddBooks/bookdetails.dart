@@ -9,19 +9,19 @@ import 'package:sajhabackup/pages/cartmodel.dart';
 
 class booksdetails extends StatefulWidget {
   
-  final  book_name;
-  final  book_price;
-  final  book_author;
-  final  book_edition;
+  final book_name;
+  final book_price;
+  final book_author;
+  final book_edition;
   final book_condition;
-  final  book_pic;
+  final book_pic;
   booksdetails(
-      { this.book_name,
-       this.book_price,
-       this.book_author,
-         this.book_edition,
-         this.book_condition,
-       this.book_pic});
+      {this.book_name,
+      this.book_price,
+      this.book_author,
+      this.book_edition,
+      this.book_condition,
+      this.book_pic});
 
   @override
   State<booksdetails> createState() => _bookdetailsState();
@@ -91,25 +91,29 @@ class _bookdetailsState extends State<booksdetails> {
                 child: Container(
                   height: 40,
                   width: 20,
-                  child: Container(
-                    color: color,
-                    child: TextButton(
-                      //backgroundColor: color,
-                      onPressed: () {
-                       
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Buy",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                  child: FloatingActionButton(
+                    backgroundColor: color,
+                    onPressed: () {
+                      Provider.of<CartModel>(context, listen: false).addToCart(
+            Book(
+              name: widget.book_name,
+              author:widget.book_author,
+              imageUrl: widget.book_pic,
+              price: widget.book_price,
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Buy",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -149,17 +153,13 @@ class _bookdetailsState extends State<booksdetails> {
                     backgroundColor: color,
                     onPressed: () {
                    Provider.of<CartModel>(context, listen: false).addToCart(
-                        Book(
-                          name: widget.book_name,
-                          author: widget.book_author,
-                          imageUrl: widget.book_pic,
-                          price: widget.book_price,
-                        ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CartPage()),
-                      );
+            Book(
+              name: widget.book_name,
+              author:widget.book_author,
+              imageUrl: widget.book_pic,
+              price: widget.book_price,
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -8,12 +8,12 @@ class CartPage extends StatelessWidget {
     var cartModel = Provider.of<CartModel>(context);
 
     // Calculate total price
-    double totalPrice = cartModel.cartItems.fold(
-        0, (previousValue, book) => previousValue + book.price);
+    double totalPrice = cartModel.cartItems
+        .fold(0, (previousValue, book) => previousValue + book.price);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Cart'),
+        title: Text('Cart'),
       ),
       body: Column(
         children: [
@@ -39,7 +39,8 @@ class CartPage extends StatelessWidget {
                                   width: 100,
                                   fit: BoxFit.cover,
                                 ),
-                                Text('Price: \$${book.price.toStringAsFixed(2)}'),
+                                Text(
+                                    'Price: \$${book.price.toStringAsFixed(2)}'),
                               ],
                             ),
                             trailing: IconButton(
@@ -63,9 +64,7 @@ class CartPage extends StatelessWidget {
               children: [
                 Text('Total Price: \Rs${totalPrice.toStringAsFixed(2)}'),
                 ElevatedButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   child: Text('Checkout'),
                 ),
               ],

@@ -68,12 +68,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SettingsTile(
-                color: color,
-                icon: Ionicons.language,
-                title: "Language",
-                onTap: () {},
-              ),
             ],
           ),
         ),
