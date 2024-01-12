@@ -140,6 +140,22 @@ class booksdetails2 extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 10),
+               Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                  child: Text(
+                    'Added By:',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: TextButton(onPressed:(){},child: Text(book['added by'])),
+                )
+              ],
+            ),
             SizedBox(height: 30),
             Row(
               children: [

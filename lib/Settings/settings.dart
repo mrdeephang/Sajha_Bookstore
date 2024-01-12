@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: "Account",
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProfileScreen()));
+                      MaterialPageRoute(builder: (context) => AccDetails()));
                 },
               ),
               const SizedBox(
