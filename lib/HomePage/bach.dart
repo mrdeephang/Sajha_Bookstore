@@ -17,7 +17,7 @@ class _BachState extends State<Bach> {
       future: fetchBooksFromFirebase(),
       builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
@@ -30,7 +30,7 @@ class _BachState extends State<Bach> {
               return SingleProd(
                 prodName: product_list[index]['name'],
                 prodPicture: product_list[index]['image_url'],
-                prodPrice: product_list[index]['price'],
+                prodPrice: product_list[index]['price'].toDouble(),
                 prodAuthor: product_list[index]['author'],
                 prodCondition: product_list[index]['condition'],
                 prodEdition: product_list[index]['edition'],
@@ -62,7 +62,7 @@ class _BachState extends State<Bach> {
 class SingleProd extends StatelessWidget {
   final String prodName;
   final String prodPicture;
-  final int prodPrice;
+  final double prodPrice;
 
   final String prodAuthor;
  final String prodCondition;

@@ -35,25 +35,27 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
       height: 250,
-      child: Carousel(
-        boxFit: BoxFit.cover,
-        images: [
-          NetworkImage(
-              "https://w7.pngwing.com/pngs/377/407/png-transparent-paperback-book-cover-publishing-physics-cover-book-text-wholesale-business.png"),
-          NetworkImage(
-              "https://w7.pngwing.com/pngs/998/703/png-transparent-chemistry-units-1-2-matter-molecule-book-chemistry-book-chemistry-curriculum-electric-blue.png"),
-          NetworkImage(
-              "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
-          //AssetImage("images/book4.jpg"),
-        ],
-        autoplay: true,
-        animationCurve: Curves.fastOutSlowIn,
-        animationDuration: Duration(milliseconds: 1000),
-        //borderRadius: true,
-        dotSize: 3,
-        dotSpacing: 15,
-        indicatorBgPadding: 2,
-        dotBgColor: Colors.transparent,
+      child: SafeArea(
+        child: Carousel(
+          boxFit: BoxFit.cover,
+          images: [
+            NetworkImage(
+                "https://w7.pngwing.com/pngs/377/407/png-transparent-paperback-book-cover-publishing-physics-cover-book-text-wholesale-business.png"),
+            NetworkImage(
+                "https://w7.pngwing.com/pngs/998/703/png-transparent-chemistry-units-1-2-matter-molecule-book-chemistry-book-chemistry-curriculum-electric-blue.png"),
+            NetworkImage(
+                "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
+            //AssetImage("images/book4.jpg"),
+          ],
+          autoplay: true,
+          animationCurve: Curves.fastOutSlowIn,
+          animationDuration: Duration(milliseconds: 1000),
+          //borderRadius: true,
+          dotSize: 3,
+          dotSpacing: 15,
+          indicatorBgPadding: 2,
+          dotBgColor: Colors.transparent,
+        ),
       ),
     );
     return Scaffold(
