@@ -40,7 +40,7 @@ class CartPage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                                 Text(
-                                    'Price: \$${book.price.toStringAsFixed(2)}'),
+                                    'Price: \Rs${book.price.toStringAsFixed(2)}'),
                               ],
                             ),
                             trailing: IconButton(

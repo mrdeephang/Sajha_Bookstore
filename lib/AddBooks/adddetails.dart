@@ -144,12 +144,7 @@ class _BookAddPageState extends State<BookAddPage> {
                 controller: additionalInfoController,
                 decoration: InputDecoration(labelText: 'Additional Info'),
               ),
-              Container(
-                height: 10,
-                width: 20,
-                child: Text(currentUser.email!),
-              ),
-              SizedBox(height: 20),
+            
               DropdownButton<String>(
                 value: selectedCategory,
                 onChanged: (String? newValue) {

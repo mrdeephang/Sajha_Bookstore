@@ -94,15 +94,20 @@ class _bookdetailsState extends State<booksdetails> {
                   child: FloatingActionButton(
                     backgroundColor: color,
                     onPressed: () {
-                      Provider.of<CartModel>(context, listen: false).addToCart(
-            Book(
-              name: widget.book_name,
-              author:widget.book_author,
-              imageUrl: widget.book_pic,
-              price: widget.book_price,
-            ));
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
-                    },
+  try {
+    Provider.of<CartModel>(context, listen: false).addToCart(
+      Book(
+        name: widget.book_name,
+        author: widget.book_author,
+        imageUrl: widget.book_pic,
+        price: widget.book_price,
+      ),
+    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+  } catch (e) {
+    print("Error: $e");
+  }
+},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

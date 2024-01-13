@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/HomePage/bach.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
@@ -270,7 +271,7 @@ class _homepageState extends State<homepage> {
           ),
           Container(
             height: 300,
-            child: bach(),
+            child: Bach(),
           ),
 
           SizedBox(

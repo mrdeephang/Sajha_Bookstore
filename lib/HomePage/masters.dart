@@ -17,6 +17,7 @@ class _mastersState extends State<masters> {
     {"name": "Economics", "picture": "assets/images/M-Eco.png", "Price": "900"},
     {"name": "Physics", "picture": "assets/images/M-phy.jpeg", "Price": "1500"},
   ];
+  
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -24,13 +25,16 @@ class _mastersState extends State<masters> {
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext conntext, int index) {
-          return Single_prod(
+          return 
+          
+          Single_prod(
               prod_name: product_list[index]['name'],
               prod_picture: product_list[index]['picture'],
               prod_price: product_list[index]['Price']);
         });
   }
 }
+
 
 class Single_prod extends StatelessWidget {
   final prod_name;
@@ -46,8 +50,7 @@ class Single_prod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Hero(
-        tag: prod_name,
+      
         child: Material(
             child: InkWell(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -82,7 +85,7 @@ class Single_prod extends StatelessWidget {
             ),
           ),
         )),
-      ),
+      
     );
   }
 }

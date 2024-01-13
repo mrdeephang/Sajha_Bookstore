@@ -3,21 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:sajhabackup/AddBooks/bookdetails.dart';
 import 'package:sajhabackup/AddBooks/bookdetails2.dart';
 
-class extra extends StatefulWidget {
-  
+class Bach extends StatefulWidget {
+  const Bach({Key? key}) : super(key: key);
 
   @override
-  State<extra> createState() => _extraState();
+  State<Bach> createState() => _BachState();
 }
 
-class _extraState extends State<extra> {
+class _BachState extends State<Bach> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: fetchBooksFromFirebase(),
       builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
@@ -30,7 +30,7 @@ class _extraState extends State<extra> {
               return SingleProd(
                 prodName: product_list[index]['name'],
                 prodPicture: product_list[index]['image_url'],
-                prodPrice: product_list[index]['price'].toDouble(),
+                prodPrice: product_list[index]['price'],
                 prodAuthor: product_list[index]['author'],
                 prodCondition: product_list[index]['condition'],
                 prodEdition: product_list[index]['edition'],
@@ -51,7 +51,7 @@ class _extraState extends State<extra> {
     final QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
         .instance
         .collection('books')
-        .where('category', isEqualTo: 'Extra')
+        .where('category', isEqualTo: 'Bachelors')
         .limit(4)
         .get();
 
@@ -62,7 +62,7 @@ class _extraState extends State<extra> {
 class SingleProd extends StatelessWidget {
   final String prodName;
   final String prodPicture;
-  final double prodPrice;
+  final int prodPrice;
 
   final String prodAuthor;
  final String prodCondition;
@@ -75,6 +75,7 @@ class SingleProd extends StatelessWidget {
     required this.prodPicture,
     required this.prodPrice,
     required this.prodAuthor,
+    
     required this.prodCondition,
     required this.prodEdition,
     required this.prodAddInfo,
@@ -93,7 +94,7 @@ class SingleProd extends StatelessWidget {
               builder: (context) => booksdetails2(book: {
                     'name': prodName,
                     'image_url': prodPicture,
-                    'author': prodAuthor, 
+                    'author': prodAuthor,
                     'edition': prodEdition, 
                     'price': prodPrice,
                     'condition': prodCondition, 
