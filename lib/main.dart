@@ -2,13 +2,9 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/Splashes/splashscreen.dart';
-<<<<<<< HEAD
 import 'package:sajhabackup/Cart/cartmodel.dart';
-=======
-import 'package:sajhabackup/pages/cartmodel.dart';
+import 'package:sajhabackup/Splashes/splashscreen.dart';
 import 'package:sajhabackup/themes/themeprovider.dart';
->>>>>>> d17db5e6bcb4461c8056d4fcf7df286275face6a
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
