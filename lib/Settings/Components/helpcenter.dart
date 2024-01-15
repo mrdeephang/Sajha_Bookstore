@@ -60,8 +60,10 @@ class _helpcenterState extends State<helpcenter> {
                   SizedBox(
                     width: 5,
                   ),
-                  GestureDetector(
-                      onTap: () {},
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         children: [
                           Text(
@@ -119,8 +121,10 @@ class _helpcenterState extends State<helpcenter> {
                   SizedBox(
                     width: 5,
                   ),
-                  GestureDetector(
-                      onTap: () {},
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         children: [
                           Text(
@@ -165,13 +169,19 @@ class _helpcenterState extends State<helpcenter> {
               SizedBox(
                 height: 15,
               ),
-              Text(
-                '“SAJHA BOOKSTORE” is a platform for students and booklovers of Nepal to buy, sell and rent old books online.',
-                style: TextStyle(
-                    fontFamily: regular,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '“SAJHA BOOKSTORE” is a platform for students and booklovers of Nepal to buy, sell and rent old books online.',
+                  style: TextStyle(
+                      fontFamily: regular,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
               ),
               Image.asset(
                 'assets/images/read.png',

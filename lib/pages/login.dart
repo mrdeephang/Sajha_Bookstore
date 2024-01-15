@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
@@ -81,7 +82,8 @@ class _loginscreenState extends State<loginscreen> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         hintText: "Email or Phone",
-        hintStyle: TextStyle(fontSize: 18),
+        hintStyle:
+            TextStyle(fontSize: 18, fontFamily: regular, color: Colors.grey),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
@@ -152,7 +154,10 @@ class _loginscreenState extends State<loginscreen> {
                           suffixIcon: togglePassword(),
                           contentPadding: EdgeInsets.all(10),
                           hintText: "Password",
-                          hintStyle: TextStyle(fontSize: 18),
+                          hintStyle: TextStyle(
+                              fontSize: 18,
+                              fontFamily: regular,
+                              color: Colors.grey),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(32)),
                         ),
@@ -216,7 +221,13 @@ class _loginscreenState extends State<loginscreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Not a member?'),
+                          Text(
+                            'Not a member?',
+                            style: TextStyle(
+                                fontFamily: regular,
+                                fontSize: 14,
+                                color: Colors.black),
+                          ),
                           SizedBox(width: 1),
                           TextButton(
                               onPressed: () {
