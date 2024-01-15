@@ -6,7 +6,7 @@ import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:sajhabackup/HomePage/bach.dart';
-import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/bachelors.dart';
@@ -28,9 +28,8 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  final currentUser=FirebaseAuth.instance.currentUser!;
-  
-  
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
@@ -59,7 +58,7 @@ class _homepageState extends State<homepage> {
       ),
     );
     return Scaffold(
-     // backgroundColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: color,
         title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),

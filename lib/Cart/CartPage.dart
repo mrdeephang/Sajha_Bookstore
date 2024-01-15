@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/pages/cartmodel.dart';
+import 'package:sajhabackup/Cart/cartmodel.dart';
 
 class CartPage extends StatelessWidget {
   @override

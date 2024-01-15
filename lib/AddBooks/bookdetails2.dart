@@ -5,20 +5,19 @@ import 'package:sajhabackup/AddBooks/bookdetails.dart';
 import 'package:sajhabackup/Chat/chatpage.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/pages/RentDetails.dart';
-import 'package:sajhabackup/pages/cartmodel.dart';
+import 'package:sajhabackup/Cart/cartmodel.dart';
 import 'package:sajhabackup/utils/maps.dart';
 //import 'package:sajhabackup/pages/CartPage.dart';
 
 class booksdetails2 extends StatelessWidget {
-  final Map<String,dynamic> book;
+  final Map<String, dynamic> book;
 
   booksdetails2({required this.book});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: color,
@@ -47,7 +46,11 @@ class booksdetails2 extends StatelessWidget {
               ),
               Text(
                 "Book Details",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: bold,
+                    color: color),
               ),
               SizedBox(height: 18),
               Row(
@@ -56,12 +59,18 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
                       'Author:',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text(book['author']),
+                    child: Text(
+                      book['author'],
+                      style: TextStyle(fontFamily: regular, fontSize: 16),
+                    ),
                   )
                 ],
               ),
@@ -72,12 +81,18 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
                       'Edition:',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text(book['edition']),
+                    child: Text(
+                      book['edition'],
+                      style: TextStyle(fontFamily: regular, fontSize: 16),
+                    ),
                   )
                 ],
               ),
@@ -87,13 +102,19 @@ class booksdetails2 extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
-                      'Price',
-                      style: TextStyle(color: Colors.blue),
+                      'Price:',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text('\Rs.${book['price']}'),
+                    child: Text(
+                      '\Rs.${book['price']}',
+                      style: TextStyle(fontFamily: regular, fontSize: 16),
+                    ),
                   )
                 ],
               ),
@@ -104,12 +125,18 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
                       'Condition:',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text(book['condition']),
+                    child: Text(
+                      book['condition'],
+                      style: TextStyle(fontFamily: regular, fontSize: 16),
+                    ),
                   )
                 ],
               ),
@@ -120,43 +147,63 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
                       'Address:',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: TextButton(
-                      onPressed:()=> Navigator.push(context, MaterialPageRoute(builder: (
-                       (context)=> MapOpenPage(destinationAddress: book['address'],)
-                      ))),
-                    child: Text(book['address'],style: TextStyle(color: Colors.red),)),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => MapOpenPage(
+                                      destinationAddress: book['address'],
+                                    )))),
+                        child: Text(
+                          book['address'],
+                          style: TextStyle(
+                              fontFamily: regular, fontSize: 16, color: color),
+                        )),
                   )
                 ],
               ),
               SizedBox(height: 7),
-               Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                  child: Text(
-                    'Additional Info:',
-                    style: TextStyle(color: Colors.blue),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                    child: Text(
+                      'Additional Info:',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 16),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Text(book['additional_info']),
-                )
-              ],
-            ),
-            SizedBox(height: 7),
-             Row(
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      book['additional_info'],
+                      style: TextStyle(
+                          fontFamily: regular, fontSize: 16, color: color),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 7),
+              Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     child: Text(
                       'Added By:',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -165,56 +212,107 @@ class booksdetails2 extends StatelessWidget {
                   )
                 ],
               ),
-            SizedBox(height: 25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  color: color,
-                  // width: MediaQuery.of(context).size.width*0.4,  
-                  child: TextButton(onPressed: (){}, child: Text('Buy',style: TextStyle(color: Colors.black),))),
-                SizedBox(width: 2),
-                Container(
-                   //padding: EdgeInsets.only(right: 10),
-                  color: color,
-                  //width: MediaQuery.of(context).size.width*0.4,
-                  child: TextButton(onPressed: (){
-                     Provider.of<CartModel>(context, listen: false).addToCart(
-            Book(
-              name: book['name'],
-              author: book['author'],
-              imageUrl: book['image_url'],
-              price: book['price'].toDouble(),
-              
-            ));
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
-                  }, child: Text('AddToCart',style: TextStyle(color: Colors.black)))),
+              SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Container(
-                    color: Colors.deepPurple[200],
-                    child: ElevatedButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>RentingExplanationPage()));
-                    }, child: Text('Rent')))
-              ],
-            ),
-            SizedBox(height: 10),
-            Container(
-              color: color,
-              width: MediaQuery.of(context).size.width,
-              child: TextButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: book['added by'], receiverId: "")));
-              }, child: Text('Chat With Seller',style: TextStyle(color: Colors.black)))),
-               Divider(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Explore  More',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-          ),
-          Container(
-            height: 360,
-            child: similarbooks(),
-          )
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: FloatingActionButton(
+                          backgroundColor: color,
+                          onPressed: () {},
+                          child: Text(
+                            'Buy',
+                            style: TextStyle(
+                                color: color1,
+                                fontFamily: regular,
+                                fontSize: 18),
+                          ))),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: color),
+                      child: TextButton(
+                          onPressed: () {
+                            Provider.of<CartModel>(context, listen: false)
+                                .addToCart(Book(
+                              name: book['name'],
+                              author: book['author'],
+                              imageUrl: book['image_url'],
+                              price: book['price'].toDouble(),
+                            ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CartPage()));
+                          },
+                          child: Text(
+                            'Add To Cart',
+                            style: TextStyle(
+                                color: color1,
+                                fontFamily: regular,
+                                fontSize: 18),
+                          ))),
+                  Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: FloatingActionButton(
+                          backgroundColor: color,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RentingExplanationPage()));
+                          },
+                          child: Text(
+                            'Rent',
+                            style: TextStyle(
+                                color: color1,
+                                fontFamily: regular,
+                                fontSize: 18),
+                          )))
+                ],
+              ),
+              SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: FloatingActionButton(
+                  backgroundColor: color,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => chatpage(
+                                receiveruserEmail: book['added by'],
+                                receiverId: "")));
+                  },
+                  child: Text(
+                    'Chat With Seller',
+                    style: TextStyle(
+                        color: color1, fontFamily: regular, fontSize: 18),
+                  ),
+                ),
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Explore  More',
+                  style: TextStyle(
+                      color: color, fontFamily: regular, fontSize: 20),
+                ),
+              ),
+              Container(
+                height: 360,
+                child: similarbooks(),
+              )
             ],
           ),
         ),
@@ -222,6 +320,7 @@ class booksdetails2 extends StatelessWidget {
     );
   }
 }
+
 class similarbooks extends StatefulWidget {
   @override
   State<similarbooks> createState() => _similarbooksState();
