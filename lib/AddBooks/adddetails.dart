@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,6 +16,7 @@ class BookAddPage extends StatefulWidget {
 }
 
 class _BookAddPageState extends State<BookAddPage> {
+  final currentUser=FirebaseAuth.instance.currentUser!;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController authorController = TextEditingController();
   final TextEditingController conditionController = TextEditingController();
@@ -68,6 +70,7 @@ class _BookAddPageState extends State<BookAddPage> {
         'additional_info': additionalInfoController.text,
         'category': selectedCategory,
         'image_url': imageUrl,
+        'added by':currentUser.email!
       });
 
       // Clear the input fields and image selection
@@ -141,7 +144,7 @@ class _BookAddPageState extends State<BookAddPage> {
                 controller: additionalInfoController,
                 decoration: InputDecoration(labelText: 'Additional Info'),
               ),
-              SizedBox(height: 20),
+            
               DropdownButton<String>(
                 value: selectedCategory,
                 onChanged: (String? newValue) {

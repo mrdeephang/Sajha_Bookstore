@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/Cart/CartPage.dart';
-import 'package:sajhabackup/Cart/cartmodel.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
+//import 'package:sajhabackup/Pages/cart.dart';
+import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/pages/cartmodel.dart';
 
 class booksdetails extends StatefulWidget {
+  
   final book_name;
   final book_price;
   final book_author;
@@ -92,16 +94,20 @@ class _bookdetailsState extends State<booksdetails> {
                   child: FloatingActionButton(
                     backgroundColor: color,
                     onPressed: () {
-                      Provider.of<CartModel>(context, listen: false)
-                          .addToCart(Book(
-                        name: widget.book_name,
-                        author: widget.book_author,
-                        imageUrl: widget.book_pic,
-                        price: widget.book_price,
-                      ));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CartPage()));
-                    },
+  try {
+    Provider.of<CartModel>(context, listen: false).addToCart(
+      Book(
+        name: widget.book_name,
+        author: widget.book_author,
+        imageUrl: widget.book_pic,
+        price: widget.book_price,
+      ),
+    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+  } catch (e) {
+    print("Error: $e");
+  }
+},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -126,7 +132,9 @@ class _bookdetailsState extends State<booksdetails> {
                   width: 20,
                   child: FloatingActionButton(
                     backgroundColor: color,
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -149,15 +157,14 @@ class _bookdetailsState extends State<booksdetails> {
                   child: FloatingActionButton(
                     backgroundColor: color,
                     onPressed: () {
-                      Provider.of<CartModel>(context, listen: false)
-                          .addToCart(Book(
-                        name: widget.book_name,
-                        author: widget.book_author,
-                        imageUrl: widget.book_pic,
-                        price: widget.book_price,
-                      ));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CartPage()));
+                   Provider.of<CartModel>(context, listen: false).addToCart(
+            Book(
+              name: widget.book_name,
+              author:widget.book_author,
+              imageUrl: widget.book_pic,
+              price: widget.book_price,
+            ));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

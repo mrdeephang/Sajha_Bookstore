@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:sajhabackup/AddBooks/bookdetails.dart';
 import 'package:sajhabackup/AddBooks/bookdetails2.dart';
 
-class extra extends StatefulWidget {
-  
+class Bach extends StatefulWidget {
+  const Bach({Key? key}) : super(key: key);
 
   @override
-  State<extra> createState() => _extraState();
+  State<Bach> createState() => _BachState();
 }
 
-class _extraState extends State<extra> {
+class _BachState extends State<Bach> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -51,7 +51,7 @@ class _extraState extends State<extra> {
     final QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
         .instance
         .collection('books')
-        .where('category', isEqualTo: 'Extra')
+        .where('category', isEqualTo: 'Bachelors')
         .limit(4)
         .get();
 
@@ -75,6 +75,7 @@ class SingleProd extends StatelessWidget {
     required this.prodPicture,
     required this.prodPrice,
     required this.prodAuthor,
+    
     required this.prodCondition,
     required this.prodEdition,
     required this.prodAddInfo,
@@ -93,7 +94,7 @@ class SingleProd extends StatelessWidget {
               builder: (context) => booksdetails2(book: {
                     'name': prodName,
                     'image_url': prodPicture,
-                    'author': prodAuthor, 
+                    'author': prodAuthor,
                     'edition': prodEdition, 
                     'price': prodPrice,
                     'condition': prodCondition, 

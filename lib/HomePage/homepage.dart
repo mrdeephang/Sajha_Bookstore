@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/Cart/CartPage.dart';
+import 'package:sajhabackup/HomePage/bach.dart';
+import 'package:sajhabackup/pages/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/bachelors.dart';
@@ -26,62 +28,34 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  User? _user;
-  String _userName = '';
-  String _userEmail = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
-
-  Future<void> _getUser() async {
-    User? user = _auth.currentUser;
-    if (user != null) {
-      setState(() {
-        _user = user;
-      });
-
-      // Fetch user details from Firestore 'users' collection
-      DocumentSnapshot userSnapshot =
-          await _firestore.collection('users').doc(user.uid).get();
-
-      if (userSnapshot.exists) {
-        setState(() {
-          _userName = userSnapshot['Full Name'];
-          _userEmail = userSnapshot['Email'];
-        });
-      }
-    }
-  }
-
+  final currentUser=FirebaseAuth.instance.currentUser!;
+  
+  
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
       height: 250,
-      child: Carousel(
-        boxFit: BoxFit.cover,
-        images: [
-          NetworkImage(
-              "https://w7.pngwing.com/pngs/377/407/png-transparent-paperback-book-cover-publishing-physics-cover-book-text-wholesale-business.png"),
-          NetworkImage(
-              "https://w7.pngwing.com/pngs/998/703/png-transparent-chemistry-units-1-2-matter-molecule-book-chemistry-book-chemistry-curriculum-electric-blue.png"),
-          NetworkImage(
-              "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
-          //AssetImage("images/book4.jpg"),
-        ],
-        autoplay: true,
-        animationCurve: Curves.fastOutSlowIn,
-        animationDuration: Duration(milliseconds: 1000),
-        //borderRadius: true,
-        dotSize: 3,
-        dotSpacing: 15,
-        indicatorBgPadding: 2,
-        dotBgColor: Colors.transparent,
+      child: SafeArea(
+        child: Carousel(
+          boxFit: BoxFit.cover,
+          images: [
+            NetworkImage(
+                "https://w7.pngwing.com/pngs/377/407/png-transparent-paperback-book-cover-publishing-physics-cover-book-text-wholesale-business.png"),
+            NetworkImage(
+                "https://w7.pngwing.com/pngs/998/703/png-transparent-chemistry-units-1-2-matter-molecule-book-chemistry-book-chemistry-curriculum-electric-blue.png"),
+            NetworkImage(
+                "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
+            //AssetImage("images/book4.jpg"),
+          ],
+          autoplay: true,
+          animationCurve: Curves.fastOutSlowIn,
+          animationDuration: Duration(milliseconds: 1000),
+          //borderRadius: true,
+          dotSize: 3,
+          dotSpacing: 15,
+          indicatorBgPadding: 2,
+          dotBgColor: Colors.transparent,
+        ),
       ),
     );
     return Scaffold(
@@ -122,8 +96,8 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(_userName),
-              accountEmail: Text(_userEmail),
+              accountName: Text(currentUser.uid!),
+              accountEmail: Text(currentUser.email!),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
@@ -299,7 +273,7 @@ class _homepageState extends State<homepage> {
           ),
           Container(
             height: 300,
-            child: bach(),
+            child: Bach(),
           ),
 
           SizedBox(
