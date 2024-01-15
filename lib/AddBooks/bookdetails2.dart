@@ -6,6 +6,7 @@ import 'package:sajhabackup/Chat/chatpage.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajhabackup/pages/RentDetails.dart';
 import 'package:sajhabackup/pages/cartmodel.dart';
 import 'package:sajhabackup/utils/maps.dart';
 //import 'package:sajhabackup/pages/CartPage.dart';
@@ -17,6 +18,7 @@ class booksdetails2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: color,
@@ -165,16 +167,17 @@ class booksdetails2 extends StatelessWidget {
               ),
             SizedBox(height: 25),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   color: color,
-                   width: MediaQuery.of(context).size.width*0.4,  
+                  // width: MediaQuery.of(context).size.width*0.4,  
                   child: TextButton(onPressed: (){}, child: Text('Buy',style: TextStyle(color: Colors.black),))),
                 SizedBox(width: 2),
                 Container(
                    //padding: EdgeInsets.only(right: 10),
                   color: color,
-                  width: MediaQuery.of(context).size.width*0.4,
+                  //width: MediaQuery.of(context).size.width*0.4,
                   child: TextButton(onPressed: (){
                      Provider.of<CartModel>(context, listen: false).addToCart(
             Book(
@@ -186,6 +189,11 @@ class booksdetails2 extends StatelessWidget {
             ));
             Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                   }, child: Text('AddToCart',style: TextStyle(color: Colors.black)))),
+                  Container(
+                    color: Colors.deepPurple[200],
+                    child: ElevatedButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>RentingExplanationPage()));
+                    }, child: Text('Rent')))
               ],
             ),
             SizedBox(height: 10),

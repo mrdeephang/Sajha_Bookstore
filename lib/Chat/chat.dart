@@ -19,6 +19,7 @@ class _chatState extends State<chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: color,
@@ -43,7 +44,7 @@ class _chatState extends State<chat> {
           return Text('error');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text('Loading..');
+          return Center(child: Text('Loading..'));
         }
         return ListView(
           children: snapshot.data!.docs

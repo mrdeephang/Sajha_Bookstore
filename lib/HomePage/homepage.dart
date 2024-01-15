@@ -59,6 +59,7 @@ class _homepageState extends State<homepage> {
       ),
     );
     return Scaffold(
+     // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: color,
         title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),

@@ -45,6 +45,7 @@ class _mybookstatusState extends State<mybookstatus> {
       return CircularProgressIndicator(); // Loading indicator or login page
     } else {
       return Scaffold(
+        //backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           title: Text('My Books'),
         ),

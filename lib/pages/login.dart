@@ -25,6 +25,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
         future: _initializeFirebase(),
         builder: (context, snapshot) {

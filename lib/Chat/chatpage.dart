@@ -32,6 +32,7 @@ class _chatpageState extends State<chatpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: color,
@@ -110,7 +111,9 @@ class _chatpageState extends State<chatpage> {
         children: [
           Expanded(
               child: TextField(
+                
             controller: _messageController,
+            
             obscureText: false,
           )),
           IconButton(

@@ -161,6 +161,7 @@ class _searchState extends State<search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: CupertinoSearchTextField(
           controller: _searchController,

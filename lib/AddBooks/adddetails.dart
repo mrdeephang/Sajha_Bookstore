@@ -98,6 +98,7 @@ class _BookAddPageState extends State<BookAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       appBar: AppBar(
         backgroundColor: color,
         leading: BackButton(

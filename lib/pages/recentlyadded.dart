@@ -13,6 +13,7 @@ class _BookListPageState extends State<BookListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: color,
         centerTitle: true,

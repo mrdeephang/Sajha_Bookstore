@@ -12,6 +12,7 @@ class CartPage extends StatelessWidget {
         .fold(0, (previousValue, book) => previousValue + book.price);
 
     return Scaffold(
+      //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text('Cart'),
       ),

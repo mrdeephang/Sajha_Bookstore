@@ -14,6 +14,7 @@ class _helpcenterState extends State<helpcenter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     // backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: color,
