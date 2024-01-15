@@ -3,6 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/helpcenter.dart';
+import 'package:sajhabackup/Settings/Components/theme.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
 import 'package:sajhabackup/Settings/Components/accountdetails.dart';
 
@@ -17,7 +18,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -63,7 +63,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: color,
                 icon: Ionicons.moon_outline,
                 title: "Theme",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => theme()));
+                },
               ),
               const SizedBox(
                 height: 10,
