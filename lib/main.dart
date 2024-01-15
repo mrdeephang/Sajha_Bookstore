@@ -17,10 +17,22 @@ Future<void> main() async {
               projectId: 'sajhabookstore',
               storageBucket: 'gs://sajhabookstore.appspot.com'))
       : await Firebase.initializeApp();
-  runApp(ChangeNotifierProvider(
-    create: (context) => CartModel(),
-    child: MyApp(),
-  ));
+  runApp(Home());
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartModel()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
+      child: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     // theme: Provider.of<ThemeProvider>(context).themData,
+      theme: Provider.of<ThemeProvider>(context).themData,
       debugShowCheckedModeBanner: false,
       home: splashscreen(),
     );
