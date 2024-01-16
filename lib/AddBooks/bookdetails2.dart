@@ -187,8 +187,7 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     child: Text(
                       book['additional_info'],
-                      style: TextStyle(
-                          fontFamily: regular, fontSize: 16, color: color),
+                      style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
                 ],
@@ -300,7 +299,10 @@ class booksdetails2 extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(),
+              Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(

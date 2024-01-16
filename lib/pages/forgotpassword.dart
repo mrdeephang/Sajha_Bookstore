@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class forgetpassword extends StatefulWidget {
   @override
@@ -53,7 +54,7 @@ class _forgetpasswordState extends State<forgetpassword> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Text(
-              'Enter your email and we will send you a link',
+              'Enter Your Email',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
@@ -71,7 +72,7 @@ class _forgetpasswordState extends State<forgetpassword> {
                   borderSide: BorderSide(color: color),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                hintText: '...',
+                hintText: 'Email',
                 fillColor: Colors.grey[200],
                 filled: true,
               ),
@@ -80,7 +81,11 @@ class _forgetpasswordState extends State<forgetpassword> {
           SizedBox(height: 10),
           MaterialButton(
             onPressed: passwrodReset,
-            child: Text('Reset Password'),
+            child: Text(
+              'Reset Password',
+              style:
+                  TextStyle(fontSize: 16, fontFamily: regular, color: color1),
+            ),
             color: color,
           )
         ],

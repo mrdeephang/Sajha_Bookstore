@@ -104,6 +104,8 @@ class _loginscreenState extends State<loginscreen> {
           if (user != null) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SplashPage()));
+          } else {
+            print('Incorrect Password or Username');
           }
         },
         child: const Text(

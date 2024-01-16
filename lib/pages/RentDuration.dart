@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class RentDurationPage extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
   void calculateTotalCost() {
     if (selectedDuration == 2) {
       // Special case for 2 days
-      totalCost = 5.0 ;
+      totalCost = 5.0;
     } else if (selectedDuration > 30) {
       // Adjust the cost per day if duration is more than a month
       rentalCostPerDay = 5.0 / 5;
@@ -33,7 +35,12 @@ class _RentDurationPageState extends State<RentDurationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: color,
         title: Text('Choose Rent Duration'),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,11 +66,14 @@ class _RentDurationPageState extends State<RentDurationPage> {
                         });
                       },
                       child: Container(
-                        width: 100, // Adjust the width of each item based on your preference
+                        width:
+                            100, // Adjust the width of each item based on your preference
                         margin: EdgeInsets.symmetric(horizontal: 8),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: selectedDuration == duration ? Colors.blue : Colors.grey,
+                          color: selectedDuration == duration
+                              ? color
+                              : Colors.grey,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
@@ -91,10 +101,14 @@ class _RentDurationPageState extends State<RentDurationPage> {
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                
-                print('Initiate Payment for Rs ${totalCost.toStringAsFixed(2)}');
+                print(
+                    'Initiate Payment for Rs ${totalCost.toStringAsFixed(2)}');
               },
-              child: Text('Rent Now'),
+              child: Text(
+                'Rent Now',
+                style: TextStyle(
+                    fontSize: 16, fontFamily: regular, color: Colors.black),
+              ),
             ),
           ],
         ),
@@ -122,5 +136,3 @@ class _RentDurationPageState extends State<RentDurationPage> {
     }
   }
 }
-
-
