@@ -23,6 +23,8 @@ class _registerState extends State<register> {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmpasswordController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  
   bool isSigningUp = false;
 
   @override
@@ -33,6 +35,7 @@ class _registerState extends State<register> {
     _phoneController.dispose();
     _passwordController.dispose();
     _confirmpasswordController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
@@ -66,6 +69,14 @@ class _registerState extends State<register> {
                 FormContainerWidget(
                   controller: _usernameController,
                   hintText: "Username",
+                  isPasswordField: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                 FormContainerWidget(
+                  controller: _addressController,
+                  hintText: "Address",
                   isPasswordField: false,
                 ),
                 SizedBox(
@@ -173,6 +184,7 @@ class _registerState extends State<register> {
     String email = _emailController.text;
     String phone = _phoneController.text;
     String password = _passwordController.text;
+    String address=_addressController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
     addUser(
@@ -181,6 +193,7 @@ class _registerState extends State<register> {
       int.parse(_phoneController.text.trim()),
       _emailController.text.trim(),
       _passwordController.text.trim(),
+      _addressController.text.trim(),
     );
     setState(() {
       isSigningUp = false;
@@ -195,13 +208,14 @@ class _registerState extends State<register> {
   }
 
   Future addUser(String fullname, String userName, int phone, String email,
-      String pass) async {
+      String pass,String address) async {
     await FirebaseFirestore.instance.collection('users').add({
       'Full Name': fullname,
       'Username': userName,
       'Phone': phone,
       'Email': email,
       'Password': pass,
+      'Address':address
     });
   }
 }

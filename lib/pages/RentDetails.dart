@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/pages/RentDuration.dart';
 
 class RentingExplanationPage extends StatelessWidget {
@@ -6,7 +7,7 @@ class RentingExplanationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[200],
+        backgroundColor: color,
         title: Text('How Renting Works'),
         leading: BackButton(),
       ),

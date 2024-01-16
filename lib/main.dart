@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context).themData,
+      theme: Provider.of<ThemeProvider>(context).themeData,
       home: splashscreen(),
     );
   }
