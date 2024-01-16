@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class MyBook {
   final String name;
@@ -22,7 +24,6 @@ class mybookstatus extends StatefulWidget {
   @override
   _mybookstatusState createState() => _mybookstatusState();
 }
-
 
 class _mybookstatusState extends State<mybookstatus> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -47,7 +48,15 @@ class _mybookstatusState extends State<mybookstatus> {
       return Scaffold(
         //backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          title: Text('My Books'),
+          centerTitle: true,
+          backgroundColor: color,
+          title: Text(
+            'My Books Status',
+            style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+          ),
+          leading: BackButton(
+            color: color1,
+          ),
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
@@ -102,12 +111,21 @@ class _mybookstatusState extends State<mybookstatus> {
                                 // Add your logic to delete the book
                                 _deleteBook(book);
                               },
-                              child: Text('Delete'),
+                              child: Text(
+                                'Delete',
+                                style: TextStyle(
+                                    color: color,
+                                    fontFamily: regular,
+                                    fontSize: 18),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Divider(), // Add a Divider between each book
+                      Divider(
+                        thickness: 1,
+                        color: Colors.grey,
+                      ), // Add a Divider between each book
                     ],
                   );
                 },
@@ -133,4 +151,3 @@ class _mybookstatusState extends State<mybookstatus> {
     });
   }
 }
-

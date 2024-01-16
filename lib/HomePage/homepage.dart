@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -9,7 +7,6 @@ import 'package:sajhabackup/HomePage/bach.dart';
 import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/HomePage/bachelors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/MyBooksStatus/mybookstatus.dart';

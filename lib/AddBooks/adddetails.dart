@@ -16,7 +16,7 @@ class BookAddPage extends StatefulWidget {
 }
 
 class _BookAddPageState extends State<BookAddPage> {
-  final currentUser=FirebaseAuth.instance.currentUser!;
+  final currentUser = FirebaseAuth.instance.currentUser!;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController authorController = TextEditingController();
   final TextEditingController conditionController = TextEditingController();
@@ -70,7 +70,7 @@ class _BookAddPageState extends State<BookAddPage> {
         'additional_info': additionalInfoController.text,
         'category': selectedCategory,
         'image_url': imageUrl,
-        'added by':currentUser.email!
+        'added by': currentUser.email!
       });
 
       // Clear the input fields and image selection
@@ -98,7 +98,6 @@ class _BookAddPageState extends State<BookAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       appBar: AppBar(
         backgroundColor: color,
         leading: BackButton(
@@ -145,7 +144,6 @@ class _BookAddPageState extends State<BookAddPage> {
                 controller: additionalInfoController,
                 decoration: InputDecoration(labelText: 'Additional Info'),
               ),
-            
               DropdownButton<String>(
                 value: selectedCategory,
                 onChanged: (String? newValue) {
@@ -164,7 +162,11 @@ class _BookAddPageState extends State<BookAddPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _uploadImage,
-                child: Text('Pick Image'),
+                child: Text(
+                  'Pick Image',
+                  style: TextStyle(
+                      color: color, fontFamily: regular, fontSize: 18),
+                ),
               ),
               _image != null
                   ? Image.file(
@@ -176,7 +178,11 @@ class _BookAddPageState extends State<BookAddPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _addBook,
-                child: Text('Add Book'),
+                child: Text(
+                  'Add Book',
+                  style: TextStyle(
+                      color: color, fontFamily: regular, fontSize: 18),
+                ),
               ),
             ],
           ),
