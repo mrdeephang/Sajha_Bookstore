@@ -7,6 +7,7 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+import 'package:sajhabackup/utils/toast.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
 
@@ -105,7 +106,7 @@ class _loginscreenState extends State<loginscreen> {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SplashPage()));
           } else {
-            print('Incorrect Password or Username');
+            showToast(message: "Incorrect Password or Username");
           }
         },
         child: const Text(

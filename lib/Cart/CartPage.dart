@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sajhabackup/Cart/cartmodel.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -14,7 +16,15 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text('Cart'),
+        centerTitle: true,
+        backgroundColor: color,
+        title: Text(
+          'Cart',
+          style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+        ),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: Column(
         children: [
@@ -66,7 +76,11 @@ class CartPage extends StatelessWidget {
                 Text('Total Price: \Rs${totalPrice.toStringAsFixed(2)}'),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Checkout'),
+                  child: Text(
+                    'Checkout',
+                    style: TextStyle(
+                        color: color, fontFamily: regular, fontSize: 18),
+                  ),
                 ),
               ],
             ),

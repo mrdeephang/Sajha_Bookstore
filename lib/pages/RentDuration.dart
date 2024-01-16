@@ -37,7 +37,10 @@ class _RentDurationPageState extends State<RentDurationPage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: color,
-        title: Text('Choose Rent Duration'),
+        title: Text(
+          'Choose Rent Duration',
+          style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+        ),
         leading: BackButton(
           color: color1,
         ),
