@@ -190,7 +190,7 @@ class _registerState extends State<register> {
     addUser(
       _fullnameController.text.trim(),
       _usernameController.text.trim(),
-      int.parse(_phoneController.text.trim()),
+      _phoneController.text.trim(),
       _emailController.text.trim(),
       _passwordController.text.trim(),
       _addressController.text.trim(),
@@ -207,7 +207,7 @@ class _registerState extends State<register> {
     }
   }
 
-  Future addUser(String fullname, String userName, int phone, String email,
+  Future addUser(String fullname, String userName, String phone, String email,
       String pass,String address) async {
     await FirebaseFirestore.instance.collection('users').add({
       'Full Name': fullname,
