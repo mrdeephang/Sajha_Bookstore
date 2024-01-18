@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/pages/RentDuration.dart';
 
 class RentingExplanationPage extends StatelessWidget {
