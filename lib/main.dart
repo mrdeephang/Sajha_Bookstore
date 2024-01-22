@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sajhabackup/Cart/cartmodel.dart';
 import 'package:sajhabackup/Splashes/splashscreen.dart';
+import 'package:sajhabackup/pages/recentlyadded.dart';
 import 'package:sajhabackup/themes/themeprovider.dart';
 
 Future<void> main() async {
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: splashscreen(),
+      home: BookListPage(),
     );
   }
 }
