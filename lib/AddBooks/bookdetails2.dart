@@ -8,6 +8,7 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/pages/RentDetails.dart';
 import 'package:sajhabackup/Cart/cartmodel.dart';
+import 'package:sajhabackup/pages/sellerprofile.dart';
 import 'package:sajhabackup/utils/maps.dart';
 //import 'package:sajhabackup/pages/CartPage.dart';
 
@@ -207,7 +208,9 @@ class booksdetails2 extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text(book['added by']),
+                    child: TextButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfilePage(userEmail: book['added by'])));
+                    },child: Text(book['added by'])),
                   )
                 ],
               ),

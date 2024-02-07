@@ -1,21 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+//import 'package:sajhabackup/pages/email_verification.dart';
 import 'package:sajhabackup/utils/formcontainer.dart';
-import 'package:sajhabackup/utils/firebase.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
+
 class register extends StatefulWidget {
-  const register({super.key});
+  const register({Key? key}) : super(key: key);
 
   @override
-  State<register> createState() => _registerState();
+  _registerState createState() => _registerState();
 }
 
 class _registerState extends State<register> {
-  final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   TextEditingController _fullnameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
@@ -24,20 +26,12 @@ class _registerState extends State<register> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmpasswordController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
-  
+
   bool isSigningUp = false;
 
-  @override
-  void dispose() {
-    _fullnameController.dispose();
-    _usernameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    _passwordController.dispose();
-    _confirmpasswordController.dispose();
-    _addressController.dispose();
-    super.dispose();
-  }
+  
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -66,57 +60,44 @@ class _registerState extends State<register> {
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10),
-                FormContainerWidget(
+               FormContainerWidget(
                   controller: _usernameController,
                   hintText: "Username",
                   isPasswordField: false,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                 FormContainerWidget(
+                SizedBox(height: 10),
+                FormContainerWidget(
                   controller: _addressController,
                   hintText: "Address",
                   isPasswordField: false,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 FormContainerWidget(
                   controller: _phoneController,
                   hintText: "Phone Number",
                   isPasswordField: false,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 FormContainerWidget(
                   controller: _emailController,
                   hintText: "Email",
                   isPasswordField: false,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 FormContainerWidget(
                   controller: _passwordController,
                   hintText: "Password",
                   isPasswordField: true,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 FormContainerWidget(
                   controller: _confirmpasswordController,
-                  hintText: " Confirm Password",
+                  hintText: "Confirm Password",
                   isPasswordField: true,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
+                SizedBox(height: 10),
+                SizedBox(height: 30),
+
                 GestureDetector(
                   onTap: () {
                     _signUp();
@@ -129,21 +110,21 @@ class _registerState extends State<register> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                        child: isSigningUp
-                            ? CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                      child: isSigningUp
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -152,21 +133,23 @@ class _registerState extends State<register> {
                       width: 5,
                     ),
                     GestureDetector(
-                        onTap: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => loginscreen()),
-                              (route) => false);
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Color(0xFF9526BC),
-                              fontWeight: FontWeight.bold),
-                        ))
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => loginscreen()),
+                            (route) => false);
+                      },
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Color(0xFF9526BC),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
-                )
+                ),
+                
               ],
             ),
           ),
@@ -179,43 +162,61 @@ class _registerState extends State<register> {
     setState(() {
       isSigningUp = true;
     });
-    String fullname = _fullnameController.text;
-    String username = _usernameController.text;
-    String email = _emailController.text;
-    String phone = _phoneController.text;
-    String password = _passwordController.text;
-    String address=_addressController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
-    addUser(
-      _fullnameController.text.trim(),
-      _usernameController.text.trim(),
-      _phoneController.text.trim(),
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
-      _addressController.text.trim(),
-    );
-    setState(() {
-      isSigningUp = false;
-    });
-    if (user != null) {
-      showToast(message: "Registered Successfully");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SplashPage()));
-    } else {
-      showToast(message: "Some error happend");
+    try {
+      String fullname = _fullnameController.text;
+      String username = _usernameController.text;
+      String email = _emailController.text;
+      String phone = _phoneController.text;
+      String password = _passwordController.text;
+      String address = _addressController.text;
+
+      if (_validateForm()) {
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+      
+       
+        await userCredential.user!.sendEmailVerification();
+         showToast(message: "Verification email sent!");
+        
+                
+        await _waitForEmailVerification(userCredential.user!);
+        //Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailVerificationPage()));
+      }
+    } on FirebaseAuthException catch (e) {
+      showToast(message: "Error: ${e.message}");
     }
+
+    
   }
 
-  Future addUser(String fullname, String userName, String phone, String email,
-      String pass,String address) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'Full Name': fullname,
-      'Username': userName,
-      'Phone': phone,
-      'Email': email,
-      'Password': pass,
-      'Address':address
-    });
+  bool _validateForm() {
+      if (_fullnameController.text.isEmpty ||
+        _usernameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _phoneController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _confirmpasswordController.text.isEmpty ||
+        _addressController.text.isEmpty) {
+      showToast(message: "All fields must be filled");
+      return false;
+    } else if (_passwordController.text != _confirmpasswordController.text) {
+      showToast(message: "Passwords do not match");
+      return false;
+    }
+    return true;
   }
+
+  Future<void> _waitForEmailVerification(User user) async {
+  await user.sendEmailVerification();
+   if(user.emailVerified){
+    showToast(message: 'Registerd Sucessfully');
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
+   }
+  
+}
 }

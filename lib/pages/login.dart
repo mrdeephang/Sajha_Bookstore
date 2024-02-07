@@ -7,6 +7,7 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
@@ -209,9 +210,9 @@ class _loginscreenState extends State<loginscreen> {
                           children: [
                             //googlebutton
                             GestureDetector(
-                              onTap: () {
-                                SignInWithGoogle();
-                              },
+                              onTap: () => authservice().signinwithGoogle(),
+
+                              
                               child: Image.asset(
                                 'assets/images/google.png',
                                 height: 60,

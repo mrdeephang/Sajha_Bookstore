@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sajhabackup/Chat/chat_service.dart';
 import 'package:sajhabackup/Chat/chatpage.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
@@ -15,6 +16,7 @@ class chat extends StatefulWidget {
 }
 
 class _chatState extends State<chat> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
