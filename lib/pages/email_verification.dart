@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Splashes/splashpage.dart';
-import 'package:sajhabackup/utils/toast.dart';
+//import 'package:sajhabackup/Splashes/splashpage.dart';
+//import 'package:sajhabackup/utils/toast.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   @override

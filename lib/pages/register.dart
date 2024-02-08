@@ -158,41 +158,39 @@ class _registerState extends State<register> {
     );
   }
 
-  void _signUp() async {
-    setState(() {
-      isSigningUp = true;
-    });
+ void _signUp() async {
+  setState(() {
+    isSigningUp = true;
+  });
 
-    try {
-      String fullname = _fullnameController.text;
-      String username = _usernameController.text;
-      String email = _emailController.text;
-      String phone = _phoneController.text;
-      String password = _passwordController.text;
-      String address = _addressController.text;
+  try {
+    String fullname = _fullnameController.text;
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String phone = _phoneController.text;
+    String password = _passwordController.text;
+    String address = _addressController.text;
 
-      if (_validateForm()) {
-        UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
+    if (_validateForm()) {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-      
-       
-        await userCredential.user!.sendEmailVerification();
-         showToast(message: "Verification email sent!");
-        
-                
-        await _waitForEmailVerification(userCredential.user!);
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailVerificationPage()));
-      }
-    } on FirebaseAuthException catch (e) {
-      showToast(message: "Error: ${e.message}");
+      await userCredential.user!.sendEmailVerification();
+      showToast(message: "Verification email sent!");
+
+      await Future.delayed(Duration(seconds: 30));
+      await userCredential.user!.reload();
+     showToast(message: 'Registered Successfullt');
+     Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
     }
-
-    
+  } on FirebaseAuthException catch (e) {
+    showToast(message: "Error: ${e.message}");
   }
+}
+
 
   bool _validateForm() {
       if (_fullnameController.text.isEmpty ||
@@ -212,11 +210,11 @@ class _registerState extends State<register> {
   }
 
   Future<void> _waitForEmailVerification(User user) async {
-  await user.sendEmailVerification();
+ // await user.sendEmailVerification();
+ await user.reload();
    if(user.emailVerified){
     showToast(message: 'Registerd Sucessfully');
     Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
    }
-  
 }
 }

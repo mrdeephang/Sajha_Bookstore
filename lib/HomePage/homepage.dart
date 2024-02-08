@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
@@ -25,6 +26,9 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  //final currentUser = FirebaseAuth.instance.currentUser!;
+    User? user = FirebaseAuth.instance.currentUser;
+  final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -93,7 +97,7 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(currentUser.uid!),
+              accountName: Text('Welcome'),
               accountEmail: Text(currentUser.email!),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
@@ -137,7 +141,7 @@ class _homepageState extends State<homepage> {
                     MaterialPageRoute(builder: (context) => BookListPage()));
               },
               child: ListTile(
-                title: Text('Recently Added'),
+                title: Text('All Books'),
                 leading: Icon(Icons.add_alert_outlined, color: color),
               ),
             ),

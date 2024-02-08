@@ -19,7 +19,7 @@ class CartPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: color,
         title: Text(
-          'Cart',
+          'Favorites',
           style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
         ),
         leading: BackButton(
@@ -74,14 +74,7 @@ class CartPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Total Price: \Rs${totalPrice.toStringAsFixed(2)}'),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Checkout',
-                    style: TextStyle(
-                        color: color, fontFamily: regular, fontSize: 18),
-                  ),
-                ),
+               
               ],
             ),
           ),

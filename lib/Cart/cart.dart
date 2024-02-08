@@ -18,7 +18,7 @@ class _cartState extends State<cart> {
         centerTitle: true,
         backgroundColor: color,
         title: Text(
-          'Cart',
+          'Favorites',
           style: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: color1),
         ),
@@ -44,17 +44,7 @@ class _cartState extends State<cart> {
               title: Text('Total:'),
               subtitle: Text('Rs'),
             )),
-            Expanded(
-              child: MaterialButton(
-                onPressed: () {},
-                child: Text(
-                  'Check Out',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-                color: color,
-              ),
-            )
+           
           ],
         ),
       ),
