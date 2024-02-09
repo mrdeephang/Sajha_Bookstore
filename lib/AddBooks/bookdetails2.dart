@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +16,11 @@ import 'package:sajhabackup/utils/maps.dart';
 
 class booksdetails2 extends StatelessWidget {
   final Map<String, dynamic> book;
-
+final currentUser = FirebaseAuth.instance.currentUser!;
   booksdetails2({required this.book});
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -210,7 +213,7 @@ class booksdetails2 extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     child: TextButton(onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfilePage(userEmail: book['added by'])));
-                    },child: Text(book['added by'])),
+                    },child: Text(book['added by'],style: TextStyle(color: color),),),
                   )
                 ],
               ),
@@ -224,7 +227,9 @@ class booksdetails2 extends StatelessWidget {
                       ),
                       child: FloatingActionButton(
                           backgroundColor: color,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: book['added by'], receiverId: "")));
+                          },
                           child: Text(
                             'Buy',
                             style: TextStyle(
@@ -251,7 +256,7 @@ class booksdetails2 extends StatelessWidget {
                                     builder: (context) => CartPage()));
                           },
                           child: Text(
-                            'Add To Cart',
+                            'Add To Favorites',
                             style: TextStyle(
                                 color: color1,
                                 fontFamily: regular,
@@ -302,6 +307,22 @@ class booksdetails2 extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: FloatingActionButton(
+                  backgroundColor: color,
+                  onPressed: (){
+                    _showReportMenu(context);
+                  },
+                  child: Text('Report',
+                  style: TextStyle(color: Colors.white,fontSize: 18),
+                  ),
+                ),
+              ),
               Divider(
                 thickness: 1,
                 color: Colors.grey,
@@ -324,7 +345,64 @@ class booksdetails2 extends StatelessWidget {
       ),
     );
   }
+void _showReportMenu(BuildContext context){
+  showModalBottomSheet(context: context,
+   builder: (BuildContext context){
+    return Container(
+      child: Wrap(
+        children: [
+          ListTile(
+            leading: Icon(Icons.flag),
+            title: Text('Inappropriate Content'),
+            onTap: () {
+              _reportBook('Inappropriate Content');
+              Navigator.pop(context);
+            },
+          ),
+           ListTile(
+            leading: Icon(Icons.flag),
+            title: Text('Fake information'),
+            onTap: () {
+              _reportBook('Fake information');
+              Navigator.pop(context);
+            },
+          ),
+           ListTile(
+            leading: Icon(Icons.flag),
+            title: Text('Spam'),
+            onTap: () {
+              _reportBook('Spam');
+              Navigator.pop(context);
+            },
+          ),
+           ListTile(
+            leading: Icon(Icons.flag),
+            title: Text('Wrong information'),
+            onTap: () {
+              _reportBook('Wrong infomation');
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+   }
+   );
 }
+void _reportBook(String reason) async {
+  String bookname= book['name'];
+  await FirebaseFirestore.instance.collection('reports').add({
+    'bookname':bookname,
+    'reason':reason,
+    'reportedby':currentUser.email!
+  });
+  int reportcount=await FirebaseFirestore.instance.collection('reports').where('bookname',isEqualTo: bookname).get().then((value) => value.size);
+  if(reportcount>=3){
+    await FirebaseFirestore.instance.collection('books').doc(bookname).delete();
+  }
+}
+}
+
 
 class similarbooks extends StatefulWidget {
   @override

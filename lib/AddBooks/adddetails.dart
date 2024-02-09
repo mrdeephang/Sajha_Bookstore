@@ -42,12 +42,12 @@ class _BookAddPageState extends State<BookAddPage> {
 
   Future<void> _addBook() async {
     if (_image == null) {
-      // Handle the case where the user didn't pick an image
+      
       return;
     }
 
     try {
-      // Upload image to Firebase Storage with content type set to 'image/jpeg'
+     
       final Reference storageReference = FirebaseStorage.instance
           .ref()
           .child('book_images/${DateTime.now()}.jpg');
@@ -56,10 +56,10 @@ class _BookAddPageState extends State<BookAddPage> {
         SettableMetadata(contentType: 'image/jpeg'),
       );
 
-      // Get the download URL of the uploaded image
+   
       final String imageUrl = await storageReference.getDownloadURL();
 
-      // Add book details to Firebase Firestore in the 'books' collection
+      
       await FirebaseFirestore.instance.collection('books').add({
         'name': nameController.text,
         'author': authorController.text,
@@ -73,7 +73,7 @@ class _BookAddPageState extends State<BookAddPage> {
         'added by': currentUser.email!
       });
 
-      // Clear the input fields and image selection
+    
       nameController.clear();
       authorController.clear();
       conditionController.clear();
@@ -85,11 +85,11 @@ class _BookAddPageState extends State<BookAddPage> {
         _image = null;
       });
 
-      // Show a success message or navigate to a different page
+      
       QuickAlert.show(context: context, type: QuickAlertType.success);
-      // ...
+      
     } catch (error) {
-      // Handle the error
+     
       print(error);
       QuickAlert.show(context: context, type: QuickAlertType.error);
     }

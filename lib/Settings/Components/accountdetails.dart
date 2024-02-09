@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
@@ -14,6 +15,42 @@ class _AccDetailsState extends State<AccDetails> {
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
+  String? _profilePicUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _getProfilePicUrl();
+  }
+
+  Future<String?> _getProfilePicUrl() async {
+    try {
+      
+      final ref = FirebaseStorage.instance.ref().child('profile_pic/${user?.uid}.jpg');
+      _profilePicUrl = await ref.getDownloadURL();
+
+      
+      setState(() {});
+    } catch (e) {
+      print('Error getting profile picture URL: $e');
+    }
+  }
+  Widget _buildProfilePic(){
+    return FutureBuilder<String?> (
+      future: _getProfilePicUrl(), 
+    builder:(context, AsyncSnapshot<String?> snapshot){
+      if(snapshot.connectionState==ConnectionState.done && snapshot.hasData){
+        return CircleAvatar(
+          radius: 80,
+          backgroundImage: NetworkImage(snapshot.data!),
+        );
+      }else{
+             return CircleAvatar(
+          radius: 80,
+          backgroundImage: AssetImage('assets/images/profile.jpg'));
+      }
+    } );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +92,7 @@ class _AccDetailsState extends State<AccDetails> {
                   child: Column(
                     children: [
                       const SizedBox(height: 40),
-                      CircleAvatar(
-                        radius: 80,
-                        backgroundImage:
-                            AssetImage('assets/images/profile.jpg'),
-                      ),
+                    _buildProfilePic(),
                       const SizedBox(height: 20),
                       itemProfile('Name', snapshot.data!.docs[index]['Full Name'],
                           CupertinoIcons.person, 'Name'),

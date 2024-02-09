@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 //import 'package:sajhabackup/pages/email_verification.dart';
@@ -18,7 +21,7 @@ class register extends StatefulWidget {
 class _registerState extends State<register> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final ImagePicker _picker=ImagePicker();
   TextEditingController _fullnameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -28,10 +31,7 @@ class _registerState extends State<register> {
   TextEditingController _addressController = TextEditingController();
 
   bool isSigningUp = false;
-
-  
-
- 
+   XFile? _pickedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +97,29 @@ class _registerState extends State<register> {
                 ),
                 SizedBox(height: 10),
                 SizedBox(height: 30),
+               
+                GestureDetector(
+                  onTap: (){
+                    _pickImage();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: _pickedImage==null
+                      ? Text('Choose Profile Picture',
+                      style: TextStyle(color: Colors.grey),
+                      )
+                      :Image.file(File(_pickedImage!.path),
+                      fit: BoxFit.cover,
+                      )
+                    ),
+                  ),
+                ),
 
                 GestureDetector(
                   onTap: () {
@@ -157,6 +180,15 @@ class _registerState extends State<register> {
       ),
     );
   }
+  Future<void> _pickImage() async{
+    final XFile? pickedImage= await _picker.pickImage(source: ImageSource.gallery);
+    if(pickedImage!=null){
+      setState(() {
+        _pickedImage=pickedImage;
+      });
+    }
+  }
+  
 
  void _signUp() async {
   setState(() {
@@ -183,16 +215,26 @@ class _registerState extends State<register> {
 
       await Future.delayed(Duration(seconds: 30));
       await userCredential.user!.reload();
-     showToast(message: 'Registered Successfullt');
+      if(_pickedImage!=null){
+        await _uploadProfilePicture(userCredential.user!.uid);
+      }
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+       'Full Name':fullname,
+       'Username':username,
+       'Email':email,
+       'Phone':phone,
+       'Address':address,
+       'Password':password,
+       'ProfilePic':_pickedImage!=null ? _pickedImage!.path:null,
+      });
+     showToast(message: 'Registered Successfull');
      Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
     }
   } on FirebaseAuthException catch (e) {
     showToast(message: "Error: ${e.message}");
   }
 }
-
-
-  bool _validateForm() {
+ bool _validateForm() {
       if (_fullnameController.text.isEmpty ||
         _usernameController.text.isEmpty ||
         _emailController.text.isEmpty ||
@@ -208,6 +250,27 @@ class _registerState extends State<register> {
     }
     return true;
   }
+Future<void> _uploadProfilePicture(String userId) async{
+  try {
+     
+      final Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('profile_pic')
+          .child('profile_pic_$userId.jpg');
+      await storageReference.putFile(
+        File(_pickedImage!.path),
+        SettableMetadata(contentType: 'image/jpeg'),
+        );
+       String downloadUrl=await storageReference.getDownloadURL();
+       await _firestore.collection('users').doc(userId).update({
+        'ProfilePicUrl':downloadUrl,
+       });
+       
+}catch(e){
+  showToast(message: 'Error');
+}
+
+ 
 
   Future<void> _waitForEmailVerification(User user) async {
  // await user.sendEmailVerification();
@@ -216,5 +279,6 @@ class _registerState extends State<register> {
     showToast(message: 'Registerd Sucessfully');
     Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
    }
+}
 }
 }
