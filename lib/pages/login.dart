@@ -7,6 +7,7 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+import 'package:sajhabackup/pages/RegisterPage.dart';
 //import 'package:sajhabackup/pages/newRegister.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
@@ -239,7 +240,7 @@ class _loginscreenState extends State<loginscreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => register()));
+                                        builder: (context) => RegisterPage()));
                               },
                               child: Text(
                                 'Register Now',

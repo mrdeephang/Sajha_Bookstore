@@ -255,15 +255,15 @@ Future<void> _uploadProfilePicture(String userId) async{
      
       final Reference storageReference = FirebaseStorage.instance
           .ref()
-          .child('profile_pic')
-          .child('profile_pic_$userId.jpg');
+          .child('profile_pic/$userId/ProfilePic.jpg');
+          
       await storageReference.putFile(
         File(_pickedImage!.path),
         SettableMetadata(contentType: 'image/jpeg'),
         );
        String downloadUrl=await storageReference.getDownloadURL();
        await _firestore.collection('users').doc(userId).update({
-        'ProfilePicUrl':downloadUrl,
+        'ProfilePic':downloadUrl,
        });
        
 }catch(e){

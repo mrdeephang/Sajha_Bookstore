@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajhabackup/Settings/Components/edit_profile.dart';
 
 class AccDetails extends StatefulWidget{
    @override
@@ -22,19 +23,26 @@ class _AccDetailsState extends State<AccDetails> {
     super.initState();
     _getProfilePicUrl();
   }
-
+ 
   Future<String?> _getProfilePicUrl() async {
-    try {
+  try {
+    final ref = FirebaseStorage.instance.ref().child('profile_pic/${user?.uid}.jpg');
+    _profilePicUrl = await ref.getDownloadURL();
+    return _profilePicUrl;
+  } catch (e) {
+    
+    if (e is FirebaseException && e.code == 'object-not-found') {
       
-      final ref = FirebaseStorage.instance.ref().child('profile_pic/${user?.uid}.jpg');
-      _profilePicUrl = await ref.getDownloadURL();
-
+      print('Profile picture not found');
+    } else {
       
-      setState(() {});
-    } catch (e) {
       print('Error getting profile picture URL: $e');
     }
+    return null;
   }
+}
+
+  
   Widget _buildProfilePic(){
     return FutureBuilder<String?> (
       future: _getProfilePicUrl(), 
@@ -68,56 +76,70 @@ class _AccDetailsState extends State<AccDetails> {
           color: Colors.white,
         ),
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("users")
-            .where("Email", isEqualTo: user?.email)
-            .snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something Went Wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CupertinoActivityIndicator());
-          }
-          if (snapshot.data!.docs.isEmpty) {
-            return Text("No data Found");
-          }
-          if (snapshot != null && snapshot.data != null) {
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 40),
-                    _buildProfilePic(),
-                      const SizedBox(height: 20),
-                      itemProfile('Name', snapshot.data!.docs[index]['Full Name'],
-                          CupertinoIcons.person, 'Name'),
-                      const SizedBox(height: 10),
-                      itemProfile(
-                          'Phone', snapshot.data!.docs[index]['Phone'],
-                          CupertinoIcons.phone, 'Phone'),
-                      const SizedBox(height: 10),
-                      itemProfile('Address',
-                          snapshot.data!.docs[index]['Address'],
-                          CupertinoIcons.location, 'Address'),
-                      const SizedBox(height: 10),
-                      itemProfile('Email', snapshot.data!.docs[index]['Email'],
-                          CupertinoIcons.mail, 'Email'),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          }
-          return Container();
-        },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [color, Colors.deepPurple,Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+         ),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection("users")
+              .where("Email", isEqualTo: user?.email)
+              .snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something Went Wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CupertinoActivityIndicator());
+            }
+            if (snapshot.data!.docs.isEmpty) {
+              return Text("No data Found");
+            }
+            if (snapshot != null && snapshot.data != null) {
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 40),
+                      _buildProfilePic(),
+                        const SizedBox(height: 20),
+                        itemProfile('Name', snapshot.data!.docs[index]['Full Name'],
+                            CupertinoIcons.person, 'Name'),
+                        const SizedBox(height: 10),
+                        itemProfile(
+                            'Phone', snapshot.data!.docs[index]['Phone'],
+                            CupertinoIcons.phone, 'Phone'),
+                        const SizedBox(height: 10),
+                        itemProfile('Address',
+                            snapshot.data!.docs[index]['Address'],
+                            CupertinoIcons.location, 'Address'),
+                        const SizedBox(height: 10),
+                        itemProfile('Email', snapshot.data!.docs[index]['Email'],
+                            CupertinoIcons.mail, 'Email'),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          
+                          onPressed: (){
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>EditProfilePage()));
+                        }, child: Text('Edit Profile'))
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }
@@ -138,10 +160,7 @@ class _AccDetailsState extends State<AccDetails> {
         title: Text(title),
         subtitle: Text(subtitle),
         leading: Icon(iconData),
-        trailing: IconButton(
-          onPressed: () => editField(field),
-          icon: Icon(Icons.settings),
-        ),
+       
         tileColor: Colors.white,
       ),
     );
@@ -175,7 +194,7 @@ class _AccDetailsState extends State<AccDetails> {
           TextButton(
             onPressed: () async {
               Navigator.pop(context, newValue);
-              _updateUserData(field, newValue); // Update user data here
+              _updateUserData(field, newValue); 
             },
             child: Text(
               'Save',
@@ -187,7 +206,6 @@ class _AccDetailsState extends State<AccDetails> {
     );
   }
 
-  // Function to update user data
   Future<void> _updateUserData(String field, String newValue) async {
     try {
       await usersCollection.doc(currentUser.email).update({field: newValue});

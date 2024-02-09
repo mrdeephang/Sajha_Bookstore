@@ -4,8 +4,10 @@ import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 import 'package:sajhabackup/Settings/Components/theme.dart';
+import 'package:sajhabackup/Settings/Components/userDetails.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
-import 'package:sajhabackup/Settings/Components/accountdetails.dart';
+import 'package:sajhabackup/Settings/Components/edit_profile.dart';
+import 'package:sajhabackup/pages/sellerprofile.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
