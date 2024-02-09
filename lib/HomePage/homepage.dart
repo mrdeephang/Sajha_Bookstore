@@ -88,7 +88,7 @@ class _homepageState extends State<homepage> {
                     MaterialPageRoute(builder: (context) => CartPage()));
               },
               icon: Icon(
-                Icons.shopping_cart,
+                Icons.favorite,
                 color: Colors.white,
               ))
         ],

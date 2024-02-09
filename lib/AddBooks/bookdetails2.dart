@@ -14,10 +14,48 @@ import 'package:sajhabackup/pages/sellerprofile.dart';
 import 'package:sajhabackup/utils/maps.dart';
 //import 'package:sajhabackup/pages/CartPage.dart';
 
-class booksdetails2 extends StatelessWidget {
+class booksdetails2 extends StatefulWidget {
   final Map<String, dynamic> book;
-final currentUser = FirebaseAuth.instance.currentUser!;
+
   booksdetails2({required this.book});
+
+  @override
+  State<booksdetails2> createState() => _booksdetails2State();
+}
+
+class _booksdetails2State extends State<booksdetails2> {
+  late String status;
+  @override
+  void initState() {
+    super.initState();
+    status = 'Available';
+  }
+  void _updateStatus(String newStatus) {
+    setState(() {
+      status = newStatus;
+    });
+  }
+
+  void _buyBook() {
+    _updateStatus('Bought');
+    _updateBookStatusInFirestore();
+  }
+
+  void _rentBook() {
+    _updateStatus('Rented');
+    _updateBookStatusInFirestore();
+  }
+
+  void _updateBookStatusInFirestore() {
+    FirebaseFirestore.instance
+        .collection('books')
+        .doc(widget.book['name'])
+        .update({'status': status});
+  }
+
+
+final currentUser = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
      
@@ -26,7 +64,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
         centerTitle: true,
         backgroundColor: color,
         title: Text(
-          book['name'],
+          widget.book['name'],
           style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
         ),
         leading: BackButton(color: color1),
@@ -39,7 +77,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
             children: [
               InstaImageViewer(
                 child: Image.network(
-                  book['image_url'],
+                  widget.book['image_url'],
                   height: 300,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -72,7 +110,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      book['author'],
+                      widget.book['author'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
@@ -94,7 +132,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      book['edition'],
+                      widget.book['edition'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
@@ -116,7 +154,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      '\Rs.${book['price']}',
+                      '\Rs.${widget.book['price']}',
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
@@ -138,7 +176,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      book['condition'],
+                      widget.book['condition'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
@@ -164,10 +202,10 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                             context,
                             MaterialPageRoute(
                                 builder: ((context) => MapOpenPage(
-                                      destinationAddress: book['address'],
+                                      destinationAddress: widget.book['address'],
                                     )))),
                         child: Text(
-                          book['address'],
+                          widget.book['address'],
                           style: TextStyle(
                               fontFamily: regular, fontSize: 16, color: color),
                         )),
@@ -190,7 +228,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      book['additional_info'],
+                      widget.book['additional_info'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
                   )
@@ -212,8 +250,31 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfilePage(userEmail: book['added by'])));
-                    },child: Text(book['added by'],style: TextStyle(color: color),),),
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfilePage(userEmail: widget.book['added by'])));
+                    },child: Text(widget.book['added by'],style: TextStyle(color: color),),),
+                  ),
+                  
+                ],
+              ),
+              SizedBox(height: 7),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                    child: Text(
+                      'Status:',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: regular,
+                          fontSize: 18),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      status,
+                      style: TextStyle(color: color),
+                    ),
                   )
                 ],
               ),
@@ -228,7 +289,8 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: book['added by'], receiverId: "")));
+                            _buyBook();
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: widget.book['added by'], receiverId: "")));
                           },
                           child: Text(
                             'Buy',
@@ -245,10 +307,10 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
                                 .addToCart(Book(
-                              name: book['name'],
-                              author: book['author'],
-                              imageUrl: book['image_url'],
-                              price: book['price'].toDouble(),
+                              name: widget.book['name'],
+                              author: widget.book['author'],
+                              imageUrl: widget.book['image_url'],
+                              price: widget.book['price'].toDouble(),
                             ));
                             Navigator.push(
                                 context,
@@ -269,6 +331,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
+                            _rentBook();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -297,7 +360,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                         context,
                         MaterialPageRoute(
                             builder: (context) => chatpage(
-                                receiveruserEmail: book['added by'],
+                                receiveruserEmail: widget.book['added by'],
                                 receiverId: "")));
                   },
                   child: Text(
@@ -345,6 +408,8 @@ final currentUser = FirebaseAuth.instance.currentUser!;
       ),
     );
   }
+  
+
 void _showReportMenu(BuildContext context){
   showModalBottomSheet(context: context,
    builder: (BuildContext context){
@@ -389,8 +454,9 @@ void _showReportMenu(BuildContext context){
    }
    );
 }
+
 void _reportBook(String reason) async {
-  String bookname= book['name'];
+  String bookname= widget.book['name'];
   await FirebaseFirestore.instance.collection('reports').add({
     'bookname':bookname,
     'reason':reason,
@@ -402,6 +468,7 @@ void _reportBook(String reason) async {
   }
 }
 }
+
 
 
 class similarbooks extends StatefulWidget {
