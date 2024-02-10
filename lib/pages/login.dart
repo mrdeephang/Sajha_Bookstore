@@ -5,12 +5,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
-import 'package:sajhabackup/Pages/register.dart';
+//import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/RegisterPage.dart';
 //import 'package:sajhabackup/pages/newRegister.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
 
@@ -75,11 +76,19 @@ class _loginscreenState extends State<loginscreen> {
   bool _issecuredpassword = true;
   String user = '';
   String pass = '';
+  var auth = FirebaseAuth.instance;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
+  
+
+  
     final userfield = TextField(
       controller: _emailController,
       style: mystyle,
