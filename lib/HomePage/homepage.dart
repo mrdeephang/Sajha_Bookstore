@@ -12,9 +12,10 @@ import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/MyBooksStatus/mybookstatus.dart';
 import 'package:sajhabackup/Notification/notification.dart';
-import 'package:sajhabackup/Pages/login.dart';
+//import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
 import 'package:sajhabackup/AddBooks/adddetails.dart';
+import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/pages/recentlyadded.dart';
 import 'package:sajhabackup/pages/search.dart';
 
@@ -177,6 +178,7 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
+
                 QuickAlert.show(
                     textColor: Colors.black,
                     backgroundColor: Colors.white,
@@ -185,10 +187,18 @@ class _homepageState extends State<homepage> {
                     type: QuickAlertType.confirm,
                     title: "LogOut",
                     text: "Are you sure you want to logout?",
-                    onConfirmBtnTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => loginscreen())));
+
+
+                    
+                   onConfirmBtnTap: () async {
+  // Sign out the user from Firebase Authentication
+  await FirebaseAuth.instance.signOut();
+  
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const loginscreen()));
+}                         
+                            );
               },
               child: ListTile(
                 title: Text('Log Out'),

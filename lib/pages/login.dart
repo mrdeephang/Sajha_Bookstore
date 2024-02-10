@@ -77,7 +77,7 @@ class _loginscreenState extends State<loginscreen> {
   String user = '';
   String pass = '';
   var auth = FirebaseAuth.instance;
-
+bool islogin = false;
 
 
 
