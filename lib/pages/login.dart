@@ -1,17 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
-//import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/RegisterPage.dart';
-//import 'package:sajhabackup/pages/newRegister.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 TextStyle mystyle = TextStyle(fontSize: 25);
 
@@ -77,18 +73,12 @@ class _loginscreenState extends State<loginscreen> {
   String user = '';
   String pass = '';
   var auth = FirebaseAuth.instance;
-bool islogin = false;
-
-
-
 
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
-  
 
-  
     final userfield = TextField(
       controller: _emailController,
       style: mystyle,
@@ -221,9 +211,8 @@ bool islogin = false;
                           children: [
                             //googlebutton
                             GestureDetector(
-                              onTap: () => authservice().signinwithGoogle(),
-
-                              
+                              onTap: () =>
+                                  FirebaseService.signInwithGoogle(context),
                               child: Image.asset(
                                 'assets/images/google.png',
                                 height: 60,
@@ -282,16 +271,4 @@ bool islogin = false;
       color: Colors.grey,
     );
   }
-}
-
-SignInWithGoogle() async {
-  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-  AuthCredential credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-  UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithCredential(credential);
-  print(userCredential.user?.displayName);
 }
