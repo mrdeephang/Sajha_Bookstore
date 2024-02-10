@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/pages/googlesignin.dart';
+import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 
 class UserProfilePage extends StatefulWidget {
   final String userEmail;
@@ -24,7 +24,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   void _loadUserData() {
-    _usersCollection.where('Email', isEqualTo: widget.userEmail).get().then((QuerySnapshot querySnapshot) {
+    _usersCollection
+        .where('Email', isEqualTo: widget.userEmail)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
         setState(() {
           _userSnapshot = querySnapshot.docs.first;
@@ -53,37 +56,40 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      showDialog(context: context, 
-                      builder: (context)=>AlertDialog(
-                        title: Text('Report User?'),
-                        backgroundColor: Colors.grey[300],
-                        content: TextField(
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            hintText: 'Are you sure you want to report ${_userSnapshot['Full Name']}'
-                          ),
-                        
-                        ),
-                        actions: [
-                           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Cancel',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>helpcenter()));
-            },
-            child: Text(
-              'Yes',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-                        ],
-                      )
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: Text('Report User?'),
+                                backgroundColor: Colors.grey[300],
+                                content: TextField(
+                                  autofocus: true,
+                                  decoration: InputDecoration(
+                                      hintText:
+                                          'Are you sure you want to report ${_userSnapshot['Full Name']}'),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text(
+                                      'Cancel',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  helpcenter()));
+                                    },
+                                    child: Text(
+                                      'Yes',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ));
                     },
                     child: Text('Report'),
                   ),
