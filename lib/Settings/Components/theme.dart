@@ -13,7 +13,7 @@ class theme extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF9526BC),
+          backgroundColor: color,
           title: Text(
             'Theme',
             style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
