@@ -114,7 +114,7 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Welcome'),
+              accountName: Text(userName),
               accountEmail: Text(currentUser.email!),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
