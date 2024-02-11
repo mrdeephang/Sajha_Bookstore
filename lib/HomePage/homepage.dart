@@ -30,7 +30,8 @@ class _homepageState extends State<homepage> {
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
-   late String userName = ''; // Variable to store user's name
+   late String userName = ''; 
+   late String profilepic='';
 
   void fetchUserName() async {
     try {
@@ -39,10 +40,11 @@ class _homepageState extends State<homepage> {
             await usersCollection.doc(user!.uid).get();
 
         String name = userDoc['Full Name'];
-
-        // 
+        String picUrl=userDoc['ProfilePicUrl'];
+        
         setState(() {
           userName = name;
+          profilepic=picUrl;
         });
       }
     } catch (error) {
@@ -119,10 +121,7 @@ class _homepageState extends State<homepage> {
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey[300],
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
+                 backgroundImage: NetworkImage(profilepic),
                 ),
               ),
             ),
