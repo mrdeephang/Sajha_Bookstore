@@ -19,8 +19,11 @@ class _helpcenterState extends State<helpcenter> {
           backgroundColor: color,
           title: Text(
             'Help Center',
-            style:
-                TextStyle(color: Colors.white, fontFamily: bold, fontSize: 20),
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: bold,
+              fontSize: 20,
+            ),
           ),
           leading: BackButton(
             color: Colors.white,
@@ -57,18 +60,18 @@ class _helpcenterState extends State<helpcenter> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 10,
                   ),
                   Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(12)),
+                          color: Colors.grey[350],
+                          borderRadius: BorderRadius.circular(4)),
                       child: Column(
                         children: [
                           Text(
                             'Call Us',
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                                 fontFamily: regular),
@@ -118,24 +121,24 @@ class _helpcenterState extends State<helpcenter> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 10,
                   ),
                   Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(12)),
+                          color: Colors.grey[350],
+                          borderRadius: BorderRadius.circular(4)),
                       child: Column(
                         children: [
                           Text(
                             'Email Us',
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                                 fontFamily: regular),
                           ),
                           Text(
-                            '    Within 48 Hours',
+                            '   Within 48 Hours',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
@@ -170,22 +173,38 @@ class _helpcenterState extends State<helpcenter> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(12),
+                  color: color,
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  '“SAJHA BOOKSTORE” is a platform for students and booklovers of Nepal to buy, sell and rent old books online.',
+                  '“SAJHA BOOKSTORE” is a Platform for Students and Booklovers of Nepal to Buy, Sell and Rent Used Books Online.',
                   style: TextStyle(
                       fontFamily: regular,
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: color1),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Image.asset(
                 'assets/images/read.png',
-                height: 300,
-              )
+                height: 270,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                child: Text(
+                  'Version 1.0',
+                  style: TextStyle(
+                      fontFamily: regular,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: color),
+                ),
+              ),
             ],
           ),
         ));
