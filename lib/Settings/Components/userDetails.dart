@@ -7,8 +7,8 @@ import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/edit_profile.dart';
 
-class AccDetails extends StatefulWidget{
-   @override
+class AccDetails extends StatefulWidget {
+  @override
   _AccDetailsState createState() => _AccDetailsState();
 }
 
@@ -23,47 +23,45 @@ class _AccDetailsState extends State<AccDetails> {
     super.initState();
     _getProfilePicUrl();
   }
- 
-  Future<String?> _getProfilePicUrl() async {
-  try {
-    final ref = FirebaseStorage.instance.ref().child('profile_pic/${user?.uid}.jpg');
-    _profilePicUrl = await ref.getDownloadURL();
-    return _profilePicUrl;
-  } catch (e) {
-    
-    if (e is FirebaseException && e.code == 'object-not-found') {
-      
-      print('Profile picture not found');
-    } else {
-      
-      print('Error getting profile picture URL: $e');
-    }
-    return null;
-  }
-}
 
-  
-  Widget _buildProfilePic(){
-    return FutureBuilder<String?> (
-      future: _getProfilePicUrl(), 
-    builder:(context, AsyncSnapshot<String?> snapshot){
-      if(snapshot.connectionState==ConnectionState.done && snapshot.hasData){
-        return CircleAvatar(
-          radius: 80,
-          backgroundImage: NetworkImage(snapshot.data!),
-        );
-      }else{
-             return CircleAvatar(
-          radius: 80,
-          backgroundImage: AssetImage('assets/images/profile.jpg'));
+  Future<String?> _getProfilePicUrl() async {
+    try {
+      final ref =
+          FirebaseStorage.instance.ref().child('profile_pic/${user?.uid}.jpg');
+      _profilePicUrl = await ref.getDownloadURL();
+      return _profilePicUrl;
+    } catch (e) {
+      if (e is FirebaseException && e.code == 'object-not-found') {
+        print('Profile picture not found');
+      } else {
+        print('Error getting profile picture URL: $e');
       }
-    } );
+      return null;
+    }
+  }
+
+  Widget _buildProfilePic() {
+    return FutureBuilder<String?>(
+        future: _getProfilePicUrl(),
+        builder: (context, AsyncSnapshot<String?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData) {
+            return CircleAvatar(
+              radius: 80,
+              backgroundImage: NetworkImage(snapshot.data!),
+            );
+          } else {
+            return CircleAvatar(
+                radius: 80,
+                backgroundImage: AssetImage('assets/images/profile.jpg'));
+          }
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -77,13 +75,13 @@ class _AccDetailsState extends State<AccDetails> {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [color, Colors.deepPurple,Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            colors: [],
           ),
-         ),
+        ),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("users")
@@ -108,29 +106,48 @@ class _AccDetailsState extends State<AccDetails> {
                     child: Column(
                       children: [
                         const SizedBox(height: 40),
-                      _buildProfilePic(),
+                        _buildProfilePic(),
                         const SizedBox(height: 20),
-                        itemProfile('Name', snapshot.data!.docs[index]['Full Name'],
-                            CupertinoIcons.person, 'Name'),
+                        itemProfile(
+                            'Name',
+                            snapshot.data!.docs[index]['Full Name'],
+                            CupertinoIcons.person,
+                            'Name'),
                         const SizedBox(height: 10),
                         itemProfile(
-                            'Phone', snapshot.data!.docs[index]['Phone'],
-                            CupertinoIcons.phone, 'Phone'),
+                            'Phone',
+                            snapshot.data!.docs[index]['Phone'],
+                            CupertinoIcons.phone,
+                            'Phone'),
                         const SizedBox(height: 10),
-                        itemProfile('Address',
+                        itemProfile(
+                            'Address',
                             snapshot.data!.docs[index]['Address'],
-                            CupertinoIcons.location, 'Address'),
+                            CupertinoIcons.location,
+                            'Address'),
                         const SizedBox(height: 10),
-                        itemProfile('Email', snapshot.data!.docs[index]['Email'],
-                            CupertinoIcons.mail, 'Email'),
+                        itemProfile(
+                            'Email',
+                            snapshot.data!.docs[index]['Email'],
+                            CupertinoIcons.mail,
+                            'Email'),
                         const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
-                          
-                          onPressed: (){
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>EditProfilePage()));
-                        }, child: Text('Edit Profile'))
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditProfilePage()));
+                            },
+                            child: Text(
+                              'Edit Profile',
+                              style: TextStyle(
+                                  fontFamily: regular,
+                                  color: color,
+                                  fontSize: 14),
+                            ))
                       ],
                     ),
                   );
@@ -160,7 +177,6 @@ class _AccDetailsState extends State<AccDetails> {
         title: Text(title),
         subtitle: Text(subtitle),
         leading: Icon(iconData),
-       
         tileColor: Colors.white,
       ),
     );
@@ -192,15 +208,15 @@ class _AccDetailsState extends State<AccDetails> {
             ),
           ),
           TextButton(
-            onPressed: () async {
-              Navigator.pop(context, newValue);
-              _updateUserData(field, newValue); 
-            },
-            child: Text(
-              'Save',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+              onPressed: () async {
+                Navigator.pop(context, newValue);
+                _updateUserData(field, newValue);
+              },
+              child: Text(
+                'Save',
+                style:
+                    TextStyle(fontFamily: regular, color: color, fontSize: 14),
+              )),
         ],
       ),
     );

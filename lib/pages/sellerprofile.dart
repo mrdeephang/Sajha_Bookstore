@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -40,8 +41,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seller Profile'),
+        centerTitle: true,
+        title: Text(
+          'Seller Profile',
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+        ),
         backgroundColor: color,
+        leading: BackButton(color: color1),
       ),
       body: _userSnapshot != null
           ? Padding(
@@ -59,7 +65,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                                title: Text('Report User?'),
+                                title: Text(
+                                  'Report User?',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: regular,
+                                      color: color1),
+                                ),
                                 backgroundColor: Colors.grey[300],
                                 content: TextField(
                                   autofocus: true,
@@ -72,7 +84,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     onPressed: () => Navigator.pop(context),
                                     child: Text(
                                       'Cancel',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: regular,
+                                          color: color1),
                                     ),
                                   ),
                                   TextButton(
@@ -85,13 +100,17 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     },
                                     child: Text(
                                       'Yes',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: color),
                                     ),
                                   ),
                                 ],
                               ));
                     },
-                    child: Text('Report'),
+                    child: Text(
+                      'Report',
+                      style: TextStyle(
+                          fontSize: 14, fontFamily: regular, color: color1),
+                    ),
                   ),
                 ],
               ),

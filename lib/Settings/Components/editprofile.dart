@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class editprofile extends StatefulWidget {
   @override
@@ -55,9 +57,7 @@ class _editprofileState extends State<editprofile> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Profile updated successfully!'),
-          
         ),
-        
       );
     } catch (e) {
       print('Error updating profile: $e');
@@ -68,7 +68,10 @@ class _editprofileState extends State<editprofile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(fontFamily: regular, color: color1, fontSize: 20),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -92,7 +95,11 @@ class _editprofileState extends State<editprofile> {
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: _updateUserData,
-              child: Text('Save Changes'),
+              child: Text(
+                'Save Changes',
+                style:
+                    TextStyle(fontFamily: regular, color: color, fontSize: 14),
+              ),
             ),
           ],
         ),
@@ -100,4 +107,3 @@ class _editprofileState extends State<editprofile> {
     );
   }
 }
-
