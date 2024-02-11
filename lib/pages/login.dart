@@ -268,19 +268,7 @@ class _loginscreenState extends State<loginscreen> {
     );
   }
 
-  Widget togglePassword() {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          _issecuredpassword = !_issecuredpassword;
-        });
-      },
-      icon: _issecuredpassword
-          ? Icon(Icons.visibility)
-          : Icon(Icons.visibility_off),
-      color: Colors.grey,
-    );
-  }
+  
 }
 
 SignInWithGoogle() async {

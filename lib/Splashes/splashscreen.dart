@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
 import 'package:sajhabackup/Pages/login.dart';
 
 class splashscreen extends StatefulWidget {
@@ -10,9 +12,12 @@ class splashscreen extends StatefulWidget {
 }
 
 class _splashscreenState extends State<splashscreen> {
+
+  User? user;
   @override
   void initState() {
     super.initState();
+    user= FirebaseAuth.instance.currentUser;
     goToLogin();
   }
 
@@ -20,8 +25,15 @@ class _splashscreenState extends State<splashscreen> {
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const MainPage()),
-        (Route<dynamic> route) => false,
+
+        MaterialPageRoute(builder: (context) {
+  if (user != null) {
+    return homepage(); // Replace with the desired page for the condition
+  } else {
+    return MainPage(); // Replace with the desired page for the else condition
+  }
+}),
+(Route<dynamic> route) => false,
       );
     });
   }
