@@ -16,7 +16,7 @@ class chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color,
+         backgroundColor: color,
         title: Text(
           'Chat',
           style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
@@ -50,15 +50,6 @@ class chat extends StatelessWidget {
       Map<String, dynamic> userData, BuildContext context) {
     if (userData['Email'] != _authService.getCurrentUser()!.email) {
       return UserTile(
-      text: userData["Email"],
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(
-          receiverEmail: userData["Email"],
-          receiverID: userData['uid'],
-        )));
-      },
-    );
-    }else{
         text: userData["Email"],
         onTap: () {
           Navigator.push(
@@ -66,7 +57,7 @@ class chat extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => chatpage(
                         receiverEmail: userData["Email"],
-                        receiverID: userData["uid"],
+                        receiverID: userData['uid'],
                       )));
         },
       );
