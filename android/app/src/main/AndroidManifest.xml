@@ -7,7 +7,7 @@
     <application
         android:label="Sajha Bookstore"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
             android:exported="true"
