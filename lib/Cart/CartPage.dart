@@ -16,11 +16,10 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: color,
         title: Text(
           'Favorites',
-          style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+          style: TextStyle(color: color1, fontFamily: bold, fontSize: 20),
         ),
         leading: BackButton(
           color: color1,
@@ -74,7 +73,6 @@ class CartPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Total Price: \Rs${totalPrice.toStringAsFixed(2)}'),
-               
               ],
             ),
           ),

@@ -8,11 +8,10 @@ class RentingExplanationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xFF9526BC),
+        backgroundColor: color,
         title: Text(
-          'How Renting Works',
-          style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+          'Rent',
+          style: TextStyle(color: color1, fontFamily: bold, fontSize: 20),
         ),
         leading: BackButton(
           color: color1,

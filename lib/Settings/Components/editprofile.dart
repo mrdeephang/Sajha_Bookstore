@@ -68,6 +68,7 @@ class _editprofileState extends State<editprofile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: color,
         title: Text(
           'Edit Profile',
           style: TextStyle(fontFamily: regular, color: color1, fontSize: 20),

@@ -35,11 +35,10 @@ class _RentDurationPageState extends State<RentDurationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: color,
         title: Text(
           'Choose Rent Duration',
-          style: TextStyle(color: color1, fontFamily: regular, fontSize: 20),
+          style: TextStyle(color: color1, fontFamily: bold, fontSize: 20),
         ),
         leading: BackButton(
           color: color1,
@@ -51,7 +50,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Select the rental duration:',
+              'Select the Rental Duration:',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 16),

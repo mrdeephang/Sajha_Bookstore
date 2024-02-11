@@ -63,10 +63,9 @@ class _AccDetailsState extends State<AccDetails> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           'Account',
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
         ),
         elevation: 0,
         backgroundColor: color,
@@ -75,11 +74,10 @@ class _AccDetailsState extends State<AccDetails> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [],
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/editprofile.png"),
+            fit: BoxFit.cover,
           ),
         ),
         child: StreamBuilder(
@@ -146,7 +144,7 @@ class _AccDetailsState extends State<AccDetails> {
                               style: TextStyle(
                                   fontFamily: regular,
                                   color: color,
-                                  fontSize: 14),
+                                  fontSize: 16),
                             ))
                       ],
                     ),

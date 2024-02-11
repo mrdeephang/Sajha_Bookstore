@@ -38,10 +38,9 @@ class MapOpenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: color,
         title: Text(
-          'Address of Seller',
+          'Seller Address',
           style: TextStyle(fontFamily: regular, fontSize: 20, color: color1),
         ),
         leading: BackButton(

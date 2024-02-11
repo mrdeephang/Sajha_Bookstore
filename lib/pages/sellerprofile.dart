@@ -41,10 +41,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           'Seller Profile',
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
         ),
         backgroundColor: color,
         leading: BackButton(color: color1),
@@ -70,7 +69,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: regular,
-                                      color: color1),
+                                      color: color),
                                 ),
                                 backgroundColor: Colors.grey[300],
                                 content: TextField(
@@ -109,7 +108,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     child: Text(
                       'Report',
                       style: TextStyle(
-                          fontSize: 14, fontFamily: regular, color: color1),
+                          fontSize: 14, fontFamily: regular, color: color),
                     ),
                   ),
                 ],

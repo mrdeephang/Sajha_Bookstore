@@ -30,6 +30,7 @@ class _booksdetails2State extends State<booksdetails2> {
     super.initState();
     status = 'Available';
   }
+
   void _updateStatus(String newStatus) {
     setState(() {
       status = newStatus;
@@ -53,19 +54,16 @@ class _booksdetails2State extends State<booksdetails2> {
         .update({'status': status});
   }
 
-
-final currentUser = FirebaseAuth.instance.currentUser!;
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
-     
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: color,
         title: Text(
           widget.book['name'],
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
         ),
         leading: BackButton(color: color1),
       ),
@@ -202,7 +200,8 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                             context,
                             MaterialPageRoute(
                                 builder: ((context) => MapOpenPage(
-                                      destinationAddress: widget.book['address'],
+                                      destinationAddress:
+                                          widget.book['address'],
                                     )))),
                         child: Text(
                           widget.book['address'],
@@ -249,11 +248,20 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                    child: TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfilePage(userEmail: widget.book['added by'])));
-                    },child: Text(widget.book['added by'],style: TextStyle(color: color),),),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserProfilePage(
+                                    userEmail: widget.book['added by'])));
+                      },
+                      child: Text(
+                        widget.book['added by'],
+                        style: TextStyle(color: color),
+                      ),
+                    ),
                   ),
-                  
                 ],
               ),
               SizedBox(height: 7),
@@ -290,7 +298,14 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                           backgroundColor: color,
                           onPressed: () {
                             _buyBook();
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiverEmail: widget.book['added by'],receiverID: '',)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => chatpage(
+                                          receiverEmail:
+                                              widget.book['added by'],
+                                          receiverID: '',
+                                        )));
                           },
                           child: Text(
                             'Buy',
@@ -331,7 +346,6 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                            
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -359,7 +373,10 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => chatpage(receiverEmail: widget.book['added by'],receiverID: '',)));
+                            builder: (context) => chatpage(
+                                  receiverEmail: widget.book['added by'],
+                                  receiverID: '',
+                                )));
                   },
                   child: Text(
                     'Chat With Seller',
@@ -376,11 +393,12 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                 width: MediaQuery.of(context).size.width,
                 child: FloatingActionButton(
                   backgroundColor: color,
-                  onPressed: (){
+                  onPressed: () {
                     _showReportMenu(context);
                   },
-                  child: Text('Report',
-                  style: TextStyle(color: Colors.white,fontSize: 18),
+                  child: Text(
+                    'Report',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
               ),
@@ -406,68 +424,72 @@ final currentUser = FirebaseAuth.instance.currentUser!;
       ),
     );
   }
-  
 
-void _showReportMenu(BuildContext context){
-  showModalBottomSheet(context: context,
-   builder: (BuildContext context){
-    return Container(
-      child: Wrap(
-        children: [
-          ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('Inappropriate Content'),
-            onTap: () {
-              _reportBook('Inappropriate Content');
-              Navigator.pop(context);
-            },
-          ),
-           ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('Fake information'),
-            onTap: () {
-              _reportBook('Fake information');
-              Navigator.pop(context);
-            },
-          ),
-           ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('Spam'),
-            onTap: () {
-              _reportBook('Spam');
-              Navigator.pop(context);
-            },
-          ),
-           ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('Wrong information'),
-            onTap: () {
-              _reportBook('Wrong infomation');
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
-   }
-   );
-}
+  void _showReportMenu(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            child: Wrap(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.flag),
+                  title: Text('Inappropriate Content'),
+                  onTap: () {
+                    _reportBook('Inappropriate Content');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.flag),
+                  title: Text('Fake information'),
+                  onTap: () {
+                    _reportBook('Fake information');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.flag),
+                  title: Text('Spam'),
+                  onTap: () {
+                    _reportBook('Spam');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.flag),
+                  title: Text('Wrong information'),
+                  onTap: () {
+                    _reportBook('Wrong infomation');
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
 
-void _reportBook(String reason) async {
-  String bookname= widget.book['name'];
-  await FirebaseFirestore.instance.collection('reports').add({
-    'bookname':bookname,
-    'reason':reason,
-    'reportedby':currentUser.email!
-  });
-  int reportcount=await FirebaseFirestore.instance.collection('reports').where('bookname',isEqualTo: bookname).get().then((value) => value.size);
-  if(reportcount>=3){
-    await FirebaseFirestore.instance.collection('books').doc(bookname).delete();
+  void _reportBook(String reason) async {
+    String bookname = widget.book['name'];
+    await FirebaseFirestore.instance.collection('reports').add({
+      'bookname': bookname,
+      'reason': reason,
+      'reportedby': currentUser.email!
+    });
+    int reportcount = await FirebaseFirestore.instance
+        .collection('reports')
+        .where('bookname', isEqualTo: bookname)
+        .get()
+        .then((value) => value.size);
+    if (reportcount >= 3) {
+      await FirebaseFirestore.instance
+          .collection('books')
+          .doc(bookname)
+          .delete();
+    }
   }
 }
-}
-
-
 
 class similarbooks extends StatefulWidget {
   @override

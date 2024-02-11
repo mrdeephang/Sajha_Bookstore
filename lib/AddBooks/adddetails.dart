@@ -26,7 +26,6 @@ class _BookAddPageState extends State<BookAddPage> {
   final TextEditingController additionalInfoController =
       TextEditingController();
 
-
   String selectedCategory = 'Masters';
   File? _image;
 
@@ -43,12 +42,10 @@ class _BookAddPageState extends State<BookAddPage> {
 
   Future<void> _addBook() async {
     if (_image == null) {
-      
       return;
     }
 
     try {
-     
       final Reference storageReference = FirebaseStorage.instance
           .ref()
           .child('book_images/${DateTime.now()}.jpg');
@@ -57,10 +54,8 @@ class _BookAddPageState extends State<BookAddPage> {
         SettableMetadata(contentType: 'image/jpeg'),
       );
 
-   
       final String imageUrl = await storageReference.getDownloadURL();
 
-      
       await FirebaseFirestore.instance.collection('books').add({
         'name': nameController.text,
         'author': authorController.text,
@@ -74,7 +69,6 @@ class _BookAddPageState extends State<BookAddPage> {
         'added by': currentUser.email!
       });
 
-    
       nameController.clear();
       authorController.clear();
       conditionController.clear();
@@ -86,11 +80,8 @@ class _BookAddPageState extends State<BookAddPage> {
         _image = null;
       });
 
-      
       QuickAlert.show(context: context, type: QuickAlertType.success);
-      
     } catch (error) {
-     
       print(error);
       QuickAlert.show(context: context, type: QuickAlertType.error);
     }
@@ -104,10 +95,9 @@ class _BookAddPageState extends State<BookAddPage> {
         leading: BackButton(
           color: color1,
         ),
-        centerTitle: true,
         title: Text(
           'Add Book',
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
         ),
       ),
       body: SingleChildScrollView(

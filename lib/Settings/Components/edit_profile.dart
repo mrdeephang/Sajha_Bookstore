@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
       if (userSnapshot.exists) {
         setState(() {
-                    _fullNameController.text = userSnapshot['Full Name'] ?? '';
+          _fullNameController.text = userSnapshot['Full Name'] ?? '';
           _usernameController.text = userSnapshot['Username'] ?? '';
           _addressController.text = userSnapshot['Address'] ?? '';
           _phoneController.text = userSnapshot['Phone'] ?? '';
@@ -62,7 +63,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await _user.updateDisplayName(_usernameController.text);
 
       await _firestore.collection('users').doc(_user.uid).update({
-        'Username':_usernameController.text,
+        'Username': _usernameController.text,
         'Full Name': _fullNameController.text,
         'Address': _addressController.text,
         'Phone': _phoneController.text,
@@ -124,18 +125,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
-        centerTitle: true,
-        title: Text('Edit Profile'),
-       leading: BackButton(),
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(fontFamily: bold, color: color1, fontSize: 20),
+        ),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [color, Colors.deepPurple,Colors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          image: DecorationImage(
+            image: AssetImage("assets/images/userdetails.png"),
+            fit: BoxFit.cover,
           ),
-         ),
+        ),
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -150,33 +154,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 30.0),
               TextField(
                 controller: _fullNameController,
                 decoration: InputDecoration(labelText: 'Full Name'),
               ),
+              SizedBox(height: 20.0),
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(labelText: 'Username'),
               ),
+              SizedBox(height: 20.0),
               TextField(
                 controller: _addressController,
                 decoration: InputDecoration(labelText: 'Address'),
               ),
+              SizedBox(height: 20.0),
               TextField(
                 controller: _phoneController,
                 decoration: InputDecoration(labelText: 'Phone'),
               ),
+              SizedBox(height: 20.0),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(labelText: 'Email'),
                 readOnly: true,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Center(
                 child: ElevatedButton(
                   onPressed: _updateProfile,
-                  child: Text('Save'),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(
+                        fontFamily: regular, color: color, fontSize: 16),
+                  ),
                 ),
               ),
             ],
@@ -186,5 +198,3 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 }
-
-
