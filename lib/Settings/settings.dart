@@ -6,8 +6,6 @@ import 'package:sajhabackup/Settings/Components/helpcenter.dart';
 import 'package:sajhabackup/Settings/Components/theme.dart';
 import 'package:sajhabackup/Settings/Components/userDetails.dart';
 import 'package:sajhabackup/Widgets/settingstile.dart';
-import 'package:sajhabackup/Settings/Components/edit_profile.dart';
-import 'package:sajhabackup/pages/sellerprofile.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -21,10 +19,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           'Settings',
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
         ),
         backgroundColor: color,
         leading: BackButton(

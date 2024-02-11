@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
-//import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/RegisterPage.dart';
-//import 'package:sajhabackup/pages/newRegister.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
@@ -75,7 +72,7 @@ class _loginscreenState extends State<loginscreen> {
   bool _issecuredpassword = true;
   String user = '';
   String pass = '';
-  bool _isPasswordVisible=false;
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +80,6 @@ class _loginscreenState extends State<loginscreen> {
     TextEditingController _passwordController = TextEditingController();
     final userfield = TextField(
       controller: _emailController,
-      style: mystyle,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         hintText: "Email or Phone",
@@ -156,16 +152,17 @@ class _loginscreenState extends State<loginscreen> {
                       TextField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        style: mystyle,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
-                      onPressed: (){
-                        setState(() {
-                          _isPasswordVisible=!_isPasswordVisible;
-                        });
-                      },
-                      icon: Icon(_isPasswordVisible? Icons.visibility: Icons.visibility_off),
-                    ),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                            icon: Icon(_isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          ),
                           contentPadding: EdgeInsets.all(10),
                           hintText: "Password",
                           hintStyle: TextStyle(
@@ -220,7 +217,9 @@ class _loginscreenState extends State<loginscreen> {
                           children: [
                             //googlebutton
                             GestureDetector(
-                              onTap: () => FirebaseService.signInwithGoogle(context),    
+                              onTap: () => authservice().signinwithGoogle(),
+
+                              
                               child: Image.asset(
                                 'assets/images/google.png',
                                 height: 60,
@@ -265,18 +264,4 @@ class _loginscreenState extends State<loginscreen> {
       ),
     );
   }
-
-  
-}
-
-SignInWithGoogle() async {
-  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-  AuthCredential credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-  UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithCredential(credential);
-  print(userCredential.user?.displayName);
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/HomePage/bach.dart';
 import 'package:sajhabackup/Cart/CartPage.dart';
 import 'package:sajhabackup/Chat/chat.dart';
@@ -11,8 +12,6 @@ import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/HomePage/extra.dart';
 import 'package:sajhabackup/HomePage/masters.dart';
 import 'package:sajhabackup/MyBooksStatus/mybookstatus.dart';
-import 'package:sajhabackup/Notification/notification.dart';
-//import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Settings/settings.dart';
 import 'package:sajhabackup/AddBooks/adddetails.dart';
 import 'package:sajhabackup/pages/login.dart';
@@ -28,7 +27,7 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   //final currentUser = FirebaseAuth.instance.currentUser!;
-    User? user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
    late String userName = ''; // Variable to store user's name
@@ -87,7 +86,9 @@ class _homepageState extends State<homepage> {
       // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: color,
-        title: Text('Sajha Bookstore', style: TextStyle(color: Colors.white)),
+        title: Text('Sajha Bookstore',
+            style:
+                TextStyle(color: Colors.white, fontFamily: bold, fontSize: 21)),
         actions: [
           IconButton(
               onPressed: () {
@@ -96,15 +97,6 @@ class _homepageState extends State<homepage> {
               },
               icon: Icon(
                 Icons.search,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => notification()));
-              },
-              icon: Icon(
-                Icons.notifications,
                 color: Colors.white,
               )),
           IconButton(
@@ -122,19 +114,16 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(userName),
+              accountName: Text('Welcome'),
               accountEmail: Text(currentUser.email!),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.grey[300],
                   child: Icon(
                     Icons.person,
                     color: Colors.white,
                   ),
                 ),
-              ),
-              decoration: BoxDecoration(
-                color: color,
               ),
             ),
             InkWell(
@@ -202,7 +191,6 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-
                 QuickAlert.show(
                     textColor: Colors.black,
                     backgroundColor: Colors.white,
@@ -211,18 +199,15 @@ class _homepageState extends State<homepage> {
                     type: QuickAlertType.confirm,
                     title: "LogOut",
                     text: "Are you sure you want to logout?",
+                    onConfirmBtnTap: () async {
+                      // Sign out the user from Firebase Authentication
+                      await FirebaseAuth.instance.signOut();
 
-
-                    
-                   onConfirmBtnTap: () async {
-  // Sign out the user from Firebase Authentication
-  await FirebaseAuth.instance.signOut();
-  
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const loginscreen()));
-}                         
-                            );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const loginscreen()));
+                    });
               },
               child: ListTile(
                 title: Text('Log Out'),

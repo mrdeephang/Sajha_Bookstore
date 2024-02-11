@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
-//import 'package:sajhabackup/pages/email_verification.dart';
 import 'package:sajhabackup/utils/formcontainer.dart';
 import 'package:sajhabackup/utils/toast.dart';
-
 
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class register extends StatefulWidget {
 class _registerState extends State<register> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ImagePicker _picker=ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   TextEditingController _fullnameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -31,14 +31,20 @@ class _registerState extends State<register> {
   TextEditingController _addressController = TextEditingController();
 
   bool isSigningUp = false;
-   XFile? _pickedImage;
+  XFile? _pickedImage;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          'Register',
+          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+        ),
         automaticallyImplyLeading: false,
-        leading: BackButton(),
+        leading: BackButton(
+          color: color1,
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -47,20 +53,21 @@ class _registerState extends State<register> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                /*
                 Text(
                   "Sign Up",
                   style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 30,
-                ),
+                ),*/
                 FormContainerWidget(
                   controller: _fullnameController,
                   hintText: "Full Name",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10),
-               FormContainerWidget(
+                FormContainerWidget(
                   controller: _usernameController,
                   hintText: "Username",
                   isPasswordField: false,
@@ -97,9 +104,8 @@ class _registerState extends State<register> {
                 ),
                 SizedBox(height: 10),
                 SizedBox(height: 30),
-               
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     _pickImage();
                   },
                   child: Container(
@@ -110,17 +116,17 @@ class _registerState extends State<register> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: _pickedImage==null
-                      ? Text('Choose Profile Picture',
-                      style: TextStyle(color: Colors.grey),
-                      )
-                      :Image.file(File(_pickedImage!.path),
-                      fit: BoxFit.cover,
-                      )
-                    ),
+                        child: _pickedImage == null
+                            ? Text(
+                                'Choose Profile Picture',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            : Image.file(
+                                File(_pickedImage!.path),
+                                fit: BoxFit.cover,
+                              )),
                   ),
                 ),
-
                 GestureDetector(
                   onTap: () {
                     _signUp();
@@ -140,14 +146,12 @@ class _registerState extends State<register> {
                           : Text(
                               "Sign Up",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  color: color, fontWeight: FontWeight.bold),
                             ),
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
-                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -172,7 +176,6 @@ class _registerState extends State<register> {
                     ),
                   ],
                 ),
-                
               ],
             ),
           ),
@@ -180,63 +183,65 @@ class _registerState extends State<register> {
       ),
     );
   }
-  Future<void> _pickImage() async{
-    final XFile? pickedImage= await _picker.pickImage(source: ImageSource.gallery);
-    if(pickedImage!=null){
+
+  Future<void> _pickImage() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
       setState(() {
-        _pickedImage=pickedImage;
+        _pickedImage = pickedImage;
       });
     }
   }
-  
 
- void _signUp() async {
-  setState(() {
-    isSigningUp = true;
-  });
+  void _signUp() async {
+    setState(() {
+      isSigningUp = true;
+    });
 
-  try {
-    String fullname = _fullnameController.text;
-    String username = _usernameController.text;
-    String email = _emailController.text;
-    String phone = _phoneController.text;
-    String password = _passwordController.text;
-    String address = _addressController.text;
+    try {
+      String fullname = _fullnameController.text;
+      String username = _usernameController.text;
+      String email = _emailController.text;
+      String phone = _phoneController.text;
+      String password = _passwordController.text;
+      String address = _addressController.text;
 
-    if (_validateForm()) {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      if (_validateForm()) {
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
 
-      await userCredential.user!.sendEmailVerification();
-      showToast(message: "Verification email sent!");
-      
+        await userCredential.user!.sendEmailVerification();
+        showToast(message: "Verification email sent!");
 
-      await Future.delayed(Duration(seconds: 30));
-      await userCredential.user!.reload();
-      if(_pickedImage!=null){
-        await _uploadProfilePicture(userCredential.user!.uid);
+        await Future.delayed(Duration(seconds: 30));
+        await userCredential.user!.reload();
+        if (_pickedImage != null) {
+          await _uploadProfilePicture(userCredential.user!.uid);
+        }
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'Full Name': fullname,
+          'Username': username,
+          'Email': email,
+          'Phone': phone,
+          'Address': address,
+          'Password': password,
+          'ProfilePic': _pickedImage != null ? _pickedImage!.path : null,
+        });
+        showToast(message: 'Registered Successfull');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SplashPage()));
       }
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-       'Full Name':fullname,
-       'Username':username,
-       'Email':email,
-       'Phone':phone,
-       'Address':address,
-       'Password':password,
-       'ProfilePic':_pickedImage!=null ? _pickedImage!.path:null,
-      });
-     showToast(message: 'Registered Successfull');
-     Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
+    } on FirebaseAuthException catch (e) {
+      showToast(message: "Error: ${e.message}");
     }
-  } on FirebaseAuthException catch (e) {
-    showToast(message: "Error: ${e.message}");
   }
-}
- bool _validateForm() {
-      if (_fullnameController.text.isEmpty ||
+
+  bool _validateForm() {
+    if (_fullnameController.text.isEmpty ||
         _usernameController.text.isEmpty ||
         _emailController.text.isEmpty ||
         _phoneController.text.isEmpty ||
@@ -251,35 +256,33 @@ class _registerState extends State<register> {
     }
     return true;
   }
-Future<void> _uploadProfilePicture(String userId) async{
-  try {
-     
+
+  Future<void> _uploadProfilePicture(String userId) async {
+    try {
       final Reference storageReference = FirebaseStorage.instance
           .ref()
           .child('profile_pic/$userId/ProfilePic.jpg');
-          
+
       await storageReference.putFile(
         File(_pickedImage!.path),
         SettableMetadata(contentType: 'image/jpeg'),
-        );
-       String downloadUrl=await storageReference.getDownloadURL();
-       await _firestore.collection('users').doc(userId).update({
-        'ProfilePic':downloadUrl,
-       });
-       
-}catch(e){
-  showToast(message: 'Error');
-}
+      );
+      String downloadUrl = await storageReference.getDownloadURL();
+      await _firestore.collection('users').doc(userId).update({
+        'ProfilePic': downloadUrl,
+      });
+    } catch (e) {
+      showToast(message: 'Error');
+    }
 
- 
-
-  Future<void> _waitForEmailVerification(User user) async {
- // await user.sendEmailVerification();
- await user.reload();
-   if(user.emailVerified){
-    showToast(message: 'Registerd Sucessfully');
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashPage()));
-   }
-}
-}
+    Future<void> _waitForEmailVerification(User user) async {
+      // await user.sendEmailVerification();
+      await user.reload();
+      if (user.emailVerified) {
+        showToast(message: 'Registerd Sucessfully');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SplashPage()));
+      }
+    }
+  }
 }

@@ -14,10 +14,9 @@ class theme extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF9526BC),
-          centerTitle: true,
           title: Text(
             'Theme',
-            style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
+            style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
           ),
           leading: BackButton(
             color: color1,

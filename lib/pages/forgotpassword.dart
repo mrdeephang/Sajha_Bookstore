@@ -25,7 +25,7 @@ class _forgetpasswordState extends State<forgetpassword> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              content: Text('Password Reset link sent!!Check Your Email'),
+              content: Text('Password Reset link sent! Check Your Email'),
             );
           });
     } on FirebaseAuthException catch (e) {
@@ -44,50 +44,69 @@ class _forgetpasswordState extends State<forgetpassword> {
     return Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(),
+        /*centerTitle: true,
+        title: Text(
+          'Forgot Password',
+          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
+        ),*/
+        backgroundColor: color,
+        leading: BackButton(
+          color: Colors.white,
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
+          /*Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Text(
-              'Enter Your Email',
+           child: Text(
+              '',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
+          ),*/
+          Container(
+            child: Image.asset(
+              'assets/images/forgot.png',
+              height: 200,
+            ),
           ),
-          SizedBox(height: 10),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: color),
                     borderRadius: BorderRadius.circular(12)),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: color),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                hintText: 'Email',
-                fillColor: Colors.grey[200],
+                hintText: 'Enter Your Email Here...',
+                hintStyle: TextStyle(
+                    color: Colors.grey, fontFamily: regular, fontSize: 14),
+                fillColor: color1,
                 filled: true,
               ),
             ),
           ),
-          SizedBox(height: 10),
-          MaterialButton(
-            onPressed: passwrodReset,
-            child: Text(
-              'Reset Password',
-              style:
-                  TextStyle(fontSize: 16, fontFamily: regular, color: color1),
+          SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50), color: color),
+            child: TextButton(
+              onPressed: passwrodReset,
+              child: Text(
+                'Reset Password',
+                style:
+                    TextStyle(fontSize: 16, fontFamily: regular, color: color1),
+              ),
             ),
-            color: color,
-          )
+          ),
         ],
       ),
     );
