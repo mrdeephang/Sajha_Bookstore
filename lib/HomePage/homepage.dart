@@ -30,6 +30,30 @@ class _homepageState extends State<homepage> {
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
+   late String userName = ''; // Variable to store user's name
+
+  void fetchUserName() async {
+    try {
+      if (user != null) {
+        DocumentSnapshot userDoc =
+            await usersCollection.doc(user!.uid).get();
+
+        String name = userDoc['Full Name'];
+
+        // 
+        setState(() {
+          userName = name;
+        });
+      }
+    } catch (error) {
+      print('Error fetching user name: $error');
+    }
+  }
+   @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,19 +114,8 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: color,
-              ),
-              accountName: Text(
-                'Welcome',
-                style:
-                    TextStyle(fontSize: 16, fontFamily: regular, color: color1),
-              ),
-              accountEmail: Text(
-                currentUser.email!,
-                style:
-                    TextStyle(fontSize: 14, fontFamily: regular, color: color1),
-              ),
+              accountName: Text(userName),
+              accountEmail: Text(currentUser.email!),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey[300],

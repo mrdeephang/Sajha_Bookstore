@@ -7,7 +7,7 @@ class AuthService{
   User? getCurrentUser(){
     return _auth.currentUser;
   }
-  Future<UserCredential> signInWithEmailPassword(String email, password) async{
+  Future<UserCredential> signInWithEmailPassword(String email, String password) async{
     try{
       UserCredential userCredential=await _auth.signInWithEmailAndPassword(email: email, password: password);
       _firestore.collection("users").doc(userCredential.user!.uid).set({

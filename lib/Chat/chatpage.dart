@@ -1,118 +1,89 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chat_bubble.dart';
 import 'package:sajhabackup/Chat/chat_service.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/services/AuthService.dart';
 
 class chatpage extends StatelessWidget {
   final String receiverEmail;
-  final String receiverID;
+    final String receiverID;
 
-  chatpage({super.key, required this.receiverEmail, required this.receiverID});
+ chatpage({super.key,required this.receiverEmail,required this.receiverID});
 
-  final TextEditingController _messageController = TextEditingController();
-  final ChatService _chatService = ChatService();
+final TextEditingController _messageController=TextEditingController();
+final ChatService _chatService=ChatService();
   final AuthService _authService = AuthService();
+  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
+  final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
 
-  void sendMessage() async {
-    if (_messageController.text.isNotEmpty) {
-      await _chatService.sendMessage(receiverID, _messageController.text);
-      _messageController.clear();
-    }
+void sendMessage()async{
+  if(_messageController.text.isNotEmpty){
+    await _chatService.sendMessage(receiverID, _messageController.text);
+    _messageController.clear();
   }
-
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color,
-        title: Text(
-          receiverEmail,
-          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
-        ),
-        leading: BackButton(
-          color: color1,
-        ),
+        title: Text(receiverEmail),
       ),
       body: Column(
-        children: [Expanded(child: _buildMessageList()), _buildUserInput()],
+        children: [
+          Expanded(child: _buildMessageList()),
+          _buildUserInput()
+        ],
       ),
     );
   }
-
-  Widget _buildMessageList() {
-    String senderId = _authService.getCurrentUser()!.uid;
+  Widget _buildMessageList(){
+    String senderId=_authService.getCurrentUser()!.uid;
     return StreamBuilder(
-        stream: _chatService.getMessage(receiverID, senderId),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
-          }
-          return ListView(
-            children: snapshot.data!.docs
-                .map((doc) => _buildMessageItem(doc))
-                .toList(),
-          );
-        });
+      stream: _chatService.getMessage(receiverID, senderId),
+       builder: (context,snapshot){
+        if(snapshot.hasError){
+          return Text('Error');
+        }
+        if(snapshot.connectionState==ConnectionState.waiting){
+          return Text('Loading...');
+        }
+        return ListView(
+          children: snapshot.data!.docs.map((doc) => _buildMessageItem(doc)).toList(),
+        );
+       });
   }
-
-  Widget _buildMessageItem(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    bool isCurrentUser = data['senderID'] == _authService.getCurrentUser()!.uid;
-    var alignment =
-        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+  Widget _buildMessageItem(DocumentSnapshot doc){
+    Map<String,dynamic> data=doc.data() as Map<String,dynamic>;
+    bool isCurrentUser=data['senderID']==_firebaseAuth.currentUser!.uid;
+    var alignment=isCurrentUser? Alignment.centerRight : Alignment.centerLeft;
     return Container(
-        alignment: alignment,
-        child: Column(
-          crossAxisAlignment:
-              isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-          children: [
-            chatbubble(message: data['message'], isCurrentUser: isCurrentUser)
-          ],
-        ));
+      alignment: alignment,
+      child: 
+          
+          chatbubble(message: data['message'])
+        
+      );
   }
-
-  Widget _buildUserInput() {
+  Widget _buildUserInput(){
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0, left: 5),
+      padding: const EdgeInsets.only(bottom:50.0),
       child: Row(
         children: [
-          Expanded(
-              child: TextField(
-            controller: _messageController,
+          Expanded(child: TextField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: color),
-                  borderRadius: BorderRadius.circular(12)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: color),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              hintText: 'Message...',
-              hintStyle: TextStyle(
-                  color: Colors.grey, fontFamily: regular, fontSize: 16),
-              fillColor: color1,
-              filled: true,
+              hintText: 'Type Something...'
             ),
+            controller: _messageController,
           )),
-          SizedBox(
-            width: 5,
-          ),
           Container(
-              margin: EdgeInsets.only(right: 5),
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              child: IconButton(
-                  onPressed: sendMessage,
-                  icon: Icon(
-                    Icons.arrow_upward,
-                    color: Colors.white,
-                  )))
+            margin: EdgeInsets.only(right: 25),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle
+            ),
+            child: IconButton(onPressed: sendMessage, icon: Icon(Icons.arrow_upward,color: Colors.white,)))
         ],
       ),
     );

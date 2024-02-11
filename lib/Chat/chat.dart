@@ -50,6 +50,17 @@ class chat extends StatelessWidget {
       Map<String, dynamic> userData, BuildContext context) {
     if (userData['Email'] != _authService.getCurrentUser()!.email) {
       return UserTile(
+<<<<<<< HEAD
+      text: userData["Email"],
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(
+          receiverEmail: userData["Email"],
+          receiverID: userData['uid'],
+        )));
+      },
+    );
+    }else{
+=======
         text: userData["Email"],
         onTap: () {
           Navigator.push(
@@ -62,6 +73,7 @@ class chat extends StatelessWidget {
         },
       );
     } else {
+>>>>>>> 61109a91b5a1fac0e949ebd76da13e6b03be9264
       return Container();
     }
   }
