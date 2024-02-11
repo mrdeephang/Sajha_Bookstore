@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
-import 'package:sajhabackup/Pages/register.dart';
+//import 'package:sajhabackup/Pages/register.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/RegisterPage.dart';
 //import 'package:sajhabackup/pages/newRegister.dart';
@@ -75,6 +75,7 @@ class _loginscreenState extends State<loginscreen> {
   bool _issecuredpassword = true;
   String user = '';
   String pass = '';
+  bool _isPasswordVisible=false;
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +155,17 @@ class _loginscreenState extends State<loginscreen> {
                       SizedBox(height: 10),
                       TextField(
                         controller: _passwordController,
-                        obscureText: _issecuredpassword,
+                        obscureText: !_isPasswordVisible,
                         style: mystyle,
                         decoration: InputDecoration(
-                          suffixIcon: togglePassword(),
+                          suffixIcon: IconButton(
+                      onPressed: (){
+                        setState(() {
+                          _isPasswordVisible=!_isPasswordVisible;
+                        });
+                      },
+                      icon: Icon(_isPasswordVisible? Icons.visibility: Icons.visibility_off),
+                    ),
                           contentPadding: EdgeInsets.all(10),
                           hintText: "Password",
                           hintStyle: TextStyle(

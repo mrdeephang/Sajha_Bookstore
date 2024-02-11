@@ -26,6 +26,7 @@ class _BookAddPageState extends State<BookAddPage> {
   final TextEditingController additionalInfoController =
       TextEditingController();
 
+
   String selectedCategory = 'Masters';
   File? _image;
 

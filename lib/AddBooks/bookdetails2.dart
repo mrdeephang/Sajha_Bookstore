@@ -38,15 +38,15 @@ class _booksdetails2State extends State<booksdetails2> {
 
   void _buyBook() {
     _updateStatus('Bought');
-    _updateBookStatusInFirestore();
+    _updateBookStatusInFirestore('Bought');
   }
 
   void _rentBook() {
     _updateStatus('Rented');
-    _updateBookStatusInFirestore();
+    _updateBookStatusInFirestore('Rented');
   }
 
-  void _updateBookStatusInFirestore() {
+  void _updateBookStatusInFirestore(String status) {
     FirebaseFirestore.instance
         .collection('books')
         .doc(widget.book['name'])
@@ -290,7 +290,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                           backgroundColor: color,
                           onPressed: () {
                             _buyBook();
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiveruserEmail: widget.book['added by'], receiverId: "")));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(receiverEmail: widget.book['added by'],receiverID: '',)));
                           },
                           child: Text(
                             'Buy',
@@ -331,7 +331,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                            _rentBook();
+                            
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -359,9 +359,7 @@ final currentUser = FirebaseAuth.instance.currentUser!;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => chatpage(
-                                receiveruserEmail: widget.book['added by'],
-                                receiverId: "")));
+                            builder: (context) => chatpage(receiverEmail: widget.book['added by'],receiverID: '',)));
                   },
                   child: Text(
                     'Chat With Seller',

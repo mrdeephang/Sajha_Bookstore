@@ -62,6 +62,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await _user.updateDisplayName(_usernameController.text);
 
       await _firestore.collection('users').doc(_user.uid).update({
+        'Username':_usernameController.text,
         'Full Name': _fullNameController.text,
         'Address': _addressController.text,
         'Phone': _phoneController.text,

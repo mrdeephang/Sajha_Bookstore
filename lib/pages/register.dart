@@ -212,6 +212,7 @@ class _registerState extends State<register> {
 
       await userCredential.user!.sendEmailVerification();
       showToast(message: "Verification email sent!");
+      
 
       await Future.delayed(Duration(seconds: 30));
       await userCredential.user!.reload();

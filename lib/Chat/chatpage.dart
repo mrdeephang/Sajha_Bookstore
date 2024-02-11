@@ -1,127 +1,89 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/Chat/chat_bubble.dart';
 import 'package:sajhabackup/Chat/chat_service.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/services/AuthService.dart';
 
-class chatpage extends StatefulWidget {
-  final String receiveruserEmail;
-  final String receiverId;
-  const chatpage({
-    super.key,
-    required this.receiveruserEmail,
-    required this.receiverId,
-  });
-  @override
-  State<chatpage> createState() => _chatpageState();
-}
+class chatpage extends StatelessWidget {
+  final String receiverEmail;
+    final String receiverID;
 
-class _chatpageState extends State<chatpage> {
-  final TextEditingController _messageController = TextEditingController();
-  final chatservice _chatservice = chatservice();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  void sendMessage() async {
-    if (_messageController.text.isNotEmpty) {
-      await _chatservice.sendmessage(
-          widget.receiverId, _messageController.text);
-      _messageController.clear();
-    }
+ chatpage({super.key,required this.receiverEmail,required this.receiverID});
+
+final TextEditingController _messageController=TextEditingController();
+final ChatService _chatService=ChatService();
+  final AuthService _authService = AuthService();
+
+void sendMessage()async{
+  if(_messageController.text.isNotEmpty){
+    await _chatService.sendMessage(receiverID, _messageController.text);
+    _messageController.clear();
   }
-
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: color,
-        title: Text(
-          widget.receiveruserEmail,
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: color1),
-        ),
-        leading: BackButton(
-          color: color1,
-        ),
+        title: Text(receiverEmail),
       ),
       body: Column(
         children: [
-          Expanded(
-            child: _buildMessageList(),
-          ),
-          _buildMessageInput(),
-          SizedBox(height: 25)
+          Expanded(child: _buildMessageList()),
+          _buildUserInput()
         ],
       ),
     );
   }
-
-  Widget _buildMessageList() {
+  Widget _buildMessageList(){
+    String senderId=_authService.getCurrentUser()!.uid;
     return StreamBuilder(
-        stream: _chatservice.getMessages(
-            widget.receiverId, _firebaseAuth.currentUser!.uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error${snapshot.error}');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading..');
-          }
-          return ListView(
-            children: snapshot.data!.docs
-                .map((document) => _buildMessageItem(document))
-                .toList(),
-          );
-        });
+      stream: _chatService.getMessage(receiverID, senderId),
+       builder: (context,snapshot){
+        if(snapshot.hasError){
+          return Text('Error');
+        }
+        if(snapshot.connectionState==ConnectionState.waiting){
+          return Text('Loading...');
+        }
+        return ListView(
+          children: snapshot.data!.docs.map((doc) => _buildMessageItem(doc)).toList(),
+        );
+       });
   }
-
-  Widget _buildMessageItem(DocumentSnapshot document) {
-    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
+  Widget _buildMessageItem(DocumentSnapshot doc){
+    Map<String,dynamic> data=doc.data() as Map<String,dynamic>;
+    bool isCurrentUser=data['senderID']==_authService.getCurrentUser()!.uid;
+    var alignment=isCurrentUser? Alignment.centerRight : Alignment.centerLeft;
     return Container(
       alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment:
-              (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-          mainAxisAlignment:
-              (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.start,
-          children: [
-            Text(data['senderEmail']),
-            SizedBox(height: 5),
-            chatbubble(message: data['message']),
-          ],
-        ),
-      ),
-    );
+      child: Column(
+        crossAxisAlignment: isCurrentUser? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          
+          chatbubble(message: data['message'], isCurrentUser: isCurrentUser)
+        ],
+      ));
   }
-
-  Widget _buildMessageInput() {
+  Widget _buildUserInput(){
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.only(bottom:50.0),
       child: Row(
         children: [
-          Expanded(
-              child: TextField(
-                
+          Expanded(child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Type Something...'
+            ),
             controller: _messageController,
-            
-            obscureText: false,
           )),
-          IconButton(
-              onPressed: sendMessage,
-              icon: Icon(
-                Icons.arrow_upward,
-                size: 40,
-              ))
+          Container(
+            margin: EdgeInsets.only(right: 25),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle
+            ),
+            child: IconButton(onPressed: sendMessage, icon: Icon(Icons.arrow_upward,color: Colors.white,)))
         ],
       ),
     );

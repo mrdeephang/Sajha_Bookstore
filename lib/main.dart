@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sajhabackup/Cart/cartmodel.dart';
+import 'package:sajhabackup/Chat/chat.dart';
+import 'package:sajhabackup/HomePage/homepage.dart';
 //import 'package:sajhabackup/HomePage/homepage.dart';
 //import 'package:sajhabackup/Settings/Components/edit_profile.dart';
 //import 'package:sajhabackup/Settings/Components/userDetails.dart';
@@ -33,6 +35,7 @@ class Home extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+
       ],
       child: MyApp(),
     );

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -29,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _confirmPasswordController = TextEditingController();
 
   XFile? _pickedImage;
+  bool _isPasswordVisible=false;
 
   Future<void> _pickImage() async {
     final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
@@ -65,14 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
         showToast(message: 'Verification Email Sent!');
         await userCredential.user!.sendEmailVerification();
-
-        
+        Future.delayed(Duration(seconds: 30));
+        if(userCredential.user!.emailVerified){
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => SplashPage()),
-        );
-
-                 showToast(message: 'Successfully Verified');
+        );}
+        showToast(message: 'Successfully Verified');
 
         print('Registration successful');
       }
@@ -216,14 +215,33 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(labelText: 'Email'),
                 ),
                 TextFormField(
+                  
                   controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: !_isPasswordVisible,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    suffixIcon: IconButton(
+                      onPressed: (){
+                        setState(() {
+                          _isPasswordVisible=!_isPasswordVisible;
+                        });
+                      },
+                      icon: Icon(_isPasswordVisible? Icons.visibility: Icons.visibility_off),
+                    )),
                 ),
                 TextFormField(
                   controller: _confirmPasswordController,
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Confirm Password'),
+                  obscureText: !_isPasswordVisible,
+                  decoration: InputDecoration(labelText: 'Confirm Password',
+                   suffixIcon: IconButton(
+                      onPressed: (){
+                        setState(() {
+                          _isPasswordVisible=!_isPasswordVisible;
+                        });
+                      },
+                      icon: Icon(_isPasswordVisible? Icons.visibility: Icons.visibility_off),
+                    )
+                  ),
                 ),
                 SizedBox(height: 16.0),
                 ElevatedButton(
