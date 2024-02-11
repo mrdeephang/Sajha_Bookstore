@@ -30,28 +30,28 @@ class _homepageState extends State<homepage> {
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
-   late String userName = ''; 
-   late String profilepic='';
+  late String userName = '';
+  late String profilepic = '';
 
   void fetchUserName() async {
     try {
       if (user != null) {
-        DocumentSnapshot userDoc =
-            await usersCollection.doc(user!.uid).get();
+        DocumentSnapshot userDoc = await usersCollection.doc(user!.uid).get();
 
         String name = userDoc['Full Name'];
-        String picUrl=userDoc['ProfilePicUrl'];
-        
+        String picUrl = userDoc['ProfilePicUrl'];
+
         setState(() {
           userName = name;
-          profilepic=picUrl;
+          profilepic = picUrl;
         });
       }
     } catch (error) {
       print('Error fetching user name: $error');
     }
   }
-   @override
+
+  @override
   void initState() {
     super.initState();
     fetchUserName();
@@ -116,12 +116,19 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(userName),
-              accountEmail: Text(currentUser.email!),
+              decoration: BoxDecoration(color: color),
+              accountName: Text(
+                userName,
+                style: TextStyle(fontSize: 16, fontFamily: bold, color: color1),
+              ),
+              accountEmail: Text(
+                currentUser.email!,
+                style: TextStyle(fontSize: 14, fontFamily: bold, color: color1),
+              ),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey[300],
-                 backgroundImage: NetworkImage(profilepic),
+                  backgroundImage: NetworkImage(profilepic),
                 ),
               ),
             ),
