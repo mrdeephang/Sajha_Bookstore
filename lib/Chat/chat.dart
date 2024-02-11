@@ -45,7 +45,7 @@ class chat extends StatelessWidget {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage(
           receiverEmail: userData["Email"],
-          receiverID: userData["uid"],
+          receiverID: userData['uid'],
         )));
       },
     );

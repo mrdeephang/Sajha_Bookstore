@@ -220,9 +220,7 @@ class _loginscreenState extends State<loginscreen> {
                           children: [
                             //googlebutton
                             GestureDetector(
-                              onTap: () => authservice().signinwithGoogle(),
-
-                              
+                              onTap: () => FirebaseService.signInwithGoogle(context),    
                               child: Image.asset(
                                 'assets/images/google.png',
                                 height: 60,

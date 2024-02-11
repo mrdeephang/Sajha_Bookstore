@@ -15,6 +15,8 @@ class chatpage extends StatelessWidget {
 final TextEditingController _messageController=TextEditingController();
 final ChatService _chatService=ChatService();
   final AuthService _authService = AuthService();
+  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
+  final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
 
 void sendMessage()async{
   if(_messageController.text.isNotEmpty){
@@ -54,17 +56,15 @@ void sendMessage()async{
   }
   Widget _buildMessageItem(DocumentSnapshot doc){
     Map<String,dynamic> data=doc.data() as Map<String,dynamic>;
-    bool isCurrentUser=data['senderID']==_authService.getCurrentUser()!.uid;
+    bool isCurrentUser=data['senderID']==_firebaseAuth.currentUser!.uid;
     var alignment=isCurrentUser? Alignment.centerRight : Alignment.centerLeft;
     return Container(
       alignment: alignment,
-      child: Column(
-        crossAxisAlignment: isCurrentUser? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
+      child: 
           
-          chatbubble(message: data['message'], isCurrentUser: isCurrentUser)
-        ],
-      ));
+          chatbubble(message: data['message'])
+        
+      );
   }
   Widget _buildUserInput(){
     return Padding(
