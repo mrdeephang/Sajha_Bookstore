@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:sajhabackup/AddBooks/bookdetails.dart';
 import 'package:sajhabackup/AddBooks/bookdetails2.dart';
+import 'package:sajhabackup/EasyConst/Colors.dart';
 
 class masters extends StatefulWidget {
   
@@ -17,12 +18,13 @@ class _mastersState extends State<masters> {
       future: fetchBooksFromFirebase(),
       builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator(color: color,));
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
           var product_list = snapshot.data ?? [];
           return GridView.builder(
+           // scrollDirection:Axis.horizontal ,
             itemCount: product_list.length,
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -52,7 +54,7 @@ class _mastersState extends State<masters> {
         .instance
         .collection('books')
         .where('category', isEqualTo: 'Masters')
-        .limit(4)
+        .limit(6)
         .get();
 
     return result.docs.map((doc) => doc.data()).toList();

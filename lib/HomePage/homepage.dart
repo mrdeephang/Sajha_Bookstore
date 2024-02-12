@@ -32,6 +32,7 @@ class _homepageState extends State<homepage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
    late String userName = ''; 
    late String profilepic='';
+   late String qouteOfTheDay='';
 
   void fetchUserName() async {
     try {
@@ -55,32 +56,67 @@ class _homepageState extends State<homepage> {
   void initState() {
     super.initState();
     fetchUserName();
+    fetchquote();
+  }
+  void fetchquote(){
+    List <String> quotes=[
+            "Books are a uniquely portable magic. - Stephen King",
+           " A room without books is like a body without a soul. - Marcus Tullius Cicero",
+           "The more that you read, the more things you will know. The more that you learn, the more places you'll go. - Dr. Seuss ",
+           "A book is a dream that you hold in your hand. - Neil Gaiman",
+           "You can never get a cup of tea large enough or a book long enough to suit me. - C.S. Lewis",
+          "A reader lives a thousand lives before he dies. The man who never reads lives only one. - George R.R. Martin",
+          "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.- Charles W. Eliot",
+          "I find television very educational. Every time someone turns it on, I go into another room and read a book. - Groucho Marx",
+           "So many books, so little time. - Frank Zappa",
+          "There is no friend as loyal as a book. - Ernest Hemingway",
+          "Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
+          "The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education. - Martin Luther King Jr.",
+            "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. - Malcolm X",
+"Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi",
+"The beautiful thing about learning is that no one can take it away from you. - B.B. King"
+
+    ];
+    DateTime now=DateTime.now();
+    int quoteIndex=now.day%quotes.length;
+    setState(() {
+      qouteOfTheDay=quotes[quoteIndex];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = Container(
-      height: 250,
+      height: 550,
       child: SafeArea(
         child: Carousel(
           boxFit: BoxFit.cover,
           images: [
             NetworkImage(
-                "https://w7.pngwing.com/pngs/377/407/png-transparent-paperback-book-cover-publishing-physics-cover-book-text-wholesale-business.png"),
+                "https://m.media-amazon.com/images/I/A12tbaSby+L._AC_UF1000,1000_QL80_.jpg"),
             NetworkImage(
-                "https://w7.pngwing.com/pngs/998/703/png-transparent-chemistry-units-1-2-matter-molecule-book-chemistry-book-chemistry-curriculum-electric-blue.png"),
+                "https://prodimage.images-bn.com/pimages/9780545791427_p0_v4_s1200x630.jpg"),
             NetworkImage(
                 "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
+                
+                 NetworkImage(
+                "https://i.ebayimg.com/images/g/OZIAAOSwItFeojCA/s-l400.jpg"),
+                  NetworkImage(
+                "https://english.onlinekhabar.com/wp-content/uploads/2023/08/Aatmabrittanta.jpg"),
             //AssetImage("images/book4.jpg"),
           ],
           autoplay: true,
           animationCurve: Curves.fastOutSlowIn,
           animationDuration: Duration(milliseconds: 1000),
-          //borderRadius: true,
+  
           dotSize: 3,
           dotSpacing: 15,
           indicatorBgPadding: 2,
           dotBgColor: Colors.transparent,
+          showIndicator: false,
+          dotVerticalPadding: -10,
+          dotPosition: DotPosition.bottomCenter,
+          dotIncreaseSize: 1.5,
         ),
       ),
     );
@@ -222,6 +258,20 @@ class _homepageState extends State<homepage> {
           SizedBox(
             height: 20,
           ),
+ Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text('Quote Of The Day',style: TextStyle(color: color,fontWeight: FontWeight.bold,fontSize: 18),),
+                Text(
+                  qouteOfTheDay,
+                  style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 15),
           Padding(
             padding: EdgeInsets.all(30),
             child: Text(
