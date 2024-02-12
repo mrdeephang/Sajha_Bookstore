@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
+import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/HomePage/homepage.dart';
 import 'package:sajhabackup/Pages/login.dart';
 
@@ -12,12 +13,11 @@ class splashscreen extends StatefulWidget {
 }
 
 class _splashscreenState extends State<splashscreen> {
-
   User? user;
   @override
   void initState() {
     super.initState();
-    user= FirebaseAuth.instance.currentUser;
+    user = FirebaseAuth.instance.currentUser;
     goToLogin();
   }
 
@@ -25,15 +25,14 @@ class _splashscreenState extends State<splashscreen> {
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
         context,
-
         MaterialPageRoute(builder: (context) {
-  if (user != null) {
-    return homepage(); // Replace with the desired page for the condition
-  } else {
-    return MainPage(); // Replace with the desired page for the else condition
-  }
-}),
-(Route<dynamic> route) => false,
+          if (user != null) {
+            return homepage(); // Replace with the desired page for the condition
+          } else {
+            return MainPage(); // Replace with the desired page for the else condition
+          }
+        }),
+        (Route<dynamic> route) => false,
       );
     });
   }
@@ -54,7 +53,7 @@ class _splashscreenState extends State<splashscreen> {
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 10),
-            padding: EdgeInsets.only(left: 10, top: 200),
+            padding: EdgeInsets.only(left: 8, top: 200),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,8 +85,9 @@ class _splashscreenState extends State<splashscreen> {
               child: Text(
                 '"तपाईको Online Bookstore"',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     color: Colors.white,
+                    fontFamily: regular,
                     fontWeight: FontWeight.bold,
                     wordSpacing: 1,
                     letterSpacing: 1),

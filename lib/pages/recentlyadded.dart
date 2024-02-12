@@ -18,13 +18,12 @@ class _BookListPageState extends State<BookListPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
-        centerTitle: true,
         elevation: 0,
         leading: BackButton(
           color: color1,
         ),
         title: Text(
-          'Recently Added',
+          'All Books',
           style: TextStyle(color: color1, fontFamily: regular),
         ),
       ),
@@ -33,7 +32,8 @@ class _BookListPageState extends State<BookListPage> {
           _buildFilterSection(),
           Expanded(
             child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('books').snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection('books').snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -45,7 +45,9 @@ class _BookListPageState extends State<BookListPage> {
 
                 // Filter books based on selected category and price range
                 if (selectedCategory != 'All') {
-                  books = books.where((book) => book['category'] == selectedCategory).toList();
+                  books = books
+                      .where((book) => book['category'] == selectedCategory)
+                      .toList();
                 }
 
                 books = _filterBooksByPriceRange(books);
@@ -126,8 +128,13 @@ class _BookListPageState extends State<BookListPage> {
             selectedPriceRange = newValue!;
           });
         },
-        items: <String>['All', 'Rs. 0 to 500', 'Rs. 500 to 1000', 'Rs. 1000 to 2000', 'Above 2000']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>[
+          'All',
+          'Rs. 0 to 500',
+          'Rs. 500 to 1000',
+          'Rs. 1000 to 2000',
+          'Above 2000'
+        ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
@@ -137,7 +144,8 @@ class _BookListPageState extends State<BookListPage> {
     );
   }
 
-  List<DocumentSnapshot> _filterBooksByPriceRange(List<DocumentSnapshot> books) {
+  List<DocumentSnapshot> _filterBooksByPriceRange(
+      List<DocumentSnapshot> books) {
     if (selectedPriceRange == 'All') {
       return books;
     }
