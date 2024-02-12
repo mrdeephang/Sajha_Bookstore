@@ -16,3 +16,11 @@ ThemeData darkMode = ThemeData(
       primary: Colors.grey.shade800,
       secondary: Colors.grey.shade700,
     ));
+   ThemeData darkBlueMode = ThemeData(
+  brightness: Brightness.dark,
+  colorScheme: ColorScheme.dark(
+    background: Colors.indigo.shade900, 
+    primary: Colors.indigo.shade800, 
+    secondary: Colors.indigo.shade700, 
+  ),
+);

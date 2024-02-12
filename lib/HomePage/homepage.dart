@@ -32,6 +32,7 @@ class _homepageState extends State<homepage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
    late String userName = ''; 
    late String profilepic='';
+   late String qouteOfTheDay='';
 
   void fetchUserName() async {
     try {
@@ -258,136 +259,147 @@ class _homepageState extends State<homepage> {
           ],
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          image_carousel,
-          SizedBox(
-            height: 20,
-          ),
- Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Text('Quote Of The Day',style: TextStyle(color: color,fontWeight: FontWeight.bold,fontSize: 18),),
-                Text(
-                  qouteOfTheDay,
-                  style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.cyan,Colors.lightGreen,Colors.white
+            ]
+          )
+        ),
+        child: ListView(
+          children: <Widget>[
+            image_carousel,
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(height: 15),
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: Text(
-              'Categories',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Text('Quote Of The Day',style: TextStyle(color: color,fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text(
+                    qouteOfTheDay,
+                    style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              children: [
-                Text(
-                  "Master's Level",
-                  style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold, color: color),
-                ),
-                SizedBox(width: 20),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BookListPage()));
-                    },
-                    child: Text(
-                      'See More',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: color),
-                    ))
-              ],
+            SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Text(
+                'Categories',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-            height: 300,
-            child: masters(),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              children: [
-                Text("Bachelor's Level",
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Row(
+                children: [
+                  Text(
+                    "Master's Level",
                     style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: color)),
-                SizedBox(width: 20),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BookListPage()));
-                    },
-                    child: Text(
-                      'See More',
+                        fontSize: 20, fontWeight: FontWeight.bold, color: color),
+                  ),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookListPage()));
+                      },
+                      child: Text(
+                        'See More',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: color),
+                      ))
+                ],
+              ),
+            ),
+            Container(
+              height: 300,
+              child: masters(),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Row(
+                children: [
+                  Text("Bachelor's Level",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: color),
-                    ))
-              ],
+                          color: color)),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookListPage()));
+                      },
+                      child: Text(
+                        'See More',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: color),
+                      ))
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 300,
-            child: Bach(),
-          ),
-
-          SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              children: [
-                Text("Extra",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: color)),
-                SizedBox(width: 20),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BookListPage()));
-                    },
-                    child: Text(
-                      'See More',
+            Container(
+              height: 300,
+              child: Bach(),
+            ),
+        
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Row(
+                children: [
+                  Text("Extra",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: color),
-                    ))
-              ],
+                          color: color)),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookListPage()));
+                      },
+                      child: Text(
+                        'See More',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: color),
+                      ))
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 300,
-            child: extra(),
-          ),
-
-          //
-        ],
+            Container(
+              height: 300,
+              child: extra(),
+            ),
+        
+            //
+          ],
+        ),
       ),
     );
   }

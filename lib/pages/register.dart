@@ -220,6 +220,10 @@ class _registerState extends State<register> {
 
         await Future.delayed(Duration(seconds: 30));
         await userCredential.user!.reload();
+         if (!userCredential.user!.emailVerified) {
+        showToast(message: "Please verify your email address.");
+        return;
+      }
         if (_pickedImage != null) {
           await _uploadProfilePicture(userCredential.user!.uid);
         }
@@ -229,7 +233,7 @@ class _registerState extends State<register> {
           'Email': email,
           'Phone': phone,
           'Address': address,
-          'Password': password,
+          //'Password': password,
           'ProfilePic': _pickedImage != null ? _pickedImage!.path : null,
         });
         showToast(message: 'Registered Successfull');
