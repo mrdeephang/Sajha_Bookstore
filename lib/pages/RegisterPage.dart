@@ -200,22 +200,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _fullNameController,
                   decoration: InputDecoration(labelText: 'Full Name'),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _addressController,
                   decoration: InputDecoration(labelText: 'Address'),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(labelText: 'Username'),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _phoneController,
                   decoration: InputDecoration(labelText: 'Phone'),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(labelText: 'Email'),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
@@ -232,6 +237,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : Icons.visibility_off),
                       )),
                 ),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: !_isPasswordVisible,
@@ -248,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : Icons.visibility_off),
                       )),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 20.0),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50), color: color),

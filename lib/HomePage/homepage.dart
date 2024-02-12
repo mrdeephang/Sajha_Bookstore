@@ -30,9 +30,9 @@ class _homepageState extends State<homepage> {
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
-   late String userName = ''; 
-   late String profilepic='';
-   late String qouteOfTheDay='';
+  late String userName = '';
+  late String profilepic = '';
+  late String qouteOfTheDay = '';
 
   void fetchUserName() async {
     try {
@@ -58,29 +58,29 @@ class _homepageState extends State<homepage> {
     fetchUserName();
     fetchquote();
   }
-  void fetchquote(){
-    List <String> quotes=[
-            "Books are a uniquely portable magic. - Stephen King",
-           " A room without books is like a body without a soul. - Marcus Tullius Cicero",
-           "The more that you read, the more things you will know. The more that you learn, the more places you'll go. - Dr. Seuss ",
-           "A book is a dream that you hold in your hand. - Neil Gaiman",
-           "You can never get a cup of tea large enough or a book long enough to suit me. - C.S. Lewis",
-          "A reader lives a thousand lives before he dies. The man who never reads lives only one. - George R.R. Martin",
-          "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.- Charles W. Eliot",
-          "I find television very educational. Every time someone turns it on, I go into another room and read a book. - Groucho Marx",
-           "So many books, so little time. - Frank Zappa",
-          "There is no friend as loyal as a book. - Ernest Hemingway",
-          "Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
-          "The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education. - Martin Luther King Jr.",
-            "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. - Malcolm X",
-"Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi",
-"The beautiful thing about learning is that no one can take it away from you. - B.B. King"
 
+  void fetchquote() {
+    List<String> quotes = [
+      "Books are a uniquely portable magic. - Stephen King",
+      " A room without books is like a body without a soul. - Marcus Tullius Cicero",
+      "The more that you read, the more things you will know. The more that you learn, the more places you'll go. - Dr. Seuss ",
+      "A book is a dream that you hold in your hand. - Neil Gaiman",
+      "You can never get a cup of tea large enough or a book long enough to suit me. - C.S. Lewis",
+      "A reader lives a thousand lives before he dies. The man who never reads lives only one. - George R.R. Martin",
+      "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.- Charles W. Eliot",
+      "I find television very educational. Every time someone turns it on, I go into another room and read a book. - Groucho Marx",
+      "So many books, so little time. - Frank Zappa",
+      "There is no friend as loyal as a book. - Ernest Hemingway",
+      "Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
+      "The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education. - Martin Luther King Jr.",
+      "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. - Malcolm X",
+      "Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi",
+      "The beautiful thing about learning is that no one can take it away from you. - B.B. King"
     ];
-    DateTime now=DateTime.now();
-    int quoteIndex=now.day%quotes.length;
+    DateTime now = DateTime.now();
+    int quoteIndex = now.day % quotes.length;
     setState(() {
-      qouteOfTheDay=quotes[quoteIndex];
+      qouteOfTheDay = quotes[quoteIndex];
     });
   }
 
@@ -98,17 +98,16 @@ class _homepageState extends State<homepage> {
                 "https://prodimage.images-bn.com/pimages/9780545791427_p0_v4_s1200x630.jpg"),
             NetworkImage(
                 "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
-                
-                 NetworkImage(
+
+            NetworkImage(
                 "https://i.ebayimg.com/images/g/OZIAAOSwItFeojCA/s-l400.jpg"),
-                  NetworkImage(
+            NetworkImage(
                 "https://english.onlinekhabar.com/wp-content/uploads/2023/08/Aatmabrittanta.jpg"),
             //AssetImage("images/book4.jpg"),
           ],
           autoplay: true,
           animationCurve: Curves.fastOutSlowIn,
           animationDuration: Duration(milliseconds: 1000),
-  
           dotSize: 3,
           dotSpacing: 15,
           indicatorBgPadding: 2,
@@ -261,25 +260,27 @@ class _homepageState extends State<homepage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.cyan,Colors.lightGreen,Colors.white
-            ]
-          )
-        ),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [color, color, Colors.white])),
         child: ListView(
           children: <Widget>[
             image_carousel,
             SizedBox(
               height: 20,
             ),
-              Padding(
+            Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Text('Quote Of The Day',style: TextStyle(color: color,fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text(
+                    'Quote Of The Day',
+                    style: TextStyle(
+                        color: color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
                   Text(
                     qouteOfTheDay,
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
@@ -303,7 +304,9 @@ class _homepageState extends State<homepage> {
                   Text(
                     "Master's Level",
                     style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold, color: color),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color),
                   ),
                   SizedBox(width: 20),
                   TextButton(
@@ -361,7 +364,7 @@ class _homepageState extends State<homepage> {
               height: 300,
               child: Bach(),
             ),
-        
+
             SizedBox(
               height: 15,
             ),
@@ -396,7 +399,7 @@ class _homepageState extends State<homepage> {
               height: 300,
               child: extra(),
             ),
-        
+
             //
           ],
         ),

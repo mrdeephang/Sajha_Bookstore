@@ -51,6 +51,22 @@ class loginscreen extends StatefulWidget {
 }
 
 class _loginscreenState extends State<loginscreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   static Future<User?> loginUsingEmailPassword(
       {required String email,
       required String password,
@@ -76,8 +92,6 @@ class _loginscreenState extends State<loginscreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
     final userfield = TextField(
       controller: _emailController,
       decoration: InputDecoration(

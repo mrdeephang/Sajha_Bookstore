@@ -64,16 +64,16 @@ class chatpage extends StatelessWidget {
 
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    var alignment=(data['senderId']==_firebaseAuth.currentUser!.uid)
-    ? Alignment.centerRight
-    : Alignment.centerLeft;
+    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
     return Padding(
-      padding: const EdgeInsets.only(left:10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8),
-        child:Align(
-          alignment: alignment, 
-          child: chatbubble(message: data['message']))),
+          margin: EdgeInsets.symmetric(vertical: 8),
+          child: Align(
+              alignment: alignment,
+              child: chatbubble(message: data['message']))),
     );
   }
 

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sajhabackup/HomePage/homepage.dart';
+import 'package:sajhabackup/splashes/splashpage.dart';
 
 class FirebaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -21,7 +21,7 @@ class FirebaseService {
       await _auth.signInWithCredential(credential);
 
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => homepage()));
+          context, MaterialPageRoute(builder: (context) => SplashPage()));
     } on FirebaseAuthException catch (e) {
       print(e.message);
       throw e;
