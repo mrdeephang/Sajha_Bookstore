@@ -177,7 +177,7 @@ class _helpcenterState extends State<helpcenter> {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  '“SAJHA BOOKSTORE” is a Platform for Students and Booklovers of Nepal to Buy, Sell and Rent Used Books Online.',
+                  '  “SAJHA BOOKSTORE” is a Platform for Students and Booklovers of Nepal to Buy, Sell and Rent Used Books Online.  ',
                   style: TextStyle(
                       fontFamily: regular,
                       fontSize: 16,
