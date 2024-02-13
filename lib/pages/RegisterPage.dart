@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'Password': _passwordController.text,
           'ProfilePicUrl':
               _pickedImage != null ? await _getProfilePicUrl(userId) : null,
-              'uid':userId,
+          'uid': userId,
         });
 
         showToast(message: 'Verification Email Sent!');
@@ -199,34 +199,63 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 16.0),
                 TextFormField(
                   controller: _fullNameController,
-                  decoration: InputDecoration(labelText: 'Full Name'),
+                  decoration: InputDecoration(
+                      labelText: 'Full Name',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16)),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _addressController,
-                  decoration: InputDecoration(labelText: 'Address'),
+                  decoration: InputDecoration(
+                      labelText: 'Address',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16)),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _usernameController,
-                  decoration: InputDecoration(labelText: 'Username'),
+                  decoration: InputDecoration(
+                      labelText: 'Username',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16)),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _phoneController,
-                  decoration: InputDecoration(labelText: 'Phone'),
+                  decoration: InputDecoration(
+                      labelText: 'Phone',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16)),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16)),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                       labelText: 'Password',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -238,12 +267,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             : Icons.visibility_off),
                       )),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                       labelText: 'Confirm Password',
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontFamily: regular,
+                          fontSize: 16),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -255,7 +288,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : Icons.visibility_off),
                       )),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 30.0),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50), color: color),
@@ -264,7 +297,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       'Register',
                       style: TextStyle(
-                          fontSize: 16, fontFamily: regular, color: color1),
+                          fontSize: 18, fontFamily: regular, color: color1),
                     ),
                   ),
                 ),

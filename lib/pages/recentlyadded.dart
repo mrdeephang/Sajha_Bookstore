@@ -58,6 +58,10 @@ class _BookListPageState extends State<BookListPage> {
                     var book = books[index].data() as Map<String, dynamic>;
 
                     return ListTile(
+                      splashColor: color,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: color, width: 1),
+                          borderRadius: BorderRadius.circular(10)),
                       title: Text(book['name']),
                       subtitle: Text(
                           'Author: ${book['author']}\nPrice: \Rs${book['price']}'),

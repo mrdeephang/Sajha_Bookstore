@@ -120,7 +120,9 @@ class _loginscreenState extends State<loginscreen> {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SplashPage()));
           } else {
-            showToast(message: "Incorrect Password or Username");
+            showToast(
+                message:
+                    "Incorrect Password or Username or Check Your Internet Connection");
           }
         },
         child: const Text(
@@ -226,7 +228,7 @@ class _loginscreenState extends State<loginscreen> {
                       ),
                       SizedBox(height: 8),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 140),
+                        padding: const EdgeInsets.symmetric(horizontal: 146),
                         child: Row(
                           children: [
                             //googlebutton
