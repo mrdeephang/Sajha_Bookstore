@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/AddBooks/bookdetails.dart';
 import 'package:sajhabackup/Chat/chatpage.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
@@ -38,21 +37,22 @@ class _booksdetails2State extends State<booksdetails2> {
   }
 
   void _buyBook() {
-    _updateStatus('Bought');
-    _updateBookStatusInFirestore('Bought');
-  }
-
-  void _rentBook() {
-    _updateStatus('Rented');
-    _updateBookStatusInFirestore('Rented');
-  }
-
-  void _updateBookStatusInFirestore(String status) {
+   // _updateStatus('Bought');
     FirebaseFirestore.instance
         .collection('books')
         .doc(widget.book['name'])
-        .update({'status': status});
+        .update({'status': 'Bought'});
   }
+
+  void _rentBook() {
+   // _updateStatus('Rented');
+    FirebaseFirestore.instance
+        .collection('books')
+        .doc(widget.book['name'])
+        .update({'status': 'Rented'});
+  }
+
+  
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
@@ -297,6 +297,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
+                            _updateStatus('Bought');
                             _buyBook();
                             Navigator.push(
                                 context,
@@ -346,6 +347,8 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
+                            _updateStatus('Rented');
+                            _rentBook();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -552,15 +555,7 @@ class Similar_Single_prod extends StatelessWidget {
         tag: prod_name,
         child: Material(
             child: InkWell(
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => booksdetails(
-                    book_name: prod_name,
-                    book_pic: prod_picture,
-                    book_price: prod_price,
-                    book_condition: "Used",
-                    book_author: "-",
-                    book_edition: "-",
-                  ))),
+          onTap: () {},
           child: GridTile(
             footer: Container(
               color: Colors.white70,

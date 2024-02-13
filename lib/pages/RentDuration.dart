@@ -8,7 +8,7 @@ class RentDurationPage extends StatefulWidget {
 }
 
 class _RentDurationPageState extends State<RentDurationPage> {
-  int selectedDuration = 7; // Default duration in days
+  int selectedDuration = 7; 
   double rentalCostPerDay = 2.5;
   late double totalCost;
 
@@ -20,10 +20,10 @@ class _RentDurationPageState extends State<RentDurationPage> {
 
   void calculateTotalCost() {
     if (selectedDuration == 2) {
-      // Special case for 2 days
+      
       totalCost = 5.0;
     } else if (selectedDuration > 30) {
-      // Adjust the cost per day if duration is more than a month
+      
       rentalCostPerDay = 5.0 / 5;
       totalCost = selectedDuration * rentalCostPerDay;
     } else {
@@ -59,7 +59,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  for (int duration in [2, 7, 14, 30, 90, 180, 365])
+                  for (int duration in [2, 7, 14, 30, 90, 180])
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -69,7 +69,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
                       },
                       child: Container(
                         width:
-                            100, // Adjust the width of each item based on your preference
+                            100, 
                         margin: EdgeInsets.symmetric(horizontal: 8),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -131,9 +131,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
       return '3 months';
     } else if (days == 180) {
       return '6 months';
-    } else if (days == 365) {
-      return '1 year';
-    } else {
+    }  else {
       return '$days days';
     }
   }

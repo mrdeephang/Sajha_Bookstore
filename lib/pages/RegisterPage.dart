@@ -65,6 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'Password': _passwordController.text,
           'ProfilePicUrl':
               _pickedImage != null ? await _getProfilePicUrl(userId) : null,
+              'uid':userId,
         });
 
         showToast(message: 'Verification Email Sent!');

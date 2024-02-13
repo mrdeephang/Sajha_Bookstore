@@ -66,7 +66,8 @@ class _BookAddPageState extends State<BookAddPage> {
         'additional_info': additionalInfoController.text,
         'category': selectedCategory,
         'image_url': imageUrl,
-        'added by': currentUser.email!
+        'added by': currentUser.email!,
+        'status':'Available'
       });
 
       nameController.clear();
