@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sajhabackup/splashes/splashpage.dart';
+import 'package:sajhabackup/utils/toast.dart';
 
 class FirebaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -19,9 +20,9 @@ class FirebaseService {
         idToken: googleSignInAuthentication.idToken,
       );
       await _auth.signInWithCredential(credential);
-
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SplashPage()));
+      showToast(message: "Signed in with Google Successfully");
     } on FirebaseAuthException catch (e) {
       print(e.message);
       throw e;

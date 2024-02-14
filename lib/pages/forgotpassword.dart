@@ -68,7 +68,7 @@ class _forgetpasswordState extends State<forgetpassword> {
           Container(
             child: Image.asset(
               'assets/images/forgot.png',
-              height: 200,
+              height: 250,
             ),
           ),
           SizedBox(
@@ -86,9 +86,9 @@ class _forgetpasswordState extends State<forgetpassword> {
                   borderSide: BorderSide(color: color),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                hintText: 'Enter Your Email Here...',
+                hintText: 'Enter your email here...',
                 hintStyle: TextStyle(
-                    color: Colors.grey, fontFamily: regular, fontSize: 14),
+                    color: Colors.grey, fontFamily: regular, fontSize: 16),
                 fillColor: color1,
                 filled: true,
               ),

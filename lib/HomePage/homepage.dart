@@ -277,7 +277,7 @@ class _homepageState extends State<homepage> {
                   Text(
                     'Quote Of The Day',
                     style: TextStyle(
-                        color: color,
+                        color: color1,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
                   ),
@@ -294,7 +294,8 @@ class _homepageState extends State<homepage> {
               padding: EdgeInsets.all(30),
               child: Text(
                 'Categories',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold, color: color1),
               ),
             ),
             Padding(
@@ -306,7 +307,7 @@ class _homepageState extends State<homepage> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: color),
+                        color: color1),
                   ),
                   SizedBox(width: 20),
                   TextButton(
@@ -321,7 +322,7 @@ class _homepageState extends State<homepage> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: color),
+                            color: color1),
                       ))
                 ],
               ),
@@ -341,7 +342,7 @@ class _homepageState extends State<homepage> {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: color)),
+                          color: color1)),
                   SizedBox(width: 20),
                   TextButton(
                       onPressed: () {
@@ -355,7 +356,7 @@ class _homepageState extends State<homepage> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: color),
+                            color: color1),
                       ))
                 ],
               ),
@@ -376,7 +377,7 @@ class _homepageState extends State<homepage> {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: color)),
+                          color: color1)),
                   SizedBox(width: 20),
                   TextButton(
                       onPressed: () {
@@ -390,7 +391,7 @@ class _homepageState extends State<homepage> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: color),
+                            color: color1),
                       ))
                 ],
               ),

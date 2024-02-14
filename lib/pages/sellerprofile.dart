@@ -18,8 +18,7 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   late CollectionReference _usersCollection;
   late DocumentSnapshot _userSnapshot;
-    final currentUser = FirebaseAuth.instance.currentUser!;
-
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
@@ -44,7 +43,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   void _reportUser(String reason) async {
     String reportedUserId = _userSnapshot.id;
     String reportedUserEmail = _userSnapshot['Email'];
-    String reporterEmail = currentUser.email!; 
+    String reporterEmail = currentUser.email!;
 
     await FirebaseFirestore.instance.collection('user_reports').add({
       'reportedUserId': reportedUserId,
@@ -60,7 +59,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           'Seller Profile',
           style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
@@ -76,82 +74,89 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 children: [
                   _userSnapshot['ProfilePicUrl'] != null
                       ? Center(
-                        child: CircleAvatar(
+                          child: CircleAvatar(
                             backgroundImage:
                                 NetworkImage(_userSnapshot['ProfilePicUrl']),
                             radius: 50,
                           ),
-                      )
+                        )
                       : Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          backgroundImage: AssetImage('assets/images/profile.jpg'),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            backgroundImage:
+                                AssetImage('assets/images/profile.jpg'),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 12,),
-                   Container(
-                     decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 5),
-                color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
-                spreadRadius: 2,
-                blurRadius: 10)
-          ]),
-                     child: ListTile(
-                        title:  Text('Name:'),
-                        subtitle:Text(' ${_userSnapshot['Full Name']}'),
-                       ),
-                   ),
-                   SizedBox(height: 10),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Container(
-                     decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 5),
-                color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
-                spreadRadius: 2,
-                blurRadius: 10)
-          ]),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 5),
+                              color: Color.fromARGB(255, 49, 2, 58)
+                                  .withOpacity(.2),
+                              spreadRadius: 2,
+                              blurRadius: 10)
+                        ]),
                     child: ListTile(
-                    title:Text('Phone:'),
-                    subtitle:  Text ('${_userSnapshot['Phone']}')),
+                      title: Text('Name:'),
+                      subtitle: Text(' ${_userSnapshot['Full Name']}'),
+                    ),
                   ),
                   SizedBox(height: 10),
                   Container(
-                     decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 5),
-                color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
-                spreadRadius: 2,
-                blurRadius: 10)
-          ]),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 5),
+                              color: Color.fromARGB(255, 49, 2, 58)
+                                  .withOpacity(.2),
+                              spreadRadius: 2,
+                              blurRadius: 10)
+                        ]),
                     child: ListTile(
-                    title:Text('Address:'),
-                    subtitle:Text(' ${_userSnapshot['Address']}')),
+                        title: Text('Phone:'),
+                        subtitle: Text('${_userSnapshot['Phone']}')),
                   ),
                   SizedBox(height: 10),
                   Container(
-                     decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 5),
-                color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
-                spreadRadius: 2,
-                blurRadius: 10)
-          ]),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 5),
+                              color: Color.fromARGB(255, 49, 2, 58)
+                                  .withOpacity(.2),
+                              spreadRadius: 2,
+                              blurRadius: 10)
+                        ]),
                     child: ListTile(
-                    title:Text('Email:'),
-                    subtitle:Text('${_userSnapshot['Email']}')),
+                        title: Text('Address:'),
+                        subtitle: Text(' ${_userSnapshot['Address']}')),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 5),
+                              color: Color.fromARGB(255, 49, 2, 58)
+                                  .withOpacity(.2),
+                              spreadRadius: 2,
+                              blurRadius: 10)
+                        ]),
+                    child: ListTile(
+                        title: Text('Email:'),
+                        subtitle: Text('${_userSnapshot['Email']}')),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -162,7 +167,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           title: Text(
                             'Report User?',
                             style: TextStyle(
-                                fontSize: 14, fontFamily: regular, color: color),
+                                fontSize: 14,
+                                fontFamily: regular,
+                                color: color),
                           ),
                           backgroundColor: Colors.grey[300],
                           content: Column(
@@ -175,7 +182,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 ),
                               ),
                               SizedBox(height: 10),
-                             
                               ListTile(
                                 title: Text('Fake Profile'),
                                 onTap: () {
