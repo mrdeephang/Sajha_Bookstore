@@ -56,7 +56,7 @@ class _BookAddPageState extends State<BookAddPage> {
 
       final String imageUrl = await storageReference.getDownloadURL();
 
-      await FirebaseFirestore.instance.collection('books').add({
+      DocumentReference addedBookRef =await FirebaseFirestore.instance.collection('books').add({
         'name': nameController.text,
         'author': authorController.text,
         'condition': conditionController.text,
@@ -67,8 +67,12 @@ class _BookAddPageState extends State<BookAddPage> {
         'category': selectedCategory,
         'image_url': imageUrl,
         'added by': currentUser.email!,
-        'status':'Available'
+        'status':'Available',
+        
       });
+      String bookId = addedBookRef.id;
+
+    await addedBookRef.update({'id': bookId});
 
       nameController.clear();
       authorController.clear();

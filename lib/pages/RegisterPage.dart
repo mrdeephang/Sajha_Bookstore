@@ -55,28 +55,14 @@ class _RegisterPageState extends State<RegisterPage> {
         if (_pickedImage != null) {
           await _uploadProfilePicture(userId);
         }
-
-        await _firestore.collection('users').doc(userId).set({
-          'Full Name': _fullNameController.text,
-          'Address': _addressController.text,
-          'Username': _usernameController.text,
-          'Phone': _phoneController.text,
-          'Email': _emailController.text,
-          'Password': _passwordController.text,
-          'ProfilePicUrl':
-              _pickedImage != null ? await _getProfilePicUrl(userId) : null,
-              'uid':userId,
-        });
-
+       
         showToast(message: 'Verification Email Sent!');
         await userCredential.user!.sendEmailVerification();
         Future.delayed(Duration(seconds: 30));
-        if (userCredential.user!.emailVerified) {
-          Navigator.pushReplacement(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => SplashPage()),
           );
-        }
         showToast(message: 'Successfully Verified');
 
         print('Registration successful');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 
@@ -10,6 +11,7 @@ class MyBook {
   final String picture;
   final double price;
   final String addedBy;
+  String status; 
 
   MyBook({
     required this.name,
@@ -17,6 +19,7 @@ class MyBook {
     required this.picture,
     required this.price,
     required this.addedBy,
+    this.status = 'Available', 
   });
 }
 
@@ -43,10 +46,9 @@ class _mybookstatusState extends State<mybookstatus> {
   @override
   Widget build(BuildContext context) {
     if (_user == null) {
-      return CircularProgressIndicator(); // Loading indicator or login page
+      return CircularProgressIndicator();
     } else {
       return Scaffold(
-        //backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: color,
           title: Text(
@@ -76,6 +78,7 @@ class _mybookstatusState extends State<mybookstatus> {
                   picture: data['image_url'],
                   price: data['price'].toDouble(),
                   addedBy: data['added by'],
+                  status: data['status'] ?? 'Available',
                 );
               }).toList();
 
@@ -89,55 +92,77 @@ class _mybookstatusState extends State<mybookstatus> {
                 itemCount: books.length,
                 itemBuilder: (context, index) {
                   final book = books[index];
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: Image.network(
-                          book.picture,
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
-                        title: Text('${index + 1}. ${book.name}'),
-                        subtitle: Text('Author: ${book.author}'),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('Price: \Rs${book.price.toStringAsFixed(2)}'),
-                            SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Add your logic to delete the book
-                                _deleteBook(book);
-                              },
-                              child: Text(
-                                'Delete',
-                                style: TextStyle(
-                                    color: color,
-                                    fontFamily: regular,
-                                    fontSize: 18),
+                  return 
+                     Column(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 8),
+                          leading: Image.network(
+                            book.picture,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+                          title: Text('${index + 1}. ${book.name}'),
+                          subtitle: Column(
+                            children: [
+                              Text('Price: ${book.price}'),
+                              SizedBox(height: 2),
+                               DropdownButton<String>(
+                                value: book.status,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    book.status = newValue!;
+                                    _updateBookStatus(book);
+                                  });
+                                },
+                                items: <String>['Available', 'Rented', 'Sold']
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                          trailing: 
+                             
+                              //SizedBox(height: 10),
+                              ElevatedButton(
+                                onPressed: () {
+                                  _deleteBook(book);
+                                },
+                                child: Text(
+                                  'Delete',
+                                  style: TextStyle(
+                                      color: color,
+                                      fontFamily: regular,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            
                         ),
+                        SizedBox(height:15,
                       ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ), // Add a Divider between each book
-                    ],
-                  );
+                        Divider(
+                          thickness: 1,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(height: 30),
+                      ],
+                    );
+                  
                 },
               );
             }
           },
-        ),
+        )
       );
     }
   }
 
   void _deleteBook(MyBook book) {
-    // Add your logic to delete the book from Firebase
     FirebaseFirestore.instance
         .collection('books')
         .where('added by', isEqualTo: _user!.email)
@@ -146,6 +171,19 @@ class _mybookstatusState extends State<mybookstatus> {
         .then((snapshot) {
       for (DocumentSnapshot ds in snapshot.docs) {
         ds.reference.delete();
+      }
+    });
+  }
+
+  void _updateBookStatus(MyBook book) {
+    FirebaseFirestore.instance
+        .collection('books')
+        .where('added by', isEqualTo: _user!.email)
+        .where('name', isEqualTo: book.name)
+        .get()
+        .then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.update({'status': book.status});
       }
     });
   }

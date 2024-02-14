@@ -6,6 +6,7 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/RegisterPage.dart';
+import 'package:sajhabackup/pages/register.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
 

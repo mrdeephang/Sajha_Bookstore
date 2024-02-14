@@ -27,7 +27,7 @@ class _booksdetails2State extends State<booksdetails2> {
   @override
   void initState() {
     super.initState();
-    status = 'Available';
+    status = widget.book['status'] ?? 'Available';
   }
 
   void _updateStatus(String newStatus) {
@@ -36,26 +36,28 @@ class _booksdetails2State extends State<booksdetails2> {
     });
   }
 
-  void _buyBook() {
-   // _updateStatus('Bought');
-    FirebaseFirestore.instance
-        .collection('books')
-        .doc(widget.book['name'])
-        .update({'status': 'Bought'});
+  void _buyBook() async {
+    await _updateBookStatusInFirestore('Bought');
   }
 
-  void _rentBook() {
-   // _updateStatus('Rented');
-    FirebaseFirestore.instance
-        .collection('books')
-        .doc(widget.book['name'])
-        .update({'status': 'Rented'});
+  void _rentBook() async {
+    await _updateBookStatusInFirestore('Rented');
   }
 
-  
+  Future<void> _updateBookStatusInFirestore(String newStatus) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('books')
+          .doc(widget.book['id'])
+          .update({'status': newStatus});
+      _updateStatus(newStatus);
+      print('Book status updated to $newStatus');
+    } catch (e) {
+      print('Error updating book status: $e');
+    }
+  }
 
   final currentUser = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -297,8 +299,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                            _updateStatus('Bought');
-                            _buyBook();
+                           _buyBook();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -347,8 +348,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                            _updateStatus('Rented');
-                            _rentBook();
+                           _rentBook();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
