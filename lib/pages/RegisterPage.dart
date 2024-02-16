@@ -8,6 +8,7 @@ import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 //import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -68,14 +69,14 @@ class _RegisterPageState extends State<RegisterPage> {
               'uid':userId,
         });
 
-        showToast(message: 'Verification Email Sent!');
+       // showToast(message: 'Verification Email Sent!');
         await userCredential.user!.sendEmailVerification();
-        Future.delayed(Duration(seconds: 30));
+       // Future.delayed(Duration(seconds: 30));
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => SplashPage()),
           );
-        showToast(message: 'Successfully Verified');
+        showToast(message: 'Successfully Registerd');
 
         print('Registration successful');
       }
@@ -299,6 +300,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                 SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already Have an account?',
+                            style: TextStyle(
+                                fontFamily: regular,
+                                fontSize: 14,
+                                color: Colors.black),
+                          ),
+                          SizedBox(width: 1),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => loginscreen()));
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: color,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ))
+                        ],
+                      ),          
               ],
             ),
           ),
