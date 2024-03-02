@@ -1,117 +1,88 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/Pages/login.dart';
-import 'package:sajhabackup/splashes/splashpage.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:pinput/pinput.dart';
+import 'package:sajhabackup/pages/RegisterPage.dart';
 
-class verification extends StatelessWidget {
+class OtpPage extends StatefulWidget {
+  final String vid;
+  final String phone;
+  const OtpPage({super.key,required this.vid,required this.phone});
+
+  @override
+  State<OtpPage> createState() => _OtpPageState();
+}
+
+class _OtpPageState extends State<OtpPage> {
+  var code='';
+  signIn() async{
+    PhoneAuthCredential credential=PhoneAuthProvider.credential(
+      verificationId: widget.vid, 
+      smsCode: code);
+      try{
+        await FirebaseAuth.instance.signInWithCredential(credential).then((value){
+        Get.offAll(RegisterPage(phone:widget.phone));
+       } );
+      }on FirebaseAuthException catch(e){
+        Get.snackbar('Error Occured', e.code);
+      }catch(e){
+        Get.snackbar('Error Occured', e.toString());
+      }
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => loginscreen())));
-            },
-            icon: const Icon(Icons.arrow_back_ios_new),
-            color: color1),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          const Icon(Icons.dialpad_rounded, size: 50),
-          const SizedBox(
-            height: 40,
-          ),
-          const Text(
-            "Enter the OTP",
-            style: TextStyle(fontSize: 40),
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Otp(),
-              Otp(),
-              Otp(),
-              Otp(),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          const Text(
-            "Resend?",
-            style: TextStyle(fontSize: 20),
-          ),
-          SizedBox(height: 40),
-          Material(
-            elevation: 3,
-            borderRadius: BorderRadius.circular(30),
-            color: Color(0xFF9526BC),
-            child: MaterialButton(
-              minWidth: 20,
-              padding: EdgeInsets.all(12),
-              onPressed: () {
-                QuickAlert.show(
-                    confirmBtnColor: Color(0xFF9526BC),
-                    context: context,
-                    type: QuickAlertType.success,
-                    onConfirmBtnTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SplashPage()));
-                    });
-              },
-              child: Text(
-                'Verify',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Center(
+              child: Text('OTP VERIFICATION',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
             ),
-          ),
-        ],
+            Padding(padding: EdgeInsets.symmetric(horizontal: 25,vertical: 6),
+            child: Text("Enter The OTP sent!",textAlign: TextAlign.center,),
+            ),
+            SizedBox(height: 20),
+            textcode(),
+            SizedBox(height: 80),
+            button()
+          ],
+        ),
       ),
     );
   }
-}
-
-class Otp extends StatelessWidget {
-  const Otp({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 50,
-      height: 50,
-      child: TextFormField(
-        keyboardType: TextInputType.number,
-        style: Theme.of(context).textTheme.headline6,
-        textAlign: TextAlign.center,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
-          FilteringTextInputFormatter.digitsOnly
-        ],
-        onChanged: (value) {
-          if (value.length == 1) {
-            FocusScope.of(context).nextFocus();
-          }
-          if (value.isEmpty) {
-            FocusScope.of(context).previousFocus();
-          }
+  Widget textcode(){
+    return Center(
+          child: Padding(
+            padding: EdgeInsets.all(6),
+            child: Pinput(
+              length: 6,
+              onChanged: (value){
+                setState(() {
+                  code=value;
+                });
+              },
+            ),
+          ),
+    );
+  }
+  Widget button(){
+    return Center(
+      child: ElevatedButton(
+        onPressed: (){
+          signIn();
         },
-        decoration: const InputDecoration(
-          hintText: ('0'),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(16),
+          primary: Color.fromRGBO(90, 208, 248, 1)
         ),
-        onSaved: (value) {},
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 90),
+          child: Text('Verify & Proceed',style: TextStyle(fontWeight: FontWeight.bold),),
+          
+        ),
       ),
     );
   }

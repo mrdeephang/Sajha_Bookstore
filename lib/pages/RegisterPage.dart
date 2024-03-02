@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
-//import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
+import 'package:sajhabackup/pages/login.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
 class RegisterPage extends StatefulWidget {
+  final String phone;
+    const RegisterPage({super.key,required this.phone});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -23,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _fullNameController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  //TextEditingController _phoneController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -60,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'Full Name': _fullNameController.text,
           'Address': _addressController.text,
           'Username': _usernameController.text,
-          'Phone': _phoneController.text,
+          'Phone': widget.phone,
           'Email': _emailController.text,
           'Password': _passwordController.text,
           'ProfilePicUrl':
@@ -68,14 +71,14 @@ class _RegisterPageState extends State<RegisterPage> {
               'uid':userId,
         });
 
-        showToast(message: 'Verification Email Sent!');
+       // showToast(message: 'Verification Email Sent!');
         await userCredential.user!.sendEmailVerification();
-        Future.delayed(Duration(seconds: 30));
+       // Future.delayed(Duration(seconds: 30));
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => SplashPage()),
           );
-        showToast(message: 'Successfully Verified');
+        showToast(message: 'Successfully Registerd');
 
         print('Registration successful');
       }
@@ -112,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_fullNameController.text.isEmpty ||
         _addressController.text.isEmpty ||
         _usernameController.text.isEmpty ||
-        _phoneController.text.isEmpty ||
+       
         _emailController.text.isEmpty ||
         _passwordController.text.isEmpty ||
         _confirmPasswordController.text.isEmpty ||
@@ -225,7 +228,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           fontSize: 16)),
                 ),
                 SizedBox(height: 15.0),
-                TextFormField(
+                /*TextFormField(
                   controller: _phoneController,
                   decoration: InputDecoration(
                       labelText: 'Phone',
@@ -233,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           color: Colors.black,
                           fontFamily: regular,
                           fontSize: 16)),
-                ),
+                ),*/
                 SizedBox(height: 15.0),
                 TextFormField(
                   controller: _emailController,
@@ -299,6 +302,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                 SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already Have an account?',
+                            style: TextStyle(
+                                fontFamily: regular,
+                                fontSize: 14,
+                                color: Colors.black),
+                          ),
+                          SizedBox(width: 1),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => loginscreen()));
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: color,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ))
+                        ],
+                      ),          
               ],
             ),
           ),

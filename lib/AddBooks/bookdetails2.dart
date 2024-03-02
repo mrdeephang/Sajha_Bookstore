@@ -23,39 +23,7 @@ class booksdetails2 extends StatefulWidget {
 }
 
 class _booksdetails2State extends State<booksdetails2> {
-  late String status;
-  @override
-  void initState() {
-    super.initState();
-    status = widget.book['status'] ?? 'Available';
-  }
-
-  void _updateStatus(String newStatus) {
-    setState(() {
-      status = newStatus;
-    });
-  }
-
-  void _buyBook() async {
-    await _updateBookStatusInFirestore('Bought');
-  }
-
-  void _rentBook() async {
-    await _updateBookStatusInFirestore('Rented');
-  }
-
-  Future<void> _updateBookStatusInFirestore(String newStatus) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('books')
-          .doc(widget.book['id'])
-          .update({'status': newStatus});
-      _updateStatus(newStatus);
-      print('Book status updated to $newStatus');
-    } catch (e) {
-      print('Error updating book status: $e');
-    }
-  }
+ 
 
   final currentUser = FirebaseAuth.instance.currentUser!;
   @override
@@ -282,7 +250,7 @@ class _booksdetails2State extends State<booksdetails2> {
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      status,
+                      widget.book["status"],
                       style: TextStyle(color: color),
                     ),
                   )
@@ -299,7 +267,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                           _buyBook();
+                          
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -348,7 +316,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       child: FloatingActionButton(
                           backgroundColor: color,
                           onPressed: () {
-                           _rentBook();
+                          
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

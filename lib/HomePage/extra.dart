@@ -36,7 +36,8 @@ class _extraState extends State<extra> {
                 prodEdition: product_list[index]['edition'],
                 prodAddInfo: product_list[index]['additional_info'],
                 prodAddress: product_list[index]['address'],
-                
+                                                 prodStatus: product_list[index]['status'],
+
                 prodAddedBy:product_list[index]['added by']
                 
               );
@@ -63,6 +64,7 @@ class SingleProd extends StatelessWidget {
   final String prodName;
   final String prodPicture;
   final double prodPrice;
+    final String prodStatus;
 
   final String prodAuthor;
  final String prodCondition;
@@ -80,6 +82,8 @@ class SingleProd extends StatelessWidget {
     required this.prodAddInfo,
     required this.prodAddedBy,
     required this.prodAddress,
+            required this.prodStatus,
+
   });
 
   @override
@@ -100,6 +104,7 @@ class SingleProd extends StatelessWidget {
                     'address':prodAddress , 
                     'additional_info': prodAddInfo, 
                     'added by': prodAddedBy, 
+                    'status':prodStatus
                   }),
             )),
             child: GridTile(

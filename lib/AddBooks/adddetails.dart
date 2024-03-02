@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quickalert/models/quickalert_type.dart';
-//import 'package:quickalert/models/quickalert_type.dart';
 import 'dart:io';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
@@ -56,7 +55,7 @@ class _BookAddPageState extends State<BookAddPage> {
 
       final String imageUrl = await storageReference.getDownloadURL();
 
-      DocumentReference addedBookRef =await FirebaseFirestore.instance.collection('books').add({
+      await FirebaseFirestore.instance.collection('books').add({
         'name': nameController.text,
         'author': authorController.text,
         'condition': conditionController.text,
@@ -70,9 +69,7 @@ class _BookAddPageState extends State<BookAddPage> {
         'status':'Available',
         
       });
-      String bookId = addedBookRef.id;
-
-    await addedBookRef.update({'id': bookId});
+     
 
       nameController.clear();
       authorController.clear();

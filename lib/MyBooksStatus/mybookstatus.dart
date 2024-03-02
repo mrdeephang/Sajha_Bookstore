@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sajhabackup/EasyConst/Colors.dart';
 import 'package:sajhabackup/EasyConst/Styles.dart';
 
@@ -99,8 +98,8 @@ class _mybookstatusState extends State<mybookstatus> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 8),
                           leading: Image.network(
                             book.picture,
-                            height: 50,
-                            width: 50,
+                            height: 75,
+                            width: 60,
                             fit: BoxFit.cover,
                           ),
                           title: Text('${index + 1}. ${book.name}'),

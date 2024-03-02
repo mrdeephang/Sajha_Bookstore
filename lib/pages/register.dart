@@ -1,192 +1,36 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Pages/login.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
-import 'package:sajhabackup/utils/formcontainer.dart';
-import 'package:sajhabackup/utils/toast.dart';
 
-class register extends StatefulWidget {
-  const register({Key? key}) : super(key: key);
-
+class Register extends StatefulWidget {
   @override
-  _registerState createState() => _registerState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _registerState extends State<register> {
+class _RegisterState extends State<Register> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ImagePicker _picker = ImagePicker();
-  TextEditingController _fullnameController = TextEditingController();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmpasswordController = TextEditingController();
+
+  TextEditingController _fullNameController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _otpController = TextEditingController();
 
-  bool isSigningUp = false;
   XFile? _pickedImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Register',
-          style: TextStyle(fontSize: 20, fontFamily: regular, color: color1),
-        ),
-        automaticallyImplyLeading: false,
-        leading: BackButton(
-          color: color1,
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                /*
-                Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 30,
-                ),*/
-                FormContainerWidget(
-                  controller: _fullnameController,
-                  hintText: "Full Name",
-                  isPasswordField: false,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _usernameController,
-                  hintText: "Username",
-                  isPasswordField: false,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _addressController,
-                  hintText: "Address",
-                  isPasswordField: false,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _phoneController,
-                  hintText: "Phone Number",
-                  isPasswordField: false,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _emailController,
-                  hintText: "Email",
-                  isPasswordField: false,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _passwordController,
-                  hintText: "Password",
-                  isPasswordField: true,
-                ),
-                SizedBox(height: 10),
-                FormContainerWidget(
-                  controller: _confirmpasswordController,
-                  hintText: "Confirm Password",
-                  isPasswordField: true,
-                ),
-                SizedBox(height: 10),
-                SizedBox(height: 30),
-                GestureDetector(
-                  onTap: () {
-                    _pickImage();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                        child: _pickedImage == null
-                            ? Text(
-                                'Choose Profile Picture',
-                                style: TextStyle(color: Colors.grey),
-                              )
-                            : Image.file(
-                                File(_pickedImage!.path),
-                                fit: BoxFit.cover,
-                              )),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _signUp();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF9526BC),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: isSigningUp
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  color: color, fontWeight: FontWeight.bold),
-                            ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Already have an account?"),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => loginscreen()),
-                            (route) => false);
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Color(0xFF9526BC),
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  bool _isPasswordVisible = false;
+  String _verificationId = "";
 
   Future<void> _pickImage() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _pickedImage = pickedImage;
@@ -194,100 +38,276 @@ class _registerState extends State<register> {
     }
   }
 
-  void _signUp() async {
-    setState(() {
-      isSigningUp = true;
-    });
-
+  Future<void> _register() async {
     try {
-      String fullname = _fullnameController.text;
-      String username = _usernameController.text;
-      String email = _emailController.text;
-      String phone = _phoneController.text;
-      String password = _passwordController.text;
-      String address = _addressController.text;
-
       if (_validateForm()) {
-        UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
+        await _auth.verifyPhoneNumber(
+          phoneNumber: '+977${_phoneController.text.trim()}',
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            UserCredential userCredential = await _auth.signInWithCredential(credential);
+            await _completeRegistration(userCredential.user!.uid);
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            print('Error during phone verification: $e');
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            setState(() {
+              _verificationId = verificationId;
+            });
+            _showOtpDialog();
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {
+            setState(() {
+              _verificationId = verificationId;
+            });
+          },
         );
-
-        await userCredential.user!.sendEmailVerification();
-        
-        showToast(message: "Verification email sent!");
-
-        await Future.delayed(Duration(seconds: 30));
-        await userCredential.user!.reload();
-         if (!userCredential.user!.emailVerified) {
-        showToast(message: "Please verify your email address.");
-        return;
       }
-        if (_pickedImage != null) {
-          await _uploadProfilePicture(userCredential.user!.uid);
-        }
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'Full Name': fullname,
-          'Username': username,
-          'Email': email,
-          'Phone': phone,
-          'Address': address,
-          //'Password': password,
-          'ProfilePic': _pickedImage != null ? _pickedImage!.path : null,
-        });
-        showToast(message: 'Registered Successfull');
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SplashPage()));
+    } catch (e) {
+      print('Error during registration: $e');
+    }
+  }
+
+  Future<void> _showOtpDialog() async {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Enter OTP'),
+        content: Column(
+          children: [
+            TextFormField(
+              controller: _otpController,
+              keyboardType: TextInputType.number,
+              maxLength: 6,
+            ),
+            SizedBox(height: 16.0),
+            TextButton(
+              onPressed: () async {
+                try {
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                    verificationId: _verificationId,
+                    smsCode: _otpController.text,
+                  );
+                  UserCredential userCredential = await _auth.signInWithCredential(credential);
+                  await _completeRegistration(userCredential.user!.uid);
+                  Navigator.of(context).pop(); 
+                } catch (e) {
+                  print('Error during OTP verification: $e');
+                }
+              },
+              child: Text('Verify OTP'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _completeRegistration(String userId) async {
+    try {
+      if (_pickedImage != null) {
+        await _uploadProfilePicture(userId);
       }
-    } on FirebaseAuthException catch (e) {
-      showToast(message: "Error: ${e.message}");
+
+      await _firestore.collection('users').doc(userId).set({
+        'Full Name': _fullNameController.text,
+        'Address': _addressController.text,
+        'Username': _usernameController.text,
+        'Phone': _phoneController.text,
+        'Email': _emailController.text.trim(),
+        'Password': _passwordController.text,
+        'ProfilePicUrl': _pickedImage != null ? await _getProfilePicUrl(userId) : null,
+        'uid': userId,
+      });
+
+      await _auth.currentUser!.sendEmailVerification();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SplashPage()),
+      );
+    } catch (e) {
+      print('Error during registration: $e');
+    }
+  }
+
+  Future<String?> _getProfilePicUrl(String userId) async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child('profile_pic/$userId.jpg');
+      return await ref.getDownloadURL();
+    } catch (e) {
+      print('Error getting profile picture URL: $e');
+      return null;
+    }
+  }
+
+  Future<void> _uploadProfilePicture(String userId) async {
+    try {
+      final Reference storageReference =
+          FirebaseStorage.instance.ref().child('profile_pic/$userId.jpg');
+      await storageReference.putFile(
+        File(_pickedImage!.path),
+        SettableMetadata(contentType: 'image/jpeg'),
+      );
+    } catch (e) {
+      print('Error uploading profile picture: $e');
     }
   }
 
   bool _validateForm() {
-    if (_fullnameController.text.isEmpty ||
+    if (_fullNameController.text.isEmpty ||
+        _addressController.text.isEmpty ||
         _usernameController.text.isEmpty ||
-        _emailController.text.isEmpty ||
         _phoneController.text.isEmpty ||
+        _emailController.text.isEmpty ||
         _passwordController.text.isEmpty ||
-        _confirmpasswordController.text.isEmpty ||
-        _addressController.text.isEmpty) {
-      showToast(message: "All fields must be filled");
+        _confirmPasswordController.text.isEmpty ||
+        (_pickedImage == null)) {
+      _showErrorDialog('All fields must be filled');
       return false;
-    } else if (_passwordController.text != _confirmpasswordController.text) {
-      showToast(message: "Passwords do not match");
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      _showErrorDialog('Passwords do not match');
       return false;
     }
     return true;
   }
 
-  Future<void> _uploadProfilePicture(String userId) async {
-    try {
-      final Reference storageReference = FirebaseStorage.instance
-          .ref()
-          .child('profile_pic/$userId/ProfilePic.jpg');
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
-      await storageReference.putFile(
-        File(_pickedImage!.path),
-        SettableMetadata(contentType: 'image/jpeg'),
-      );
-      String downloadUrl = await storageReference.getDownloadURL();
-      await _firestore.collection('users').doc(userId).update({
-        'ProfilePic': downloadUrl,
-      });
-    } catch (e) {
-      showToast(message: 'Error');
-    }
-
-    Future<void> _waitForEmailVerification(User user) async {
-      // await user.sendEmailVerification();
-      await user.reload();
-      if (user.emailVerified) {
-        showToast(message: 'Registerd Sucessfully');
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SplashPage()));
-      }
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Register'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey),
+                  image: _pickedImage != null
+                      ? DecorationImage(
+                          image: FileImage(File(_pickedImage!.path)),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
+                ),
+                child: IconButton(
+                  onPressed: _pickImage,
+                  icon: Icon(
+                    Icons.camera_alt,
+                    size: 40,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _fullNameController,
+                decoration: InputDecoration(
+                  labelText: 'Full Name',
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _addressController,
+                decoration: InputDecoration(
+                  labelText: 'Address',
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  labelText: 'Phone',
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15.0),
+              TextFormField(
+                controller: _confirmPasswordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30.0),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.blue,
+                ),
+                child: TextButton(
+                  onPressed: _register,
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

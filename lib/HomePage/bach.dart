@@ -36,7 +36,7 @@ class _BachState extends State<Bach> {
                 prodEdition: product_list[index]['edition'],
                 prodAddInfo: product_list[index]['additional_info'],
                 prodAddress: product_list[index]['address'],
-                
+                 prodStatus: product_list[index]['status'],
                 prodAddedBy:product_list[index]['added by']
                 
               );
@@ -70,12 +70,13 @@ class SingleProd extends StatelessWidget {
   final String prodAddress;
    final String prodAddInfo;
     final String prodAddedBy;
+    final String prodStatus;
   SingleProd({
     required this.prodName,
     required this.prodPicture,
     required this.prodPrice,
     required this.prodAuthor,
-    
+    required this.prodStatus,
     required this.prodCondition,
     required this.prodEdition,
     required this.prodAddInfo,
@@ -101,6 +102,7 @@ class SingleProd extends StatelessWidget {
                     'address':prodAddress , 
                     'additional_info': prodAddInfo, 
                     'added by': prodAddedBy, 
+                    'status':prodStatus
                   }),
             )),
             child: GridTile(
