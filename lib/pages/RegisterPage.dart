@@ -12,7 +12,7 @@ import 'package:sajhabackup/utils/toast.dart';
 
 class RegisterPage extends StatefulWidget {
   final String phone;
-    const RegisterPage({super.key,required this.phone});
+  const RegisterPage({Key? key, required this.phone}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -33,6 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   XFile? _pickedImage;
   bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false; // Added this variable
 
   Future<void> _pickImage() async {
     final XFile? pickedImage =
@@ -68,16 +69,14 @@ class _RegisterPageState extends State<RegisterPage> {
           'Password': _passwordController.text,
           'ProfilePicUrl':
               _pickedImage != null ? await _getProfilePicUrl(userId) : null,
-              'uid':userId,
+          'uid': userId,
         });
 
-       // showToast(message: 'Verification Email Sent!');
         await userCredential.user!.sendEmailVerification();
-       // Future.delayed(Duration(seconds: 30));
         Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => SplashPage()),
-          );
+          context,
+          MaterialPageRoute(builder: (context) => SplashPage()),
+        );
         showToast(message: 'Successfully Registerd');
 
         print('Registration successful');
@@ -115,7 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_fullNameController.text.isEmpty ||
         _addressController.text.isEmpty ||
         _usernameController.text.isEmpty ||
-       
         _emailController.text.isEmpty ||
         _passwordController.text.isEmpty ||
         _confirmPasswordController.text.isEmpty ||
@@ -271,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 15.0),
                 TextFormField(
                   controller: _confirmPasswordController,
-                  obscureText: !_isPasswordVisible,
+                  obscureText: !_isConfirmPasswordVisible,
                   decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       labelStyle: TextStyle(
@@ -281,10 +279,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
+                            _isConfirmPasswordVisible =
+                                !_isConfirmPasswordVisible;
                           });
                         },
-                        icon: Icon(_isPasswordVisible
+                        icon: Icon(_isConfirmPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off),
                       )),
@@ -302,34 +301,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                 SizedBox(height: 25),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already Have an account?',
-                            style: TextStyle(
-                                fontFamily: regular,
-                                fontSize: 14,
-                                color: Colors.black),
-                          ),
-                          SizedBox(width: 1),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => loginscreen()));
-                              },
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                    color: color,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ))
-                        ],
-                      ),          
+                SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already Have an account?',
+                      style: TextStyle(
+                          fontFamily: regular,
+                          fontSize: 14,
+                          color: Colors.black),
+                    ),
+                    SizedBox(width: 1),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => loginscreen()));
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              color: color,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14),
+                        ))
+                  ],
+                ),
               ],
             ),
           ),

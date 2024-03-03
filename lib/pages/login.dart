@@ -6,8 +6,6 @@ import 'package:sajhabackup/EasyConst/Styles.dart';
 import 'package:sajhabackup/Pages/forgotpassword.dart';
 import 'package:sajhabackup/Splashes/splashpage.dart';
 import 'package:sajhabackup/pages/phonehome.dart';
-//import 'package:sajhabackup/pages/RegisterPage.dart';
-import 'package:sajhabackup/pages/register.dart';
 import 'package:sajhabackup/services/auth_service.dart';
 import 'package:sajhabackup/utils/toast.dart';
 
@@ -230,7 +228,7 @@ class _loginscreenState extends State<loginscreen> {
                       ),
                       SizedBox(height: 8),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 146),
+                        padding: const EdgeInsets.symmetric(horizontal: 140),
                         child: Row(
                           children: [
                             //googlebutton
@@ -239,7 +237,7 @@ class _loginscreenState extends State<loginscreen> {
                                   FirebaseService.signInwithGoogle(context),
                               child: Image.asset(
                                 'assets/images/google.png',
-                                height: 60,
+                                height: 55,
                               ),
                             )
                           ],

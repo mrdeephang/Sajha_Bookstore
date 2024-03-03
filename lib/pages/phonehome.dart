@@ -13,83 +13,93 @@ class PhoneHome extends StatefulWidget {
 }
 
 class _PhoneHomeState extends State<PhoneHome> {
-  TextEditingController phoneNumber=TextEditingController();
-  sendcode() async{
-    try{
+  TextEditingController phoneNumber = TextEditingController();
+  sendcode() async {
+    try {
       await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+977'+phoneNumber.text,
-        verificationCompleted: (PhoneAuthCredential crendential){},
-         verificationFailed: (FirebaseAuthException e){
-          Get.snackbar('Error Occured', e.code);
-         },
-          codeSent: (String vid,int ? token){
-            Get.to(OtpPage(vid:vid,phone:phoneNumber.text));
-          }, 
-          codeAutoRetrievalTimeout: (vid){}
-          );
-    }on FirebaseAuthException catch(e){
+          phoneNumber: '+977' + phoneNumber.text,
+          verificationCompleted: (PhoneAuthCredential crendential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            Get.snackbar('Error Occured', e.code);
+          },
+          codeSent: (String vid, int? token) {
+            Get.to(OtpPage(vid: vid, phone: phoneNumber.text));
+          },
+          codeAutoRetrievalTimeout: (vid) {});
+    } on FirebaseAuthException catch (e) {
       Get.snackbar('Error Occured', e.code);
-    }catch(e){
+    } catch (e) {
       Get.snackbar('Error Occured', e.toString());
     }
-    
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          Center(
-            child: Text('Your Phone!',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
-           
+      appBar: AppBar(
+        backgroundColor: color1,
+        leading: BackButton(color: color),
+      ),
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              /*
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 6),
+                child: Text(
+                    "Please Enter Your Phone Number and We will send you an OTP"),
+              ),
+              */
+              SizedBox(height: 20),
+              phonetext(),
+              SizedBox(height: 20),
+              button()
+            ],
           ),
-           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25,vertical: 6),
-              child: Text("Please Enter Your Phone Number and We will send you an OTP"),
-            ),
-            SizedBox(height: 20),
-            phonetext(),
-            SizedBox(height: 50),
-            button()
-        ],
+        ),
       ),
     );
   }
-  Widget button(){
+
+  Widget button() {
     return Center(
       child: ElevatedButton(
-        onPressed: (){
+        onPressed: () {
           sendcode();
         },
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.all(16),
-          primary: Color.fromRGBO(90, 208, 248, 1)
+          primary: color,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 90),
-          child: Text('Receive OTP',style: TextStyle(fontWeight: FontWeight.bold),),
-          
+          child: Text(
+            'Receive OTP',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
   }
-  Widget phonetext(){
-    return Padding(padding: EdgeInsets.symmetric(horizontal: 50),
-    child: TextField(
-      controller: phoneNumber,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        prefix: Text('+977'),
-        prefixIcon: Icon(Icons.phone),
-        labelText: 'Enter Your Phone Number',
-        hintStyle: TextStyle(color: Colors.grey),
-        labelStyle: TextStyle(color: Colors.grey),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: color)
-        )
+
+  Widget phonetext() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      child: TextField(
+        controller: phoneNumber,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+            prefix: Text('+977'),
+            prefixIcon: Icon(Icons.phone),
+            labelText: 'Enter Your Phone Number',
+            hintStyle: TextStyle(color: Colors.grey),
+            labelStyle: TextStyle(color: Colors.grey),
+            enabledBorder:
+                UnderlineInputBorder(borderSide: BorderSide(color: color))),
       ),
-    ),
     );
   }
 }

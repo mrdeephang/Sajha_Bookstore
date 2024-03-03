@@ -44,15 +44,8 @@ class _forgetpasswordState extends State<forgetpassword> {
     return Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        /*centerTitle: true,
-        title: Text(
-          'Forgot Password',
-          style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
-        ),*/
-        backgroundColor: color,
-        leading: BackButton(
-          color: Colors.white,
-        ),
+        backgroundColor: color1,
+        leading: BackButton(color: color),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +79,7 @@ class _forgetpasswordState extends State<forgetpassword> {
                   borderSide: BorderSide(color: color),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                hintText: 'Enter your email here...',
+                hintText: 'Enter Your Email Here...',
                 hintStyle: TextStyle(
                     color: Colors.grey, fontFamily: regular, fontSize: 16),
                 fillColor: color1,
