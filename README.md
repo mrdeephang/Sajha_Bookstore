@@ -16,4 +16,4 @@ Pankaj
 ![BookDetails](https://github.com/ninjaaaxxx/Sajha_Bookstore/assets/132187755/f6aeebdd-f8fb-4eb4-b756-11b9deb17af5)\
 ![Renting](https://github.com/ninjaaaxxx/Sajha_Bookstore/assets/132187755/eeb8c10d-09e7-457a-aaf6-0bf06c7718c9)
 
-Copyright © 2025 SajhaBookstoreTeam. All rights reserved. 
+Copyright © 2023 SajhaBookstoreTeam. All rights reserved. 
