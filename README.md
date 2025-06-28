@@ -1,11 +1,25 @@
 # SajhaBookstore 
 # KEC Minor Project
 
+---
+
 Tools Used:
 - Dart
 - Flutter
 - Firebase
 - Google APIs
+
+## Requirements
+
+- Flutter installed
+- Android Studio or VS Code
+- Emulator or physical device
+
+## How to Run
+
+1. Clone the repository
+2. Run `flutter pub get`
+3. Run `flutter run`
 
 # Team Members:
 David
