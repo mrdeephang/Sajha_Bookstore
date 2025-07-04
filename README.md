@@ -8,26 +8,26 @@ Tools Used:
 - Flutter
 - Firebase
 - Google APIs
-
+---
 ## Requirements
 
 - Flutter installed
 - Android Studio or VS Code
 - Emulator or physical device
-
+---
 ## How to Run
 
 1. Clone the repository
 2. Run `flutter pub get`
 3. Run `flutter run`
-
+---
 # Team Members:
-David
-Deephang
-Dipesh
-Esparsh 
-Pankaj
-
+- David
+- Deephang
+- Dipesh
+- Esparsh 
+ -Pankaj
+---
 Copyright © 2023 SajhaBookstoreTeam. All rights reserved. 
 
 ![Splash](https://github.com/ninjaaaxxx/Sajha_Bookstore/assets/132187755/b6029a7d-6181-4eeb-9d05-649d776f57ad)
