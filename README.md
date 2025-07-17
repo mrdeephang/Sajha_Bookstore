@@ -1,4 +1,4 @@
-# SajhaBookstore y
+# SajhaBookstore
 # KEC Minor Project
 
 ---
