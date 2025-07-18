@@ -13,7 +13,7 @@ Tools Used:
 
 - Flutter installed
 - Android Studio or VS Code
-- Emulator or physical device
+- Emulator or Physical device
 ---
 ## How to Run
 
