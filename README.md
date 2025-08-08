@@ -23,11 +23,11 @@ Tools Used:
 3. Run `flutter run`
 ---
 # Team Members:
-- David
-- Deephang
-- Dipesh
-- Esparsh 
- -Pankaj
+- David Shah
+- Deephang Thegim
+- Dipesh Awasthi
+- Esparsh Tamrakar
+- Pankaj Karki
 ---
 Copyright © 2023 SajhaBookstoreTeam. All rights reserved. 
 
