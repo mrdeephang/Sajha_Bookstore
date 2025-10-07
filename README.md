@@ -77,7 +77,7 @@ flutter run
 
 This project was developed as a **KEC Minor Project** by:
 
-- **David Shah** — [@ninjaaaxxx](https://github.com/ninjaaaxxx)
+- **David Shah** 
 - **Deephang Thegim** — [@mrdeephang](https://github.com/mrdeephang)
 - **Dipesh Awasthi**
 - **Esparsh Tamrakar**
