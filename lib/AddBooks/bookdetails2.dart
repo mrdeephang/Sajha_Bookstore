@@ -3,28 +3,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/Chat/chatpage.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Cart/CartPage.dart';
-import 'package:sajhabackup/pages/RentDetails.dart';
-import 'package:sajhabackup/Cart/cartmodel.dart';
-import 'package:sajhabackup/pages/sellerprofile.dart';
-import 'package:sajhabackup/utils/maps.dart';
-//import 'package:sajhabackup/pages/CartPage.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Cart/cart_page.dart';
+import 'package:sajha_bookstore/pages/rent_details.dart';
+import 'package:sajha_bookstore/Cart/cartmodel.dart';
+import 'package:sajha_bookstore/pages/sellerprofile.dart';
+import 'package:sajha_bookstore/utils/maps.dart';
+import 'package:sajha_bookstore/Chat/chatpage.dart';
 
-class booksdetails2 extends StatefulWidget {
+class BooksDetails2 extends StatefulWidget {
   final Map<String, dynamic> book;
 
-  booksdetails2({required this.book});
+  const BooksDetails2({super.key, required this.book});
 
   @override
-  State<booksdetails2> createState() => _booksdetails2State();
+  State<BooksDetails2> createState() => _BooksDetails2State();
 }
 
-class _booksdetails2State extends State<booksdetails2> {
- 
-
+class _BooksDetails2State extends State<BooksDetails2> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
@@ -51,16 +48,15 @@ class _booksdetails2State extends State<booksdetails2> {
                   fit: BoxFit.cover,
                 ),
               ),
-              Divider(
-                color: Colors.grey,
-              ),
+              Divider(color: Colors.grey),
               Text(
                 "Book Details",
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: bold,
-                    color: color),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: bold,
+                  color: color,
+                ),
               ),
               SizedBox(height: 18),
               Row(
@@ -70,9 +66,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Author:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
@@ -81,7 +78,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       widget.book['author'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -92,9 +89,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Edition:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
@@ -103,7 +101,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       widget.book['edition'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -114,18 +112,19 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Price:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      '\Rs.${widget.book['price']}',
+                      'Rs.${widget.book['price']}',
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -136,9 +135,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Condition:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
@@ -147,7 +147,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       widget.book['condition'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -158,27 +158,33 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Address:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
                     child: TextButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => MapOpenPage(
-                                      destinationAddress:
-                                          widget.book['address'],
-                                    )))),
-                        child: Text(
-                          widget.book['address'],
-                          style: TextStyle(
-                              fontFamily: regular, fontSize: 16, color: color),
-                        )),
-                  )
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => MapOpenPage(
+                            destinationAddress: widget.book['address'],
+                          )),
+                        ),
+                      ),
+                      child: Text(
+                        widget.book['address'],
+                        style: TextStyle(
+                          fontFamily: regular,
+                          fontSize: 16,
+                          color: color,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -189,9 +195,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Additional Info:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 16),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
@@ -200,7 +207,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       widget.book['additional_info'],
                       style: TextStyle(fontFamily: regular, fontSize: 16),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 7),
@@ -211,9 +218,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Added By:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 18),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   Padding(
@@ -221,10 +229,13 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserProfilePage(
-                                    userEmail: widget.book['added by'])));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserProfilePage(
+                              userEmail: widget.book['added by'],
+                            ),
+                          ),
+                        );
                       },
                       child: Text(
                         widget.book['added by'],
@@ -242,9 +253,10 @@ class _booksdetails2State extends State<booksdetails2> {
                     child: Text(
                       'Status:',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: regular,
-                          fontSize: 18),
+                        color: Colors.blue,
+                        fontFamily: regular,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   Padding(
@@ -253,7 +265,7 @@ class _booksdetails2State extends State<booksdetails2> {
                       widget.book["status"],
                       style: TextStyle(color: color),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 25),
@@ -261,75 +273,89 @@ class _booksdetails2State extends State<booksdetails2> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FloatingActionButton(
+                      backgroundColor: color,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatPage(
+                              receiverEmail: widget.book['added by'],
+                              receiverID: '',
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Buy',
+                        style: TextStyle(
+                          color: color1,
+                          fontFamily: regular,
+                          fontSize: 18,
+                        ),
                       ),
-                      child: FloatingActionButton(
-                          backgroundColor: color,
-                          onPressed: () {
-                          
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => chatpage(
-                                          receiverEmail:
-                                              widget.book['added by'],
-                                          receiverID: '',
-                                        )));
-                          },
-                          child: Text(
-                            'Buy',
-                            style: TextStyle(
-                                color: color1,
-                                fontFamily: regular,
-                                fontSize: 18),
-                          ))),
+                    ),
+                  ),
                   Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: color),
-                      child: TextButton(
-                          onPressed: () {
-                            Provider.of<CartModel>(context, listen: false)
-                                .addToCart(Book(
-                              name: widget.book['name'],
-                              author: widget.book['author'],
-                              imageUrl: widget.book['image_url'],
-                              price: widget.book['price'].toDouble(),
-                            ));
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CartPage()));
-                          },
-                          child: Text(
-                            'Add To Favorites',
-                            style: TextStyle(
-                                color: color1,
-                                fontFamily: regular,
-                                fontSize: 18),
-                          ))),
-                  Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: color,
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Provider.of<CartModel>(
+                          context,
+                          listen: false,
+                        ).addToCart(
+                          Book(
+                            name: widget.book['name'],
+                            author: widget.book['author'],
+                            imageUrl: widget.book['image_url'],
+                            price: widget.book['price'].toDouble(),
+                          ),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CartPage()),
+                        );
+                      },
+                      child: Text(
+                        'Add To Favorites',
+                        style: TextStyle(
+                          color: color1,
+                          fontFamily: regular,
+                          fontSize: 18,
+                        ),
                       ),
-                      child: FloatingActionButton(
-                          backgroundColor: color,
-                          onPressed: () {
-                          
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        RentingExplanationPage()));
-                          },
-                          child: Text(
-                            'Rent',
-                            style: TextStyle(
-                                color: color1,
-                                fontFamily: regular,
-                                fontSize: 18),
-                          )))
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FloatingActionButton(
+                      backgroundColor: color,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RentingExplanationPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Rent',
+                        style: TextStyle(
+                          color: color1,
+                          fontFamily: regular,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -342,17 +368,22 @@ class _booksdetails2State extends State<booksdetails2> {
                   backgroundColor: color,
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => chatpage(
-                                  receiverEmail: widget.book['added by'],
-                                  receiverID: '',
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatPage(
+                          receiverEmail: widget.book['added by'],
+                          receiverID: '',
+                        ),
+                      ),
+                    );
                   },
                   child: Text(
                     'Chat With Seller',
                     style: TextStyle(
-                        color: color1, fontFamily: regular, fontSize: 18),
+                      color: color1,
+                      fontFamily: regular,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -373,22 +404,19 @@ class _booksdetails2State extends State<booksdetails2> {
                   ),
                 ),
               ),
-              Divider(
-                thickness: 1,
-                color: Colors.grey,
-              ),
+              Divider(thickness: 1, color: Colors.grey),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'Explore  More',
                   style: TextStyle(
-                      color: color, fontFamily: regular, fontSize: 20),
+                    color: color,
+                    fontFamily: regular,
+                    fontSize: 20,
+                  ),
                 ),
               ),
-              Container(
-                height: 360,
-                child: similarbooks(),
-              )
+              SizedBox(height: 360, child: Similarbooks()),
             ],
           ),
         ),
@@ -398,47 +426,48 @@ class _booksdetails2State extends State<booksdetails2> {
 
   void _showReportMenu(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            child: Wrap(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.flag),
-                  title: Text('Inappropriate Content'),
-                  onTap: () {
-                    _reportBook('Inappropriate Content');
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.flag),
-                  title: Text('Fake information'),
-                  onTap: () {
-                    _reportBook('Fake information');
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.flag),
-                  title: Text('Spam'),
-                  onTap: () {
-                    _reportBook('Spam');
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.flag),
-                  title: Text('Wrong information'),
-                  onTap: () {
-                    _reportBook('Wrong infomation');
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: Icon(Icons.flag),
+                title: Text('Inappropriate Content'),
+                onTap: () {
+                  _reportBook('Inappropriate Content');
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.flag),
+                title: Text('Fake information'),
+                onTap: () {
+                  _reportBook('Fake information');
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.flag),
+                title: Text('Spam'),
+                onTap: () {
+                  _reportBook('Spam');
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.flag),
+                title: Text('Wrong information'),
+                onTap: () {
+                  _reportBook('Wrong infomation');
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _reportBook(String reason) async {
@@ -446,7 +475,7 @@ class _booksdetails2State extends State<booksdetails2> {
     await FirebaseFirestore.instance.collection('reports').add({
       'bookname': bookname,
       'reason': reason,
-      'reportedby': currentUser.email!
+      'reportedby': currentUser.email!,
     });
     int reportcount = await FirebaseFirestore.instance
         .collection('reports')
@@ -462,58 +491,64 @@ class _booksdetails2State extends State<booksdetails2> {
   }
 }
 
-class similarbooks extends StatefulWidget {
+class Similarbooks extends StatefulWidget {
+  const Similarbooks({super.key});
+
   @override
-  State<similarbooks> createState() => _similarbooksState();
+  State<Similarbooks> createState() => _SimilarbooksState();
 }
 
-class _similarbooksState extends State<similarbooks> {
+class _SimilarbooksState extends State<Similarbooks> {
   var product_list = [
     {
       "name": "Goosebumps:Special Edition",
       "picture": "assets/images/s1.png",
-      "Price": "1000"
+      "Price": "1000",
     },
     {
       "name": "Sherlock Holmes",
       "picture": "assets/images/s2.jpg",
-      "Price": "1000"
+      "Price": "1000",
     },
     {
       "name": "Harry Potter:The Cursed Child",
       "picture": "assets/images/s3.png",
-      "Price": "1000"
+      "Price": "1000",
     },
     {
       "name": "The Fabulous Five",
       "picture": "assets/images/s4.png",
-      "Price": "1000"
+      "Price": "1000",
     },
   ];
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: product_list.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext conntext, int index) {
-          return Similar_Single_prod(
-              prod_name: product_list[index]['name'],
-              prod_picture: product_list[index]['picture'],
-              prod_price: product_list[index]['Price']);
-        });
+      itemCount: product_list.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemBuilder: (BuildContext conntext, int index) {
+        return SimilarSingleProd(
+          prod_name: product_list[index]['name'] ?? "",
+          prod_picture: product_list[index]['picture'] ?? "",
+          prod_price: product_list[index]['Price'] ?? "",
+        );
+      },
+    );
   }
 }
 
-class Similar_Single_prod extends StatelessWidget {
-  final prod_name;
-  final prod_picture;
-  final prod_price;
+class SimilarSingleProd extends StatelessWidget {
+  final String prod_name;
+  final String prod_picture;
+  final String prod_price;
 
-  Similar_Single_prod({
-    this.prod_name,
-    this.prod_picture,
-    this.prod_price,
+  const SimilarSingleProd({
+    super.key,
+    required this.prod_name,
+    required this.prod_picture,
+    required this.prod_price,
   });
 
   @override
@@ -522,31 +557,30 @@ class Similar_Single_prod extends StatelessWidget {
       child: Hero(
         tag: prod_name,
         child: Material(
-            child: InkWell(
-          onTap: () {},
-          child: GridTile(
-            footer: Container(
-              color: Colors.white70,
-              child: Row(
-                children: [
-                  Expanded(
+          child: InkWell(
+            onTap: () {},
+            child: GridTile(
+              footer: Container(
+                color: Colors.white70,
+                child: Row(
+                  children: [
+                    Expanded(
                       child: Text(
-                    prod_name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                  Text(
-                    '\Rs${prod_price}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                ],
+                        prod_name,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Text(
+                      'Rs$prod_price',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Image.asset(
-              prod_picture,
-              fit: BoxFit.cover,
+              child: Image.asset(prod_picture, fit: BoxFit.cover),
             ),
           ),
-        )),
+        ),
       ),
     );
   }

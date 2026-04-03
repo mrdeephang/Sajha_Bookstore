@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/pages/RegisterPage.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/pages/register_page.dart';
 
 class OtpPage extends StatefulWidget {
   final String vid;
@@ -17,13 +17,15 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   var code = '';
-  signIn() async {
-    PhoneAuthCredential credential =
-        PhoneAuthProvider.credential(verificationId: widget.vid, smsCode: code);
+  Future<void> signIn() async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+      verificationId: widget.vid,
+      smsCode: code,
+    );
     try {
-      await FirebaseAuth.instance
-          .signInWithCredential(credential)
-          .then((value) {
+      await FirebaseAuth.instance.signInWithCredential(credential).then((
+        value,
+      ) {
         Get.offAll(RegisterPage(phone: widget.phone));
       });
     } on FirebaseAuthException catch (e) {
@@ -52,15 +54,8 @@ class _OtpPageState extends State<OtpPage> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),*/
-            Container(
-              child: Image.asset(
-                'assets/images/otp.png',
-                height: 250,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            Container(child: Image.asset('assets/images/otp.png', height: 250)),
+            SizedBox(height: 20),
             /*  Padding(
               padding: EdgeInsets.symmetric(horizontal: 25, vertical: 6),
              child: Text(
@@ -73,7 +68,7 @@ class _OtpPageState extends State<OtpPage> {
             SizedBox(height: 20),
             textcode(),
             SizedBox(height: 20),
-            button()
+            button(),
           ],
         ),
       ),
@@ -104,7 +99,7 @@ class _OtpPageState extends State<OtpPage> {
         },
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.all(16),
-          primary: color,
+          backgroundColor: color,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 90),

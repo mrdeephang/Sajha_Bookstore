@@ -3,23 +3,28 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/Cart/cartmodel.dart';
-import 'package:sajhabackup/Splashes/splashscreen.dart';
-import 'package:sajhabackup/themes/themeprovider.dart';
+import 'package:sajha_bookstore/Cart/cartmodel.dart';
+import 'package:sajha_bookstore/Splashes/splashscreen.dart';
+import 'package:sajha_bookstore/themes/themeprovider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
   Platform.isAndroid
       ? await Firebase.initializeApp(
-          options: const FirebaseOptions(
-              apiKey: 'AIzaSyB22xWy99xjXerlI-c-sFvShkTrUlFs3nc',
-              appId: '1:198996371343:android:508c7cd18165d39e404dfa',
-              messagingSenderId: '198996371343',
-              projectId: 'sajhabookstore',
-              storageBucket: 'gs://sajhabookstore.appspot.com'))
+          options: FirebaseOptions(
+            apiKey: dotenv.env['FIREBASE_API_KEY'] ?? '',
+            appId: dotenv.env['FIREBASE_APP_ID'] ?? '',
+            messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
+            projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
+            storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'] ?? '',
+          ),
+        )
       : await Firebase.initializeApp();
-  runApp(Home());
+  runApp(const Home());
 }
 
 class Home extends StatelessWidget {
@@ -45,7 +50,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: splashscreen(),
+      home: SplashScreen(),
     );
   }
 }

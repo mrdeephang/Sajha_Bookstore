@@ -1,31 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
+import 'package:sajha_bookstore/utils/lecle_carousel_pro.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/HomePage/bach.dart';
-import 'package:sajhabackup/Cart/CartPage.dart';
-import 'package:sajhabackup/Chat/chat.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/HomePage/extra.dart';
-import 'package:sajhabackup/HomePage/masters.dart';
-import 'package:sajhabackup/MyBooksStatus/mybookstatus.dart';
-import 'package:sajhabackup/Settings/settings.dart';
-import 'package:sajhabackup/AddBooks/adddetails.dart';
-import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/pages/recentlyadded.dart';
-import 'package:sajhabackup/pages/search.dart';
+import 'package:sajha_bookstore/Chat/chat.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/HomePage/bach.dart';
+import 'package:sajha_bookstore/Cart/cart_page.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/HomePage/extra.dart';
+import 'package:sajha_bookstore/HomePage/masters.dart';
+import 'package:sajha_bookstore/MyBooksStatus/mybookstatus.dart';
+import 'package:sajha_bookstore/Settings/settings.dart';
+import 'package:sajha_bookstore/AddBooks/adddetails.dart';
+import 'package:sajha_bookstore/pages/login.dart';
+import 'package:sajha_bookstore/pages/recentlyadded.dart';
+import 'package:sajha_bookstore/pages/search.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homepageState extends State<homepage> {
+class _HomePageState extends State<HomePage> {
   //final currentUser = FirebaseAuth.instance.currentUser!;
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
@@ -75,7 +75,7 @@ class _homepageState extends State<homepage> {
       "The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education. - Martin Luther King Jr.",
       "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. - Malcolm X",
       "Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi",
-      "The beautiful thing about learning is that no one can take it away from you. - B.B. King"
+      "The beautiful thing about learning is that no one can take it away from you. - B.B. King",
     ];
     DateTime now = DateTime.now();
     int quoteIndex = now.day % quotes.length;
@@ -86,23 +86,28 @@ class _homepageState extends State<homepage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget image_carousel = Container(
+    Widget imageCarousel = SizedBox(
       height: 550,
       child: SafeArea(
         child: Carousel(
           boxFit: BoxFit.cover,
           images: [
             NetworkImage(
-                "https://m.media-amazon.com/images/I/A12tbaSby+L._AC_UF1000,1000_QL80_.jpg"),
+              "https://m.media-amazon.com/images/I/A12tbaSby+L._AC_UF1000,1000_QL80_.jpg",
+            ),
             NetworkImage(
-                "https://prodimage.images-bn.com/pimages/9780545791427_p0_v4_s1200x630.jpg"),
+              "https://prodimage.images-bn.com/pimages/9780545791427_p0_v4_s1200x630.jpg",
+            ),
             NetworkImage(
-                "https://www.theodist.com/Images/ProductImages/Large/78775.jpg"),
+              "https://www.theodist.com/Images/ProductImages/Large/78775.jpg",
+            ),
 
             NetworkImage(
-                "https://i.ebayimg.com/images/g/OZIAAOSwItFeojCA/s-l400.jpg"),
+              "https://i.ebayimg.com/images/g/OZIAAOSwItFeojCA/s-l400.jpg",
+            ),
             NetworkImage(
-                "https://english.onlinekhabar.com/wp-content/uploads/2023/08/Aatmabrittanta.jpg"),
+              "https://english.onlinekhabar.com/wp-content/uploads/2023/08/Aatmabrittanta.jpg",
+            ),
             //AssetImage("images/book4.jpg"),
           ],
           autoplay: true,
@@ -120,31 +125,32 @@ class _homepageState extends State<homepage> {
       ),
     );
     return Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: color,
-        title: Text('Sajha Bookstore',
-            style:
-                TextStyle(color: Colors.white, fontFamily: bold, fontSize: 21)),
+        title: Text(
+          'Sajha Bookstore',
+          style: TextStyle(color: Colors.white, fontFamily: bold, fontSize: 21),
+        ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => search()));
-              },
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              )),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Search()),
+              );
+            },
+            icon: Icon(Icons.search, color: Colors.white),
+          ),
           IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CartPage()));
-              },
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ))
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+            icon: Icon(Icons.favorite, color: Colors.white),
+          ),
         ],
       ),
       drawer: Drawer(
@@ -169,21 +175,22 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => homepage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
               },
               child: ListTile(
                 title: Text('Home'),
-                leading: Icon(
-                  Icons.home,
-                  color: color,
-                ),
+                leading: Icon(Icons.home, color: color),
               ),
             ),
             InkWell(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => chat()));
+                  context,
+                  MaterialPageRoute(builder: (context) => Chat()),
+                );
               },
               child: ListTile(
                 title: Text('Chat'),
@@ -192,8 +199,10 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BookListPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BookListPage()),
+                );
               },
               child: ListTile(
                 title: Text('All Books'),
@@ -202,8 +211,10 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BookAddPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BookAddPage()),
+                );
               },
               child: ListTile(
                 title: Text('Add'),
@@ -212,8 +223,10 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => mybookstatus()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mybookstatus()),
+                );
               },
               child: ListTile(
                 title: Text('My Books Status'),
@@ -222,8 +235,10 @@ class _homepageState extends State<homepage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
               },
               child: ListTile(
                 title: Text('Settings'),
@@ -233,22 +248,25 @@ class _homepageState extends State<homepage> {
             InkWell(
               onTap: () {
                 QuickAlert.show(
-                    textColor: Colors.black,
-                    backgroundColor: Colors.white,
-                    confirmBtnColor: color,
-                    context: context,
-                    type: QuickAlertType.confirm,
-                    title: "LogOut",
-                    text: "Are you sure you want to logout?",
-                    onConfirmBtnTap: () async {
-                      // Sign out the user from Firebase Authentication
-                      await FirebaseAuth.instance.signOut();
+                  textColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  confirmBtnColor: color,
+                  context: context,
+                  type: QuickAlertType.confirm,
+                  title: "LogOut",
+                  text: "Are you sure you want to logout?",
+                  onConfirmBtnTap: () async {
+                    // Sign out the user from Firebase Authentication
+                    await FirebaseAuth.instance.signOut();
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const loginscreen()));
-                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                );
               },
               child: ListTile(
                 title: Text('Log Out'),
@@ -260,16 +278,16 @@ class _homepageState extends State<homepage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [color, color, Colors.white])),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [color, color, Colors.white],
+          ),
+        ),
         child: ListView(
           children: <Widget>[
-            image_carousel,
-            SizedBox(
-              height: 20,
-            ),
+            imageCarousel,
+            SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -277,9 +295,10 @@ class _homepageState extends State<homepage> {
                   Text(
                     'Quote Of The Day',
                     style: TextStyle(
-                        color: color1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: color1,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   Text(
                     qouteOfTheDay,
@@ -295,7 +314,10 @@ class _homepageState extends State<homepage> {
               child: Text(
                 'Categories',
                 style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold, color: color1),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: color1,
+                ),
               ),
             ),
             Padding(
@@ -305,101 +327,101 @@ class _homepageState extends State<homepage> {
                   Text(
                     "Master's Level",
                     style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: color1),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: color1,
+                    ),
                   ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BookListPage()));
-                      },
-                      child: Text(
-                        'See More',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: color1),
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BookListPage()),
+                      );
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color1,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Container(
-              height: 300,
-              child: masters(),
-            ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 300, child: masters()),
+            SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.all(30),
               child: Row(
                 children: [
-                  Text("Bachelor's Level",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: color1)),
+                  Text(
+                    "Bachelor's Level",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: color1,
+                    ),
+                  ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BookListPage()));
-                      },
-                      child: Text(
-                        'See More',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: color1),
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BookListPage()),
+                      );
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color1,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Container(
-              height: 300,
-              child: Bach(),
-            ),
+            SizedBox(height: 300, child: Bach()),
 
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.all(30),
               child: Row(
                 children: [
-                  Text("Extra",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: color1)),
+                  Text(
+                    "Extra",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: color1,
+                    ),
+                  ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BookListPage()));
-                      },
-                      child: Text(
-                        'See More',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: color1),
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BookListPage()),
+                      );
+                    },
+                    child: Text(
+                      'See More',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: color1,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Container(
-              height: 300,
-              child: extra(),
-            ),
+            SizedBox(height: 300, child: extra()),
 
             //
           ],

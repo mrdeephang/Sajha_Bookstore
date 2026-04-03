@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class cartproducts extends StatefulWidget {
+  const cartproducts({super.key});
+
 
   @override
   State<cartproducts> createState() => _cartproductsState();
@@ -40,7 +42,7 @@ class singlecartproduct extends StatefulWidget {
   final cart_prod_picture;
   final cart_prod_price;
 
-  singlecartproduct({this.cart_prod_name,this.cart_prod_price,this.cart_prod_picture});
+  const singlecartproduct({super.key, this.cart_prod_name,this.cart_prod_price,this.cart_prod_picture});
 
   @override
   State<singlecartproduct> createState() => _singlecartproductState();
@@ -90,7 +92,7 @@ class _singlecartproductState extends State<singlecartproduct> {
               ),
              Container(
               alignment: Alignment.topLeft,
-              child: Text("\Rs.${widget.cart_prod_price}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+              child: Text("Rs.${widget.cart_prod_price}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
              ),
       
             ],

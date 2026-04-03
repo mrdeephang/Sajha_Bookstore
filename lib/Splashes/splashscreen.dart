@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/HomePage/homepage.dart';
-import 'package:sajhabackup/Pages/login.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/HomePage/HomePage.dart';
+import 'package:sajha_bookstore/Pages/login.dart';
 
-class splashscreen extends StatefulWidget {
-  const splashscreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashscreen> createState() => _splashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashscreenState extends State<splashscreen> {
+class _SplashScreenState extends State<SplashScreen> {
   User? user;
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _splashscreenState extends State<splashscreen> {
         context,
         MaterialPageRoute(builder: (context) {
           if (user != null) {
-            return homepage(); // Replace with the desired page for the condition
+            return HomePage(); // Replace with the desired page for the condition
           } else {
             return MainPage(); // Replace with the desired page for the else condition
           }
@@ -59,13 +59,13 @@ class _splashscreenState extends State<splashscreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
+                  width: 24,
+                  height: 24,
                   child: CircularProgressIndicator(
                     color: Colors.green,
                     backgroundColor: Colors.amberAccent,
                     strokeWidth: 2.0,
                   ),
-                  width: 24,
-                  height: 24,
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 10),

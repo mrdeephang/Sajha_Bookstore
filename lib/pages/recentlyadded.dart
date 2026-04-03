@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/AddBooks/bookdetails2.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/AddBooks/bookdetails2.dart';
 
 class BookListPage extends StatefulWidget {
+  const BookListPage({super.key});
+
   @override
   _BookListPageState createState() => _BookListPageState();
 }
@@ -19,9 +21,7 @@ class _BookListPageState extends State<BookListPage> {
       appBar: AppBar(
         backgroundColor: color,
         elevation: 0,
-        leading: BackButton(
-          color: color1,
-        ),
+        leading: BackButton(color: color1),
         title: Text(
           'All Books',
           style: TextStyle(color: color1, fontFamily: regular),
@@ -32,13 +32,12 @@ class _BookListPageState extends State<BookListPage> {
           _buildFilterSection(),
           Expanded(
             child: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('books').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('books')
+                  .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 List<DocumentSnapshot<Object?>> books = snapshot.data!.docs;
@@ -60,11 +59,13 @@ class _BookListPageState extends State<BookListPage> {
                     return ListTile(
                       splashColor: color,
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: color, width: 1),
-                          borderRadius: BorderRadius.circular(10)),
+                        side: BorderSide(color: color, width: 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       title: Text(book['name']),
                       subtitle: Text(
-                          'Author: ${book['author']}\nPrice: \Rs${book['price']}'),
+                        'Author: ${book['author']}\nPrice: Rs${book['price']}',
+                      ),
                       leading: Image.network(
                         book['image_url'],
                         height: 50,
@@ -75,9 +76,7 @@ class _BookListPageState extends State<BookListPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => booksdetails2(
-                              book: book,
-                            ),
+                            builder: (context) => BooksDetails2(book: book),
                           ),
                         );
                       },
@@ -94,10 +93,7 @@ class _BookListPageState extends State<BookListPage> {
 
   Widget _buildFilterSection() {
     return Column(
-      children: [
-        _buildCategoryDropdown(),
-        _buildPriceRangeDropdown(),
-      ],
+      children: [_buildCategoryDropdown(), _buildPriceRangeDropdown()],
     );
   }
 
@@ -113,11 +109,9 @@ class _BookListPageState extends State<BookListPage> {
         },
         items: <String>['All', 'Masters', 'Bachelors', 'Extra']
             .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
+              return DropdownMenuItem<String>(value: value, child: Text(value));
+            })
+            .toList(),
       ),
     );
   }
@@ -132,24 +126,23 @@ class _BookListPageState extends State<BookListPage> {
             selectedPriceRange = newValue!;
           });
         },
-        items: <String>[
-          'All',
-          'Rs. 0 to 500',
-          'Rs. 500 to 1000',
-          'Rs. 1000 to 2000',
-          'Above 2000'
-        ].map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
+        items:
+            <String>[
+              'All',
+              'Rs. 0 to 500',
+              'Rs. 500 to 1000',
+              'Rs. 1000 to 2000',
+              'Above 2000',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(value: value, child: Text(value));
+            }).toList(),
       ),
     );
   }
 
   List<DocumentSnapshot> _filterBooksByPriceRange(
-      List<DocumentSnapshot> books) {
+    List<DocumentSnapshot> books,
+  ) {
     if (selectedPriceRange == 'All') {
       return books;
     }

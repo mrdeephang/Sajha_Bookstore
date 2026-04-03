@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/AddBooks/bookdetails.dart';
+import 'package:sajha_bookstore/AddBooks/bookdetails.dart';
 
-class bach extends StatefulWidget {
-  const bach({super.key});
+class Bach extends StatefulWidget {
+  const Bach({super.key});
 
   @override
-  State<bach> createState() => _bachState();
+  State<Bach> createState() => _BachState();
 }
 
-class _bachState extends State<bach> {
+class _BachState extends State<Bach> {
   var product_list = [
     {"name": "Physics", "picture": "assets/images/Bphy.png", "Price": "800"},
     {"name": "Chemistry", "picture": "assets/images/Bchem.png", "Price": "750"},
@@ -30,7 +30,7 @@ class _bachState extends State<bach> {
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext conntext, int index) {
-          return Single_prod(
+          return SingleProd(
               prod_name: product_list[index]['name'],
               prod_picture: product_list[index]['picture'],
               prod_price: product_list[index]['Price']);
@@ -38,12 +38,12 @@ class _bachState extends State<bach> {
   }
 }
 
-class Single_prod extends StatelessWidget {
+class SingleProd extends StatelessWidget {
   final prod_name;
   final prod_picture;
   final prod_price;
 
-  Single_prod({
+  const SingleProd({super.key, 
     this.prod_name,
     this.prod_picture,
     this.prod_price,
@@ -57,7 +57,7 @@ class Single_prod extends StatelessWidget {
         child: Material(
             child: InkWell(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => booksdetails(
+              builder: (context) => BooksDetails(
                     book_name: prod_name,
                     book_pic: prod_picture,
                     book_price: prod_price,
@@ -76,7 +76,7 @@ class Single_prod extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )),
                   Text(
-                    '\Rs${prod_price}',
+                    'Rs$prod_price',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],

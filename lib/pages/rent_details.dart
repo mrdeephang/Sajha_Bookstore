@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/pages/RentDuration.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/pages/rent_duration.dart';
 
 class RentingExplanationPage extends StatelessWidget {
+  const RentingExplanationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

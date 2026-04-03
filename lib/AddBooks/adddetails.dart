@@ -6,12 +6,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'dart:io';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
 class BookAddPage extends StatefulWidget {
+  const BookAddPage({super.key});
+
   @override
-  _BookAddPageState createState() => _BookAddPageState();
+  State<BookAddPage> createState() => _BookAddPageState();
 }
 
 class _BookAddPageState extends State<BookAddPage> {
@@ -45,9 +47,9 @@ class _BookAddPageState extends State<BookAddPage> {
     }
 
     try {
-      final Reference storageReference = FirebaseStorage.instance
-          .ref()
-          .child('book_images/${DateTime.now()}.jpg');
+      final Reference storageReference = FirebaseStorage.instance.ref().child(
+        'book_images/${DateTime.now()}.jpg',
+      );
       await storageReference.putFile(
         _image!,
         SettableMetadata(contentType: 'image/jpeg'),
@@ -66,10 +68,8 @@ class _BookAddPageState extends State<BookAddPage> {
         'category': selectedCategory,
         'image_url': imageUrl,
         'added by': currentUser.email!,
-        'status':'Available',
-        
+        'status': 'Available',
       });
-     
 
       nameController.clear();
       authorController.clear();
@@ -82,9 +82,11 @@ class _BookAddPageState extends State<BookAddPage> {
         _image = null;
       });
 
+      if (!mounted) return;
       QuickAlert.show(context: context, type: QuickAlertType.success);
     } catch (error) {
-      print(error);
+      // print(error);
+      if (!mounted) return;
       QuickAlert.show(context: context, type: QuickAlertType.error);
     }
   }
@@ -94,9 +96,7 @@ class _BookAddPageState extends State<BookAddPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
-        leading: BackButton(
-          color: color1,
-        ),
+        leading: BackButton(color: color1),
         title: Text(
           'Add Book',
           style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
@@ -146,11 +146,12 @@ class _BookAddPageState extends State<BookAddPage> {
                 },
                 items: <String>['Masters', 'Bachelors', 'High School', 'Extra']
                     .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    })
+                    .toList(),
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -158,15 +159,14 @@ class _BookAddPageState extends State<BookAddPage> {
                 child: Text(
                   'Pick Image',
                   style: TextStyle(
-                      color: color, fontFamily: regular, fontSize: 18),
+                    color: color,
+                    fontFamily: regular,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               _image != null
-                  ? Image.file(
-                      _image!,
-                      height: 100,
-                      width: 100,
-                    )
+                  ? Image.file(_image!, height: 100, width: 100)
                   : Container(),
               SizedBox(height: 20),
               ElevatedButton(
@@ -174,7 +174,10 @@ class _BookAddPageState extends State<BookAddPage> {
                 child: Text(
                   'Add Book',
                   style: TextStyle(
-                      color: color, fontFamily: regular, fontSize: 18),
+                    color: color,
+                    fontFamily: regular,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],

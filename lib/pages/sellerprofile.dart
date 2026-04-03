@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/utils/toast.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/utils/toast.dart';
 
 class UserProfilePage extends StatefulWidget {
   final String userEmail;
 
-  UserProfilePage({required this.userEmail});
+  const UserProfilePage({super.key, required this.userEmail});
 
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
@@ -16,7 +16,7 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   late CollectionReference _usersCollection;
-  late DocumentSnapshot _userSnapshot;
+  DocumentSnapshot? _userSnapshot;
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -40,8 +40,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   void _reportUser(String reason) async {
-    String reportedUserId = _userSnapshot.id;
-    String reportedUserEmail = _userSnapshot['Email'];
+    String reportedUserId = _userSnapshot!.id;
+    String reportedUserEmail = _userSnapshot!['Email'];
     String reporterEmail = currentUser.email!;
 
     await FirebaseFirestore.instance.collection('user_reports').add({
@@ -65,17 +65,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
         backgroundColor: color,
         leading: BackButton(color: color1),
       ),
-      body: _userSnapshot != null
-          ? Padding(
+      body: _userSnapshot == null ? Center(child: CircularProgressIndicator()) : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _userSnapshot['ProfilePicUrl'] != null
+                  _userSnapshot!['ProfilePicUrl'] != null
                       ? Center(
                           child: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(_userSnapshot['ProfilePicUrl']),
+                                NetworkImage(_userSnapshot!['ProfilePicUrl']),
                             radius: 50,
                           ),
                         )
@@ -97,13 +96,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           BoxShadow(
                               offset: Offset(0, 5),
                               color: Color.fromARGB(255, 49, 2, 58)
-                                  .withOpacity(.2),
+                                  .withValues(alpha: .2),
                               spreadRadius: 2,
                               blurRadius: 10)
                         ]),
                     child: ListTile(
                       title: Text('Name:'),
-                      subtitle: Text(' ${_userSnapshot['Full Name']}'),
+                      subtitle: Text(' ${_userSnapshot!['Full Name']}'),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -115,13 +114,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           BoxShadow(
                               offset: Offset(0, 5),
                               color: Color.fromARGB(255, 49, 2, 58)
-                                  .withOpacity(.2),
+                                  .withValues(alpha: .2),
                               spreadRadius: 2,
                               blurRadius: 10)
                         ]),
                     child: ListTile(
                         title: Text('Phone:'),
-                        subtitle: Text('${_userSnapshot['Phone']}')),
+                        subtitle: Text('${_userSnapshot!['Phone']}')),
                   ),
                   SizedBox(height: 10),
                   Container(
@@ -132,13 +131,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           BoxShadow(
                               offset: Offset(0, 5),
                               color: Color.fromARGB(255, 49, 2, 58)
-                                  .withOpacity(.2),
+                                  .withValues(alpha: .2),
                               spreadRadius: 2,
                               blurRadius: 10)
                         ]),
                     child: ListTile(
                         title: Text('Address:'),
-                        subtitle: Text(' ${_userSnapshot['Address']}')),
+                        subtitle: Text(' ${_userSnapshot!['Address']}')),
                   ),
                   SizedBox(height: 10),
                   Container(
@@ -149,13 +148,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           BoxShadow(
                               offset: Offset(0, 5),
                               color: Color.fromARGB(255, 49, 2, 58)
-                                  .withOpacity(.2),
+                                  .withValues(alpha: .2),
                               spreadRadius: 2,
                               blurRadius: 10)
                         ]),
                     child: ListTile(
                         title: Text('Email:'),
-                        subtitle: Text('${_userSnapshot['Email']}')),
+                        subtitle: Text('${_userSnapshot!['Email']}')),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -174,7 +173,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           content: Column(
                             children: [
                               Text(
-                                'Are you sure you want to report ${_userSnapshot['Full Name']}?',
+                                'Are you sure you want to report ${_userSnapshot!['Full Name']}?',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: regular,
@@ -222,9 +221,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   ),
                 ],
               ),
-            )
-          : Center(
-              child: CircularProgressIndicator(),
             ),
     );
   }

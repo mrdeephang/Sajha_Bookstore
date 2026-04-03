@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/HomePage/homepage.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/HomePage/HomePage.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const homepage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
         (Route<dynamic> route) => false,
       );
     });
@@ -44,13 +44,13 @@ class _SplashPageState extends State<SplashPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
+                    width: 24,
+                    height: 24,
                     child: CircularProgressIndicator(
                       color: Colors.green,
                       backgroundColor: Colors.amberAccent,
                       strokeWidth: 2.0,
                     ),
-                    width: 24,
-                    height: 24,
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),

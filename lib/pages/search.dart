@@ -2,14 +2,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-class search extends StatefulWidget {
-  const search({super.key});
+class Search extends StatefulWidget {
+  const Search({super.key});
 
   @override
-  State<search> createState() => _searchState();
+  State<Search> createState() => _SearchState();
 }
 
-class _searchState extends State<search> {
+class _SearchState extends State<Search> {
   @override
   void initState() {
     getClientStream();
@@ -91,17 +91,16 @@ class _searchState extends State<search> {
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sajhabackup/AddBooks/bookdetails2.dart';
+import 'package:sajha_bookstore/AddBooks/bookdetails2.dart';
 
-
-class search extends StatefulWidget {
-  const search({super.key});
+class Search extends StatefulWidget {
+  const Search({super.key});
 
   @override
-  State<search> createState() => _searchState();
+  State<Search> createState() => _SearchState();
 }
 
-class _searchState extends State<search> {
+class _SearchState extends State<Search> {
   @override
   void initState() {
     getClientStream();
@@ -109,7 +108,7 @@ class _searchState extends State<search> {
     super.initState();
   }
 
-  _onSearchChanged() {
+  void _onSearchChanged() {
     print(_searchController.text);
     searchResultList();
   }
@@ -117,7 +116,7 @@ class _searchState extends State<search> {
   List _allResults = [];
   List _resultList = [];
   final TextEditingController _searchController = TextEditingController();
-  getClientStream() async {
+  Future<void> getClientStream() async {
     var data = await FirebaseFirestore.instance
         .collection('books')
         .orderBy('name')
@@ -128,7 +127,7 @@ class _searchState extends State<search> {
     searchResultList();
   }
 
-  searchResultList() {
+  void searchResultList() {
     var showResult = [];
     if (_searchController.text != "") {
       for (var clientSnapShot in _allResults) {
@@ -161,11 +160,9 @@ class _searchState extends State<search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: CupertinoSearchTextField(
-          controller: _searchController,
-        ),
+        title: CupertinoSearchTextField(controller: _searchController),
       ),
       body: ListView.builder(
         itemCount: _resultList.length,
@@ -173,10 +170,15 @@ class _searchState extends State<search> {
           return ListTile(
             title: Text(_resultList[index]['name']),
             subtitle: Text(_resultList[index]['author']),
-            onTap: () { 
+            onTap: () {
               var book = _resultList[index].data() as Map<String, dynamic>;
-              
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>booksdetails2(book: book)));
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BooksDetails2(book: book),
+                ),
+              );
             },
           );
         },

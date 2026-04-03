@@ -1,14 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
-class forgetpassword extends StatefulWidget {
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
+
   @override
-  State<forgetpassword> createState() => _forgetpasswordState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _forgetpasswordState extends State<forgetpassword> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   final _emailController = TextEditingController();
 
   @override
@@ -40,9 +42,10 @@ class _forgetpasswordState extends State<forgetpassword> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Theme.of(context).colorScheme.background,
+      //backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: color1,
         leading: BackButton(color: color),

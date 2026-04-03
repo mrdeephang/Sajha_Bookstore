@@ -14,7 +14,7 @@ class Book {
 }
 
 class CartModel extends ChangeNotifier {
-  List<Book> _cartItems = [];
+  final List<Book> _cartItems = [];
 
   List<Book> get cartItems => _cartItems;
 

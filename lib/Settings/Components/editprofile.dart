@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
 class editprofile extends StatefulWidget {
+  const editprofile({super.key});
+
   @override
   _editprofileState createState() => _editprofileState();
 }
@@ -30,19 +32,17 @@ class _editprofileState extends State<editprofile> {
   }
 
   void _loadUserData() async {
-    if (_user != null) {
-      DocumentSnapshot userDoc =
-          await _firestore.collection('users').doc(_user.email).get();
+    DocumentSnapshot userDoc =
+        await _firestore.collection('users').doc(_user.email).get();
 
-      if (userDoc.exists) {
-        setState(() {
-          _nameController.text = userDoc['Full Name'];
-          _phoneController.text = userDoc['Phone'];
-          _addressController.text = userDoc['Address'];
-        });
-      }
+    if (userDoc.exists) {
+      setState(() {
+        _nameController.text = userDoc['Full Name'];
+        _phoneController.text = userDoc['Phone'];
+        _addressController.text = userDoc['Address'];
+      });
     }
-  }
+    }
 
   Future<void> _updateUserData() async {
     try {

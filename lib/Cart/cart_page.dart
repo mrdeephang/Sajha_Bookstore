@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/Cart/cartmodel.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/Cart/cartmodel.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
 class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     var cartModel = Provider.of<CartModel>(context);
@@ -14,7 +16,7 @@ class CartPage extends StatelessWidget {
         .fold(0, (previousValue, book) => previousValue + book.price);
 
     return Scaffold(
-      //backgroundColor: Theme.of(context).colorScheme.background,
+      //backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: color,
         title: Text(
@@ -50,7 +52,7 @@ class CartPage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                                 Text(
-                                    'Price: \Rs${book.price.toStringAsFixed(2)}'),
+                                    'Price: Rs${book.price.toStringAsFixed(2)}'),
                               ],
                             ),
                             trailing: IconButton(
@@ -72,7 +74,7 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total Price: \Rs${totalPrice.toStringAsFixed(2)}'),
+                Text('Total Price: Rs${totalPrice.toStringAsFixed(2)}'),
               ],
             ),
           ),

@@ -1,4 +1,4 @@
-# 📚 SajhaBookstore
+# SajhaBookstore
 
 > **A collaborative book rental platform** — KEC Minor Project built with Flutter and Firebase
 
@@ -6,7 +6,7 @@ Sajha (सझा) means "shared" in Nepali — bringing readers together through
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <p align="center">
   <img src="https://github.com/ninjaaaxxx/Sajha_Bookstore/assets/132187755/b6029a7d-6181-4eeb-9d05-649d776f57ad" alt="Splash Screen" width="250"/>
@@ -26,29 +26,30 @@ Sajha (सझा) means "shared" in Nepali — bringing readers together through
 
 ---
 
-## ✨ Features
+## Features
 
-- 📖 **Browse books** — Discover available books in the community
-- ➕ **List your books** — Share your collection with others
-- 🔐 **Secure authentication** — Firebase-powered user accounts
-- 📝 **Book details** — View comprehensive information about each book
-- 🔄 **Rental system** — Request and manage book rentals
-- 🎨 **Clean UI** — Intuitive and user-friendly interface
-
----
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|------------|---------|
-| **Dart** | Programming language |
-| **Flutter** | Cross-platform UI framework |
-| **Firebase** | Backend & authentication |
-| **Google APIs** | Additional services |
+- **Browse books** — Discover available books in the community
+- **List your books** — Share your collection with others
+- **Secure authentication** — Firebase-powered user accounts
+- **Book details** — View comprehensive information about each book
+- **Rental system** — Request and manage book rentals
+- **Clean UI** — Intuitive and user-friendly interface
 
 ---
 
-## 📋 Requirements
+## Tech Stack
+
+| Technology      | Purpose                     |
+| --------------- | --------------------------- |
+| **Dart**        | Programming language        |
+| **Flutter**     | Cross-platform UI framework |
+| **Provider**    | State management            |
+| **Firebase**    | Backend & authentication    |
+| **Google APIs** | Additional services         |
+
+---
+
+## Requirements
 
 - Flutter SDK (v2.0+)
 - Android Studio or VS Code
@@ -57,7 +58,7 @@ Sajha (सझा) means "shared" in Nepali — bringing readers together through
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ```bash
 # 1. Clone the repository
@@ -77,7 +78,7 @@ flutter run
 
 This project was developed as a **KEC Minor Project** by:
 
-- **David Shah** 
+- **David Shah**
 - **Deephang Thegim** — [@mrdeephang](https://github.com/mrdeephang)
 - **Dipesh Awasthi**
 - **Esparsh Tamrakar**

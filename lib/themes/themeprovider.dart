@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/themes/themes.dart';
+import 'package:sajha_bookstore/themes/themes.dart';
 
 class ThemeProvider with ChangeNotifier {
   ThemeData _themeData = lightMode;

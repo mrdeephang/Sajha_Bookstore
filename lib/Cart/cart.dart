@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Cart/cart_products.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/pages/search.dart';
+import 'package:sajha_bookstore/Cart/cart_products.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/pages/search.dart';
 
-class cart extends StatefulWidget {
-  const cart({super.key});
+class Cart extends StatefulWidget {
+  const Cart({super.key});
 
   @override
-  State<cart> createState() => _cartState();
+  State<Cart> createState() => _CartState();
 }
 
-class _cartState extends State<cart> {
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,10 @@ class _cartState extends State<cart> {
         actions: [
           IconButton(
               onPressed: () {
-                search;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Search()),
+                );
               },
               icon: Icon(
                 Icons.search,

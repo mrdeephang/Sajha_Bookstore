@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Settings/Components/helpcenter.dart';
-import 'package:sajhabackup/Settings/Components/theme.dart';
-import 'package:sajhabackup/Settings/Components/userDetails.dart';
-import 'package:sajhabackup/Widgets/settingstile.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Settings/Components/helpcenter.dart';
+import 'package:sajha_bookstore/Settings/Components/theme.dart';
+import 'package:sajha_bookstore/Settings/Components/user_details.dart';
+import 'package:sajha_bookstore/Widgets/settingstile.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();

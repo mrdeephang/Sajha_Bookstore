@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Settings/Components/edit_profile.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Settings/Components/edit_profile.dart';
 
 class AccDetails extends StatefulWidget {
+  const AccDetails({super.key});
+
   @override
   _AccDetailsState createState() => _AccDetailsState();
 }
@@ -95,7 +97,7 @@ class _AccDetailsState extends State<AccDetails> {
             if (snapshot.data!.docs.isEmpty) {
               return Text("No data Found");
             }
-            if (snapshot != null && snapshot.data != null) {
+            if (snapshot.data != null) {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
@@ -159,7 +161,7 @@ class _AccDetailsState extends State<AccDetails> {
     );
   }
 
-  itemProfile(String title, String subtitle, IconData iconData, String field) {
+  Container itemProfile(String title, String subtitle, IconData iconData, String field) {
     return Container(
       decoration: BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
@@ -167,7 +169,7 @@ class _AccDetailsState extends State<AccDetails> {
           boxShadow: [
             BoxShadow(
                 offset: Offset(0, 5),
-                color: Color.fromARGB(255, 49, 2, 58).withOpacity(.2),
+                color: Color.fromARGB(255, 49, 2, 58).withValues(alpha: .2),
                 spreadRadius: 2,
                 blurRadius: 10)
           ]),
@@ -185,7 +187,7 @@ class _AccDetailsState extends State<AccDetails> {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Edit " + field, style: TextStyle(color: Colors.white)),
+        title: Text("Edit $field", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.grey[500],
         content: TextField(
           autofocus: true,

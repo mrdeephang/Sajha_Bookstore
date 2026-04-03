@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
-class chatbubble extends StatelessWidget {
+class ChatBubble extends StatelessWidget {
   final String message;
-  const chatbubble({super.key, required this.message});
+
+  const ChatBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,11 @@ class chatbubble extends StatelessWidget {
       ),
       child: Text(
         message,
-        style:
-            TextStyle(fontSize: 16, color: Colors.white, fontFamily: regular),
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+          fontFamily: regular,
+        ),
       ),
     );
   }

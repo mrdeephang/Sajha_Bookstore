@@ -1,22 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Chat/chat_bubble.dart';
-import 'package:sajhabackup/Chat/chat_service.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/services/AuthService.dart';
+import 'package:sajha_bookstore/Chat/chat_service.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Chat/chat_bubble.dart';
+import 'package:sajha_bookstore/services/auth_service_impl.dart';
 
-class chatpage extends StatelessWidget {
+class ChatPage extends StatelessWidget {
   final String receiverEmail;
   final String receiverID;
 
-  chatpage({super.key, required this.receiverEmail, required this.receiverID});
+  ChatPage({super.key, required this.receiverEmail, required this.receiverID});
 
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void sendMessage() async {
@@ -38,7 +37,10 @@ class chatpage extends StatelessWidget {
         leading: BackButton(color: color1),
       ),
       body: Column(
-        children: [Expanded(child: _buildMessageList()), _buildUserInput()],
+        children: [
+          Expanded(child: _buildMessageList()),
+          _buildUserInput(),
+        ],
       ),
     );
   }
@@ -46,20 +48,21 @@ class chatpage extends StatelessWidget {
   Widget _buildMessageList() {
     String senderId = _authService.getCurrentUser()!.uid;
     return StreamBuilder(
-        stream: _chatService.getMessage(receiverID, senderId),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
-          }
-          return ListView(
-            children: snapshot.data!.docs
-                .map((doc) => _buildMessageItem(doc))
-                .toList(),
-          );
-        });
+      stream: _chatService.getMessage(receiverID, senderId),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text('Loading...');
+        }
+        return ListView(
+          children: snapshot.data!.docs
+              .map((doc) => _buildMessageItem(doc))
+              .toList(),
+        );
+      },
+    );
   }
 
   Widget _buildMessageItem(DocumentSnapshot doc) {
@@ -70,10 +73,12 @@ class chatpage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10.0),
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: 8),
-          child: Align(
-              alignment: alignment,
-              child: chatbubble(message: data['message']))),
+        margin: EdgeInsets.symmetric(vertical: 8),
+        child: Align(
+          alignment: alignment,
+          child: ChatBubble(message: data['message']),
+        ),
+      ),
     );
   }
 
@@ -83,35 +88,37 @@ class chatpage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              child: TextField(
-            controller: _messageController,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
+            child: TextField(
+              controller: _messageController,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: color),
-                  borderRadius: BorderRadius.circular(12)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: color),
-                borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: color),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: 'Message...',
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: regular,
+                  fontSize: 14,
+                ),
+                fillColor: color1,
+                filled: true,
               ),
-              hintText: 'Message...',
-              hintStyle: TextStyle(
-                  color: Colors.grey, fontFamily: regular, fontSize: 14),
-              fillColor: color1,
-              filled: true,
             ),
-          )),
-          SizedBox(
-            width: 5,
           ),
+          SizedBox(width: 5),
           Container(
-              margin: EdgeInsets.only(right: 5),
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              child: IconButton(
-                  onPressed: sendMessage,
-                  icon: Icon(
-                    Icons.arrow_upward,
-                    color: Colors.white,
-                  )))
+            margin: EdgeInsets.only(right: 5),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            child: IconButton(
+              onPressed: sendMessage,
+              icon: Icon(Icons.arrow_upward, color: Colors.white),
+            ),
+          ),
         ],
       ),
     );

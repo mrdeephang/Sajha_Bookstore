@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MapOpenPage extends StatelessWidget {
   final String destinationAddress;
 
-  MapOpenPage({required this.destinationAddress});
+  const MapOpenPage({super.key, required this.destinationAddress});
 
   Future<void> _openMaps() async {
     LocationPermission permission = await Geolocator.checkPermission();
@@ -24,8 +24,9 @@ class MapOpenPage extends StatelessWidget {
       String googleMapsUrl =
           'https://www.google.com/maps/dir/?api=1&origin=${currentPosition.latitude},${currentPosition.longitude}&destination=$destinationAddress';
 
-      if (await canLaunch(googleMapsUrl)) {
-        await launch(googleMapsUrl);
+      final Uri url = Uri.parse(googleMapsUrl);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
       } else {
         throw 'Could not launch Google Maps';
       }

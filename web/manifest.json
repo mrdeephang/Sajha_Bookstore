@@ -1,6 +1,6 @@
 {
-    "name": "sajhabackup",
-    "short_name": "sajhabackup",
+    "name": "sajha_bookstore",
+    "short_name": "sajha_bookstore",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

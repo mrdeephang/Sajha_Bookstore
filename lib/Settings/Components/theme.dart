@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Widgets/box.dart';
-import 'package:sajhabackup/Widgets/mybutton.dart';
-import 'package:sajhabackup/themes/themeprovider.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Widgets/box.dart';
+import 'package:sajha_bookstore/Widgets/mybutton.dart';
+import 'package:sajha_bookstore/themes/themeprovider.dart';
 
 class theme extends StatelessWidget {
   const theme({super.key});
@@ -22,7 +22,7 @@ class theme extends StatelessWidget {
             color: color1,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Center(
           child: MyBox(
               color: Theme.of(context).colorScheme.primary,

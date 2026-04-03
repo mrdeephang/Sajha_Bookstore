@@ -4,15 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Splashes/splashpage.dart';
-import 'package:sajhabackup/pages/login.dart';
-import 'package:sajhabackup/utils/toast.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Splashes/splashpage.dart';
+import 'package:sajha_bookstore/pages/login.dart';
+import 'package:sajha_bookstore/utils/toast.dart';
 
 class RegisterPage extends StatefulWidget {
   final String phone;
-  const RegisterPage({Key? key, required this.phone}) : super(key: key);
+  const RegisterPage({super.key, required this.phone});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -23,13 +23,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ImagePicker _picker = ImagePicker();
 
-  TextEditingController _fullNameController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   //TextEditingController _phoneController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   XFile? _pickedImage;
   bool _isPasswordVisible = false;
@@ -318,7 +318,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => loginscreen()));
+                                  builder: (context) => LoginScreen()));
                         },
                         child: Text(
                           'Login',

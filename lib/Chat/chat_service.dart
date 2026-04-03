@@ -1,8 +1,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sajhabackup/Chat/message.dart';
-//import 'package:sajhabackup/utils/firebase.dart';
+import 'package:sajha_bookstore/Chat/message.dart';
+//import 'package:sajha_bookstore/utils/firebase.dart';
 
 class ChatService{
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;

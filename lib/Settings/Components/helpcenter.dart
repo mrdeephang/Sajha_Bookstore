@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class helpcenter extends StatefulWidget {
-  const helpcenter({Key? key}) : super(key: key);
+  const helpcenter({super.key});
 
   @override
   State<helpcenter> createState() => _helpcenterState();
@@ -14,7 +14,7 @@ class _helpcenterState extends State<helpcenter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Theme.of(context).colorScheme.background,
+        // backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           backgroundColor: color,
           title: Text(

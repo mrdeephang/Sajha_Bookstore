@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
 
 class RentDurationPage extends StatefulWidget {
+  const RentDurationPage({super.key});
+
   @override
   _RentDurationPageState createState() => _RentDurationPageState();
 }
@@ -54,7 +56,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 16),
-            Container(
+            SizedBox(
               height: 60,
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -80,7 +82,7 @@ class _RentDurationPageState extends State<RentDurationPage> {
                         ),
                         child: Center(
                           child: Text(
-                            '${getDurationLabel(duration)}',
+                            getDurationLabel(duration),
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,

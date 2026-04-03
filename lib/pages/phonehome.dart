@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/pages/verification.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/pages/verification.dart';
 
 class PhoneHome extends StatefulWidget {
   const PhoneHome({super.key});
@@ -14,18 +14,19 @@ class PhoneHome extends StatefulWidget {
 
 class _PhoneHomeState extends State<PhoneHome> {
   TextEditingController phoneNumber = TextEditingController();
-  sendcode() async {
+  Future<void> sendcode() async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: '+977' + phoneNumber.text,
-          verificationCompleted: (PhoneAuthCredential crendential) {},
-          verificationFailed: (FirebaseAuthException e) {
-            Get.snackbar('Error Occured', e.code);
-          },
-          codeSent: (String vid, int? token) {
-            Get.to(OtpPage(vid: vid, phone: phoneNumber.text));
-          },
-          codeAutoRetrievalTimeout: (vid) {});
+        phoneNumber: '+977${phoneNumber.text}',
+        verificationCompleted: (PhoneAuthCredential crendential) {},
+        verificationFailed: (FirebaseAuthException e) {
+          Get.snackbar('Error Occured', e.code);
+        },
+        codeSent: (String vid, int? token) {
+          Get.to(OtpPage(vid: vid, phone: phoneNumber.text));
+        },
+        codeAutoRetrievalTimeout: (vid) {},
+      );
     } on FirebaseAuthException catch (e) {
       Get.snackbar('Error Occured', e.code);
     } catch (e) {
@@ -56,7 +57,7 @@ class _PhoneHomeState extends State<PhoneHome> {
               SizedBox(height: 20),
               phonetext(),
               SizedBox(height: 20),
-              button()
+              button(),
             ],
           ),
         ),
@@ -72,7 +73,7 @@ class _PhoneHomeState extends State<PhoneHome> {
         },
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.all(16),
-          primary: color,
+          backgroundColor: color,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 90),
@@ -92,13 +93,15 @@ class _PhoneHomeState extends State<PhoneHome> {
         controller: phoneNumber,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-            prefix: Text('+977'),
-            prefixIcon: Icon(Icons.phone),
-            labelText: 'Enter Your Phone Number',
-            hintStyle: TextStyle(color: Colors.grey),
-            labelStyle: TextStyle(color: Colors.grey),
-            enabledBorder:
-                UnderlineInputBorder(borderSide: BorderSide(color: color))),
+          prefix: Text('+977'),
+          prefixIcon: Icon(Icons.phone),
+          labelText: 'Enter Your Phone Number',
+          hintStyle: TextStyle(color: Colors.grey),
+          labelStyle: TextStyle(color: Colors.grey),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: color),
+          ),
+        ),
       ),
     );
   }

@@ -1,22 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sajhabackup/Chat/chat_service.dart';
-import 'package:sajhabackup/Chat/chatpage.dart';
-import 'package:sajhabackup/EasyConst/Colors.dart';
-import 'package:sajhabackup/EasyConst/Styles.dart';
-import 'package:sajhabackup/Widgets/user_tile.dart';
-import 'package:sajhabackup/services/AuthService.dart';
+import 'package:sajha_bookstore/Chat/chat_service.dart';
+import 'package:sajha_bookstore/Chat/chatpage.dart';
+import 'package:sajha_bookstore/EasyConst/colors.dart';
+import 'package:sajha_bookstore/EasyConst/styles.dart';
+import 'package:sajha_bookstore/Widgets/user_tile.dart';
+import 'package:sajha_bookstore/services/auth_service_impl.dart';
 
-class chat extends StatelessWidget {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class Chat extends StatelessWidget {
   final AuthService _authService = AuthService();
   final ChatService _chatService = ChatService();
+
+  Chat({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: color,
+        backgroundColor: color,
         title: Text(
           'Chat',
           style: TextStyle(fontSize: 20, fontFamily: bold, color: color1),
@@ -29,36 +29,40 @@ class chat extends StatelessWidget {
 
   Widget _buildUserList() {
     return StreamBuilder(
-        stream: _chatService.getUsersStream(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
-          }
-          return ListView(
-            children: snapshot.data!
-                .map<Widget>(
-                    (userData) => _buildUserListItem(userData, context))
-                .toList(),
-          );
-        });
+      stream: _chatService.getUsersStream(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text('Loading...');
+        }
+        return ListView(
+          children: snapshot.data!
+              .map<Widget>((userData) => _buildUserListItem(userData, context))
+              .toList(),
+        );
+      },
+    );
   }
 
   Widget _buildUserListItem(
-      Map<String, dynamic> userData, BuildContext context) {
+    Map<String, dynamic> userData,
+    BuildContext context,
+  ) {
     if (userData['Email'] != _authService.getCurrentUser()!.email) {
       return UserTile(
         text: userData["Email"],
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => chatpage(
-                        receiverEmail: userData["Email"],
-                        receiverID: userData['uid'],
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receiverEmail: userData["Email"],
+                receiverID: userData['uid'],
+              ),
+            ),
+          );
         },
       );
     } else {
