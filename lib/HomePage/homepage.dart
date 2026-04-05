@@ -27,6 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //final currentUser = FirebaseAuth.instance.currentUser!;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   User? user = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("users");
   final currentUser = FirebaseAuth.instance.currentUser!;
@@ -125,12 +126,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     return Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.surface,
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: color,
         title: Text(
           'Sajha Bookstore',
           style: TextStyle(color: Colors.white, fontFamily: bold, fontSize: 21),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          icon: Icon(Icons.menu, color: Colors.white),
         ),
         actions: [
           IconButton(
