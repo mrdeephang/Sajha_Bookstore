@@ -109,7 +109,7 @@ class _SearchState extends State<Search> {
   }
 
   void _onSearchChanged() {
-    print(_searchController.text);
+    // print(_searchController.text);
     searchResultList();
   }
 

@@ -6,17 +6,26 @@ import 'package:sajha_bookstore/utils/toast.dart';
 
 class FirebaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
-  static final GoogleSignIn _googleSignIn = GoogleSignIn();
+  static final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
   static Future<String?> signInwithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
+      // In 7.x, we should ensure it's initialized. 
+      // If you have specific client IDs, you can pass them here.
+      await _googleSignIn.initialize();
+
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.authenticate();
+      
+      // In 7.x, tokens are split between authentication (identity) and authorization (access)
+      final GoogleSignInAuthentication authentication =
+          await googleSignInAccount.authentication;
+      final GoogleSignInClientAuthorization authorization =
+          await googleSignInAccount.authorizationClient.authorizeScopes([]);
+
       final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
+        accessToken: authorization.accessToken,
+        idToken: authentication.idToken,
       );
       await _auth.signInWithCredential(credential);
       if (!context.mounted) return null;

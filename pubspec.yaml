@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.10.7
+  sdk: '>=3.5.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -39,25 +39,25 @@ dependencies:
   avatar_glow: ^3.0.1
   speech_to_text: ^7.3.0
   quickalert: ^1.0.2
-  smooth_page_indicator: ^1.1.0
-  flutter_slidable: ^3.0.1
-  cloud_firestore: ^4.13.6
-  firebase_auth: ^4.15.3
-  firebase_core: ^2.24.2
-  firebase_storage: ^11.5.6
-  fluttertoast: ^8.2.4
-  ionicons: ^0.1.2
+  smooth_page_indicator: ^2.0.1
+  flutter_slidable: ^4.0.3
+  cloud_firestore: ^6.2.0
+  firebase_auth: ^6.3.0
+  firebase_core: ^4.6.0
+  firebase_storage: ^13.2.0
+  fluttertoast: ^9.0.0
+  ionicons: ^0.2.2
   url_launcher: ^6.2.2
-  google_sign_in: ^6.2.1
+  google_sign_in: ^7.2.0
   insta_image_viewer: ^1.0.2
-  geolocator: ^10.1.0
+  geolocator: ^14.0.2
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   country_picker: ^2.0.24
-  firebase_app_check: ^0.2.1+15
-  email_auth: ^1.1.1
+  firebase_app_check: ^0.4.2
+  email_auth: ^2.0.0
   get: ^4.6.6
-  pinput: ^4.0.0
+  pinput: ^6.0.2
   flutter_dotenv: ^6.0.0
 
 dev_dependencies:
