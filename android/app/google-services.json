@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796915404559",
+    "project_id": "sajha-bookstore-1921232440",
+    "storage_bucket": "sajha-bookstore-1921232440.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796915404559:android:45c9b553d2d747d48fb87a",
+        "android_client_info": {
+          "package_name": "com.sajha.bookstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtgZm0-HW0QCun0Sqfw-YzmRTx1EbOjPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

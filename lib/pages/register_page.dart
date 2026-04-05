@@ -154,186 +154,314 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: color,
-        leading: BackButton(
-          color: Colors.white,
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/register.png"),
-            fit: BoxFit.cover,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // Background decorative elements
+          Positioned(
+            top: -100,
+            right: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.05),
+                shape: BoxShape.circle,
+              ),
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          Positioned(
+            bottom: -50,
+            left: -50,
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.05),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.grey),
-                    image: _pickedImage != null
-                        ? DecorationImage(
-                            image: FileImage(File(_pickedImage!.path)),
-                            fit: BoxFit.cover,
-                          )
-                        : null,
-                  ),
-                  child: IconButton(
-                    onPressed: _pickImage,
-                    icon: Icon(
-                      Icons.camera_alt,
-                      size: 40,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(Icons.arrow_back_ios_new, color: color),
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: _fullNameController,
-                  decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16)),
-                ),
-                SizedBox(height: 15.0),
-                TextFormField(
-                  controller: _addressController,
-                  decoration: InputDecoration(
-                      labelText: 'Address',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16)),
-                ),
-                SizedBox(height: 15.0),
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                      labelText: 'Username',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16)),
-                ),
-                SizedBox(height: 15.0),
-                /*TextFormField(
-                  controller: _phoneController,
-                  decoration: InputDecoration(
-                      labelText: 'Phone',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16)),
-                ),*/
-                SizedBox(height: 15.0),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16)),
-                ),
-                SizedBox(height: 15.0),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: !_isPasswordVisible,
-                  decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                        icon: Icon(_isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      )),
-                ),
-                SizedBox(height: 15.0),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  obscureText: !_isConfirmPasswordVisible,
-                  decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: regular,
-                          fontSize: 16),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isConfirmPasswordVisible =
-                                !_isConfirmPasswordVisible;
-                          });
-                        },
-                        icon: Icon(_isConfirmPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      )),
-                ),
-                SizedBox(height: 30.0),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50), color: color),
-                  child: TextButton(
-                    onPressed: _register,
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                          fontSize: 18, fontFamily: regular, color: color1),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already Have an account?',
-                      style: TextStyle(
-                          fontFamily: regular,
-                          fontSize: 14,
-                          color: Colors.black),
-                    ),
-                    SizedBox(width: 1),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
-                        },
-                        child: Text(
-                          'Login',
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          'Create Account',
                           style: TextStyle(
-                              color: color,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                        ))
-                  ],
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                            fontFamily: bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Join our community of book lovers',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 16,
+                            fontFamily: regular,
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+
+                        // Profile Image Picker
+                        Center(
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 120,
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[100],
+                                  border: Border.all(
+                                      color: color.withOpacity(0.2), width: 2),
+                                  image: _pickedImage != null
+                                      ? DecorationImage(
+                                          image: FileImage(
+                                              File(_pickedImage!.path)),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
+                                ),
+                                child: _pickedImage == null
+                                    ? Icon(Icons.person_outline,
+                                        size: 60, color: Colors.grey[400])
+                                    : null,
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: _pickImage,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: color,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: Colors.white, width: 2),
+                                    ),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+
+                        // Form Fields
+                        _buildTextField(
+                          controller: _fullNameController,
+                          hint: "Full Name",
+                          icon: Icons.person_outline,
+                        ),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          controller: _usernameController,
+                          hint: "Username",
+                          icon: Icons.alternate_email,
+                        ),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          controller: _emailController,
+                          hint: "Email Address",
+                          icon: Icons.email_outlined,
+                        ),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          controller: _addressController,
+                          hint: "Address",
+                          icon: Icons.location_on_outlined,
+                        ),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          controller: _passwordController,
+                          hint: "Password",
+                          icon: Icons.lock_outline,
+                          isPassword: true,
+                          isVisible: _isPasswordVisible,
+                          onToggle: () => setState(
+                              () => _isPasswordVisible = !_isPasswordVisible),
+                        ),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          controller: _confirmPasswordController,
+                          hint: "Confirm Password",
+                          icon: Icons.lock_reset_outlined,
+                          isPassword: true,
+                          isVisible: _isConfirmPasswordVisible,
+                          onToggle: () => setState(() =>
+                              _isConfirmPasswordVisible =
+                                  !_isConfirmPasswordVisible),
+                        ),
+                        const SizedBox(height: 40),
+
+                        // Register Button
+                        _buildRegisterButton(),
+                        const SizedBox(height: 30),
+
+                        // Login Link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Already have an account?',
+                              style: TextStyle(
+                                fontFamily: regular,
+                                fontSize: 14,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: color,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    bool isPassword = false,
+    bool isVisible = false,
+    VoidCallback? onToggle,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.05),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: isPassword ? !isVisible : false,
+        cursorColor: color,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: color.withOpacity(0.7), size: 22),
+          suffixIcon: isPassword
+              ? IconButton(
+                  onPressed: onToggle,
+                  icon: Icon(
+                    isVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                )
+              : null,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 15,
+            fontFamily: regular,
+            color: Colors.grey[400],
+          ),
+          border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: color.withOpacity(0.5), width: 1),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegisterButton() {
+    return Container(
+      width: double.infinity,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: [color, color.withOpacity(0.8)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: _register,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Text(
+          'Create Account',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
     );
   }
 }
+

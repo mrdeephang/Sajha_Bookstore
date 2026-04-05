@@ -92,167 +92,166 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userfield = TextField(
-      controller: _emailController,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(10),
-        hintText: "Email or Phone",
-        hintStyle: TextStyle(
-          fontSize: 18,
-          fontFamily: regular,
-          color: Colors.grey,
-        ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-      ),
-    );
-
-    final myloginbutton = Material(
-      elevation: 3,
-      borderRadius: BorderRadius.circular(30),
-      color: color,
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(12),
-        onPressed: () async {
-          User? user = await loginUsingEmailPassword(
-            email: _emailController.text,
-            password: _passwordController.text,
-            context: context,
-          );
-          print(user);
-          if (user != null) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => SplashPage()),
-            );
-          } else {
-            showToast(
-              message:
-                  "Incorrect Password or Email or Check Your Internet Connection",
-            );
-          }
-        },
-        child: const Text(
-          'Login',
-          style: TextStyle(color: Colors.white, fontSize: 24),
-        ),
-      ),
-    );
     return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: ListView(
-              children: [
-                Column(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // Background decorative elements
+          Positioned(
+            top: -100,
+            right: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.05),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -50,
+            left: -50,
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.05),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Image.asset('assets/images/logo.png', height: 250),
-                    ),
-                    Container(
-                      child: const Text(
-                        'Buy, Sell & Rent Books',
-                        style: TextStyle(
-                          color: color,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          letterSpacing: 1,
-                          wordSpacing: 1,
-                          //fontWeight: FontWeight.bold
-                        ),
+                    // Logo Section
+                    Hero(
+                      tag: 'logo',
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        height: 180,
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    userfield,
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: !_isPasswordVisible,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
-                          icon: Icon(
-                            _isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: "Password",
-                        hintStyle: TextStyle(
-                          fontSize: 18,
-                          fontFamily: regular,
-                          color: Colors.grey,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 1),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ForgotPassword(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    myloginbutton,
-                    SizedBox(height: 10),
-                    Divider(thickness: 1, color: Colors.grey[400]),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     Text(
-                      'Or Connect With',
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                    ),
-                    SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 140),
-                      child: Row(
-                        children: [
-                          //googlebutton
-                          GestureDetector(
-                            onTap: () =>
-                                FirebaseService.signInwithGoogle(context),
-                            child: Image.asset(
-                              'assets/images/google.png',
-                              height: 55,
-                            ),
-                          ),
-                        ],
+                      'Welcome Back!',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        fontFamily: bold,
                       ),
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Buy, Sell & Rent Books',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: color,
+                        fontFamily: regular,
+                        fontSize: 16,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+
+                    // Login Form Section
+                    _buildTextField(
+                      controller: _emailController,
+                      hint: "Email or Phone",
+                      icon: Icons.email_outlined,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildTextField(
+                      controller: _passwordController,
+                      hint: "Password",
+                      icon: Icons.lock_outline,
+                      isPassword: true,
+                    ),
+
+                    // Forgot Password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgotPassword(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Login Button
+                    _buildLoginButton(context),
+                    const SizedBox(height: 30),
+
+                    // Divider Section
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Divider(
+                                thickness: 1, color: Colors.grey[200])),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            'Or Connect With',
+                            style: TextStyle(
+                                color: Colors.grey[600], fontSize: 14),
+                          ),
+                        ),
+                        Expanded(
+                            child: Divider(
+                                thickness: 1, color: Colors.grey[200])),
+                      ],
+                    ),
+                    const SizedBox(height: 25),
+
+                    // Social Login
+                    Center(
+                      child: GestureDetector(
+                        onTap: () => FirebaseService.signInwithGoogle(context),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey[200]!),
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Image.asset(
+                            'assets/images/google.png',
+                            height: 35,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+
+                    // Registration Section
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -261,10 +260,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontFamily: regular,
                             fontSize: 14,
-                            color: Colors.black,
+                            color: Colors.grey[700],
                           ),
                         ),
-                        SizedBox(width: 1),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -287,11 +285,128 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    bool isPassword = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.05),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: isPassword ? !_isPasswordVisible : false,
+        cursorColor: color,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: color.withOpacity(0.7), size: 22),
+          suffixIcon: isPassword
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                )
+              : null,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 15,
+            fontFamily: regular,
+            color: Colors.grey[400],
+          ),
+          border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: color.withOpacity(0.5), width: 1),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginButton(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: [color, color.withOpacity(0.8)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: () async {
+          User? user = await loginUsingEmailPassword(
+            email: _emailController.text,
+            password: _passwordController.text,
+            context: context,
+          );
+          if (user != null) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => SplashPage()),
+            );
+          } else {
+            showToast(
+              message:
+                  "Incorrect Password or Email or Check Your Internet Connection",
+            );
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Text(
+          'Login',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
     );
   }
 }
+
