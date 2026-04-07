@@ -88,7 +88,7 @@ This project was developed as a **KEC Minor Project** by:
 
 ## 🎓 Project Context
 
-**Institution:** Kantipur Engineering College (KEC)  
+**Institution:** Kathmandu Engineering College (KEC)  
 **Project Type:** Minor Project  
 **Year:** 2023
 
